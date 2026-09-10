@@ -1,0 +1,238 @@
+@import 'tailwindcss';
+@config "../../tailwind.config.ts";
+
+@plugin 'tailwindcss-animate';
+
+/* Brand Fonts: Israr-Syria (Arabic Body) & Thmanyah Serif Display (Arabic Headlines) */
+@font-face {
+    font-family: 'Israr-Syria';
+    src: url('/fonts/Israr-Syria-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Thmanyah Serif Display';
+    src: url('/fonts/thmanyah-serif-display-regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Thmanyah Serif Display';
+    src: url('/fonts/thmanyah-serif-display-medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Thmanyah Serif Display';
+    src: url('/fonts/thmanyah-serif-display-bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Arabic Language Typography */
+:lang(ar),
+[dir="rtl"],
+html[lang="ar"] {
+    font-family: 'Israr-Syria', 'Montserrat', sans-serif;
+}
+
+:lang(ar) h1,
+:lang(ar) h2,
+:lang(ar) h3,
+:lang(ar) h4,
+:lang(ar) .font-serif,
+[dir="rtl"] h1,
+[dir="rtl"] h2,
+[dir="rtl"] h3,
+[dir="rtl"] h4,
+[dir="rtl"] .font-serif,
+html[lang="ar"] h1,
+html[lang="ar"] h2,
+html[lang="ar"] h3,
+html[lang="ar"] h4,
+html[lang="ar"] .font-serif {
+    font-family: 'Thmanyah Serif Display', 'Cormorant Garamond', serif !important;
+}
+
+:lang(ar) p,
+:lang(ar) span,
+:lang(ar) a,
+:lang(ar) button,
+:lang(ar) .font-sans,
+[dir="rtl"] p,
+[dir="rtl"] span,
+[dir="rtl"] a,
+[dir="rtl"] button,
+[dir="rtl"] .font-sans,
+html[lang="ar"] p,
+html[lang="ar"] span,
+html[lang="ar"] a,
+html[lang="ar"] button,
+html[lang="ar"] .font-sans {
+    font-family: 'Israr-Syria', 'Montserrat', sans-serif;
+}
+
+/* Global resets */
+:root {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* CSS variable for your brown color */
+:root {
+    --brown2: #a67c52;
+    /* ← replace with your actual brown2 value */
+    --bgColorMenu: #1d1d27;
+    --duration: 0.7s;
+}
+
+.map_btn {
+    z-index: 1;
+    width: 50px;
+    height: 50px;
+    user-select: none;
+    color: #fdfbf7;
+    padding-inline: 5.5%;
+    cursor: pointer;
+}
+
+.map_btn:hover {
+    transform: scale(1.1);
+}
+
+.map_btn:hover+.map_lbl {
+    transform: translate(-50%, 0);
+    opacity: 1;
+}
+
+/* dot base circle */
+
+.map_btn::before {
+    content: '';
+    display: block;
+    width: 19px;
+    height: 19px;
+    border-radius: 12px;
+    background: var(--brown2);
+    transform: scale(0.5);
+}
+
+.Mui-active .map_btn::before {
+    background: #910e0b;
+}
+
+/* label tooltip */
+.map_btn+.map_lbl {
+    position: absolute;
+    left: 50%;
+    bottom: 100%;
+    transform: translate(-50%, 10px);
+    background: var(--brown2);
+    padding-inline: 10px;
+    height: 50px;
+    width: 100px;
+    color: #fdfbf7;
+    text-align: center;
+    border-radius: 4px;
+    letter-spacing: 0.05em;
+    line-height: 50px;
+    white-space: nowrap;
+    opacity: 0;
+    transition: 0.2s all ease-in-out;
+    pointer-events: none;
+}
+
+/* extra decorative border on .navdotf tooltip */
+.map_btn+.map_lbl::before {
+    content: '';
+    position: absolute;
+    left: 3px;
+    top: 3px;
+    right: 3px;
+    bottom: 3px;
+}
+
+.map_btn+.map_lbl::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    margin-left: -6px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 8px 6px 0;
+    border-color: #d49256 transparent transparent;
+}
+
+/* move the deco under the active dot */
+.active~.deco {
+    transform: translateX(50px);
+}
+
+/* Base html & body */
+html {
+    box-sizing: border-box;
+}
+
+body {
+    -webkit-tap-highlight-color: transparent;
+    transition: background-color var(--duration);
+    overflow-x: hidden;
+}
+
+/* Button reset */
+
+@keyframes show {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.menu_hide {
+    opacity: 0;
+    animation: hide 0.5s forwards;
+}
+
+@keyframes hide {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+.css-1b2ju2j-MuiStepLabel-iconContainer {
+    display: none !important;
+}
+
+.MuiStepLabel-root {
+    display: none !important;
+}
+
+
+@media (max-width:500px) {
+    .map_svg {
+        width: 100% !important;
+        margin-top: 0% !important;
+    }
+
+    .MuiStepper-root {
+        margin-top: -5% !important;
+        width: 50% !important;
+    }
+}

@@ -1,0 +1,24 @@
+<?php
+
+use App\Http\Controllers\Api\EventController;
+use App\Http\Controllers\Api\RoomController;
+use App\Http\Controllers\PageController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\LoginController;
+
+// Public routes
+Route::get('/', [PageController::class, 'home'])->name('home');
+Route::get('/rooms', [RoomController::class, 'render'])->name('rooms');
+Route::get('/dining', [PageController::class, 'dining'])->name('dining');
+Route::get('/events', [EventController::class, 'render'])->name('events');
+Route::get('/experience', [PageController::class, 'experience'])->name('experience');
+Route::get('/membership', [PageController::class, 'membership'])->name('membership');
+Route::get('/restoration', [PageController::class, 'restoration'])->name('restoration');
+Route::get('/contact', [PageController::class, 'contact'])->name('contact');
+
+require __DIR__ . '/admin.php';
+require __DIR__ . '/api.php';
+
+// 404 route
+Route::fallback([PageController::class, 'notFound']);
+
