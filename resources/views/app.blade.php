@@ -243,6 +243,11 @@
                 border-color: #F3EBDD;
                 background: rgba(255, 255, 255, 0.1);
             }
+
+            html[lang="ar"] #kw-callbar a,
+            [dir="rtl"] #kw-callbar a {
+                font-size: 16px;
+            }
         }
     </style>
 

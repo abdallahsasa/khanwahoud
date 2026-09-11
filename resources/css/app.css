@@ -14,6 +14,12 @@
 }
 
 /* Arabic Language Typography - Powered by Israr-Syria */
+/* Scaled font size for Arabic typography (additional 10% increase) */
+html[lang="ar"],
+html[dir="rtl"] {
+    font-size: 121% !important;
+}
+
 :lang(ar),
 [dir="rtl"],
 html[lang="ar"],

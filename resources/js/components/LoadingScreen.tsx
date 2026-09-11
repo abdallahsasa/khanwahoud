@@ -2,13 +2,25 @@ import { motion } from 'framer-motion';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+let hasShownInSession = false;
+
 const LoadingScreen: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const { t } = useTranslation();
     const [year, setYear] = useState(1736);
-    const targetYear = 2025;
-    const [isLoading, setIsLoading] = useState(true);
+    const targetYear = 2026;
+    const [isLoading, setIsLoading] = useState(() => {
+        if (typeof window === 'undefined') return false;
+        if (hasShownInSession) return false;
+        try {
+            return !sessionStorage.getItem('kw_initial_loader_shown');
+        } catch {
+            return false;
+        }
+    });
 
     useEffect(() => {
+        if (!isLoading) return;
+
         const minLoadingTime = 1500;
         const totalDuration = 1000; // 1 second for the animation
         const interval = totalDuration / (targetYear - 1736);
@@ -24,33 +36,38 @@ const LoadingScreen: React.FC<{ children: React.ReactNode }> = ({ children }) =>
             });
         }, interval);
 
+        const completeLoading = () => {
+            setIsLoading(false);
+            hasShownInSession = true;
+            try {
+                sessionStorage.setItem('kw_initial_loader_shown', 'true');
+            } catch {}
+        };
+
         // A promise that resolves when the page is fully loaded
         const imagesLoaded = new Promise<void>((resolve) => {
             if (document.readyState === 'complete') {
-                // already loaded
                 resolve();
             } else {
                 window.addEventListener('load', () => resolve(), { once: true });
             }
         });
 
-        // A promise that resolves after our minimum animation time
         const timeout = new Promise<void>((resolve) => setTimeout(resolve, minLoadingTime));
 
-        // When both are done, hide the loader
         Promise.all([imagesLoaded, timeout]).then(() => {
-            setIsLoading(false);
+            completeLoading();
         });
 
         const timer2 = setTimeout(() => {
-            setIsLoading(false);
+            completeLoading();
         }, minLoadingTime);
 
         return () => {
             clearInterval(timer);
             clearTimeout(timer2);
         };
-    }, []);
+    }, [isLoading]);
 
     return isLoading ? (
         <motion.div
