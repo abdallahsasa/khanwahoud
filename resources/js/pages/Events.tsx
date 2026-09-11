@@ -193,12 +193,8 @@ const EventsPage: React.FC = () => {
             <section className="bg-accent-50 py-16 md:py-24">
                 <div className="container mx-auto px-4 max-w-6xl">
                     <SectionTitle
-                        title={isAr ? 'مساحات الفعاليات التاريخية' : 'Our Historic Event Spaces'}
-                        subtitle={
-                            isAr
-                                ? 'اختر المساحة التراثية المثالية لمناسبتك القادمة في قلب دمشق القديمة'
-                                : 'Select the ideal heritage venue for your upcoming celebration or gathering'
-                        }
+                        title={t('events.spaces_title')}
+                        subtitle={t('events.spaces_subtitle')}
                         centered={true}
                         className="mb-14"
                     />
@@ -272,29 +268,25 @@ const EventsPage: React.FC = () => {
                                                         href={waUrl}
                                                         target="_blank"
                                                         rel="noopener noreferrer"
-                                                        className="inline-flex items-center justify-center gap-2.5 rounded-full bg-[#1c4b37] hover:bg-[#143929] text-white px-6 py-3 text-xs tracking-wider uppercase font-semibold shadow-md hover:shadow-xl transition-all"
+                                                        className="inline-flex items-center justify-center gap-2.5 rounded-full bg-accent-900 hover:bg-accent-800 text-white px-6 py-3 text-xs tracking-wider uppercase font-semibold shadow-md hover:shadow-xl transition-all"
                                                     >
                                                         <WhatsAppIcon className="w-4 h-4" />
-                                                        <span>{isAr ? 'حجز الفعالية عبر واتساب' : 'Book via WhatsApp'}</span>
+                                                        <span>{t('events.book_wa')}</span>
                                                     </a>
 
                                                     {/* Call Concierge Button */}
                                                     <a
                                                         href="tel:+963930012015"
-                                                        className="inline-flex items-center justify-center gap-2 rounded-full border border-accent-300 hover:border-primary-700 hover:text-primary-700 bg-white text-accent-950 px-5 py-3 text-xs tracking-wider uppercase font-medium shadow-sm hover:shadow transition-all"
+                                                        className="inline-flex items-center justify-center gap-2 rounded-full border border-secondary-400 hover:border-primary-700 hover:text-primary-700 bg-secondary-50 text-accent-950 px-5 py-3 text-xs tracking-wider uppercase font-medium shadow-sm hover:shadow transition-all"
                                                     >
                                                         <Phone size={15} />
-                                                        <span>{isAr ? 'اتصال مباشر' : 'Call Concierge'}</span>
+                                                        <span>{t('events.call_concierge')}</span>
                                                     </a>
                                                 </div>
 
                                                 <div className="mt-3 flex items-center gap-2 text-accent-500 text-[11px]">
                                                     <span className="w-2 h-2 rounded-full bg-emerald-600 inline-block"></span>
-                                                    <span>
-                                                        {isAr
-                                                            ? 'استجابة فورية عبر واتساب • تنسيق مخصص ومعاينة مسبقة'
-                                                            : 'Instant WhatsApp response • Tailored planning & site visit'}
-                                                    </span>
+                                                    <span>{t('events.instant_support')}</span>
                                                 </div>
                                             </div>
                                         </motion.div>
@@ -310,7 +302,7 @@ const EventsPage: React.FC = () => {
             <section className="bg-white py-16">
                 <div className="container mx-auto px-4">
                     <SectionTitle
-                        title={isAr ? 'خدمات تنظيم وتخطيط الفعاليات' : 'Event Planning Services'}
+                        title={t('events.planning_services')}
                         centered={true}
                         className="mb-12"
                     />
@@ -320,9 +312,9 @@ const EventsPage: React.FC = () => {
                             <div className="bg-primary-700 mb-4 flex h-16 w-16 items-center justify-center rounded-full text-2xl font-bold text-white">
                                 1
                             </div>
-                            <h3 className="mb-3 text-xl font-semibold">Initial Consultation</h3>
+                            <h3 className="mb-3 text-xl font-semibold">{t('events.step1_title')}</h3>
                             <p className="text-accent-700">
-                                We'll discuss your vision, requirements, and preferences to understand the scope of your event.
+                                {t('events.step1_desc')}
                             </p>
                         </div>
 
@@ -330,9 +322,9 @@ const EventsPage: React.FC = () => {
                             <div className="bg-primary-700 mb-4 flex h-16 w-16 items-center justify-center rounded-full text-2xl font-bold text-white">
                                 2
                             </div>
-                            <h3 className="mb-3 text-xl font-semibold">Customized Proposal</h3>
+                            <h3 className="mb-3 text-xl font-semibold">{t('events.step2_title')}</h3>
                             <p className="text-accent-700">
-                                Our team will create a detailed proposal including venue options, catering menus, and additional services.
+                                {t('events.step2_desc')}
                             </p>
                         </div>
 
@@ -340,34 +332,29 @@ const EventsPage: React.FC = () => {
                             <div className="bg-primary-700 mb-4 flex h-16 w-16 items-center justify-center rounded-full text-2xl font-bold text-white">
                                 3
                             </div>
-                            <h3 className="mb-3 text-xl font-semibold">Seamless Execution</h3>
+                            <h3 className="mb-3 text-xl font-semibold">{t('events.step3_title')}</h3>
                             <p className="text-accent-700">
-                                Our dedicated event coordinator will ensure every detail is perfectly executed on the day.
+                                {t('events.step3_desc')}
                             </p>
                         </div>
                     </div>
                 </div>
             </section>
 
-
             {/* Contact Form */}
             <section id="proposal-form" className="bg-white py-16 scroll-mt-24">
                 <div className="container mx-auto px-4">
                     <div className="mx-auto max-w-3xl">
                         <SectionTitle
-                            title={isAr ? 'طلب عرض مخصص للفعالية' : 'Request an Event Proposal'}
-                            subtitle={
-                                isAr
-                                    ? 'أو تواصل مباشرة مع فريق الكونسيرج عبر واتساب والهاتف أعلاه'
-                                    : 'Or connect directly with our concierge team via WhatsApp or phone above'
-                            }
+                            title={t('events.proposal_title')}
+                            subtitle={t('events.proposal_subtitle')}
                             centered={true}
                             className="mb-8"
                         />
 
                         {formSuccess && (
                             <div className="mb-6 rounded-md bg-green-100 p-4 text-green-700">
-                                Event proposal submitted successfully! We'll be in touch soon.
+                                {t('events.form.success')}
                             </div>
                         )}
 
@@ -377,7 +364,7 @@ const EventsPage: React.FC = () => {
                             <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                                 <div>
                                     <label htmlFor="name" className="text-accent-700 mb-1 block text-sm font-medium">
-                                        Full Name
+                                        {t('events.form.name')}
                                     </label>
                                     <input
                                         type="text"
@@ -389,7 +376,7 @@ const EventsPage: React.FC = () => {
                                 </div>
                                 <div>
                                     <label htmlFor="email" className="text-accent-700 mb-1 block text-sm font-medium">
-                                        Email Address
+                                        {t('events.form.email')}
                                     </label>
                                     <input
                                         type="email"
@@ -404,7 +391,7 @@ const EventsPage: React.FC = () => {
                             <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                                 <div>
                                     <label htmlFor="eventType" className="text-accent-700 mb-1 block text-sm font-medium">
-                                        Event Type
+                                        {t('events.form.event_type')}
                                     </label>
                                     <select
                                         id="eventType"
@@ -412,16 +399,16 @@ const EventsPage: React.FC = () => {
                                         className="border-accent-300 focus:ring-primary-700 focus:border-primary-700 w-full rounded-md border px-4 py-2 focus:ring-2"
                                         required
                                     >
-                                        <option value="">Select Event Type</option>
-                                        <option value="wedding">Wedding</option>
-                                        <option value="corporate">Corporate Event</option>
-                                        <option value="cultural">Cultural Salon</option>
-                                        <option value="other">Other</option>
+                                        <option value="">{t('events.form.select_type')}</option>
+                                        <option value="wedding">{t('events.form.wedding')}</option>
+                                        <option value="corporate">{t('events.form.corporate')}</option>
+                                        <option value="cultural">{t('events.form.cultural')}</option>
+                                        <option value="other">{t('events.form.other')}</option>
                                     </select>
                                 </div>
                                 <div>
                                     <label htmlFor="date" className="text-accent-700 mb-1 block text-sm font-medium">
-                                        Preferred Date
+                                        {t('events.form.date')}
                                     </label>
                                     <input
                                         type="date"
@@ -435,7 +422,7 @@ const EventsPage: React.FC = () => {
 
                             <div>
                                 <label htmlFor="guests" className="text-accent-700 mb-1 block text-sm font-medium">
-                                    Number of Guests
+                                    {t('events.form.guests')}
                                 </label>
                                 <input
                                     type="number"
@@ -449,7 +436,7 @@ const EventsPage: React.FC = () => {
 
                             <div>
                                 <label htmlFor="message" className="text-accent-700 mb-1 block text-sm font-medium">
-                                    Additional Requirements
+                                    {t('events.form.requirements')}
                                 </label>
                                 <textarea
                                     id="message"
@@ -462,7 +449,7 @@ const EventsPage: React.FC = () => {
 
                             <div className="flex justify-center">
                                 <Button type="submit" variant="primary" size="lg" disabled={formSubmitting}>
-                                    {formSubmitting ? 'Submitting...' : 'Submit Request'}
+                                    {formSubmitting ? t('events.form.submitting') : t('events.form.submit')}
                                 </Button>
                             </div>
                         </form>

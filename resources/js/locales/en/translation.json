@@ -5,7 +5,13 @@
         "book_now": "Book Now",
         "contact_us": "Contact Us",
         "read_more": "Read More",
-        "view_all": "View All"
+        "view_all": "View All",
+        "features": "Features:",
+        "sending": "Sending...",
+        "submitting": "Submitting...",
+        "return_home": "Return to Home",
+        "whatsapp_inquiries": "WhatsApp Inquiries",
+        "direct_call": "Direct Call"
     },
     "nav": {
         "home": "Home",
@@ -74,7 +80,9 @@
                 "amenities": "Queen bed, Courtyard view, Handcrafted furniture, Rainfall shower"
             }
         },
-        "booking_info": "Room rates include complimentary breakfast, evening cultural activities, and access to our Ottoman bath experience. Direct booking guarantees the best available rate."
+        "booking_info": "Room rates include complimentary breakfast, evening cultural activities, and access to our Ottoman bath experience. Direct booking guarantees the best available rate.",
+        "coming_soon": "Coming Soon",
+        "coming_soon_desc": "We are currently preparing our luxurious rooms and accommodations to provide you with the finest Ottoman experience. Please check back with us shortly."
     },
     "dining": {
         "title": "Food & Drink",
@@ -97,7 +105,10 @@
                 "description": "An intimate sanctuary for exquisite artisanal teas, traditional Damascene infusions, and handcrafted Ottoman sweets."
             }
         },
-        "inquire_text": "Reservations will open soon. For private inquiries, previews, or event dining, please contact our concierge."
+        "inquire_text": "Reservations will open soon. For private inquiries, previews, or event dining, please contact our concierge.",
+        "subtag": "Khan Wahoud · Dining",
+        "location_tag": "Khan Wahoud · Old Damascus",
+        "whatsapp_inquiries": "WhatsApp Inquiries"
     },
     "events": {
         "title": "Private Events",
@@ -108,7 +119,38 @@
         "corporate_title": "Corporate Events",
         "corporate_text": "Host meetings, retreats, or presentations in our fully-equipped heritage spaces, with customized catering and technical support.",
         "cultural_title": "Cultural Salons",
-        "cultural_text": "Continue the Khan's legacy as a center for cultural exchange with readings, exhibitions, or musical performances."
+        "cultural_text": "Continue the Khan's legacy as a center for cultural exchange with readings, exhibitions, or musical performances.",
+        "spaces_title": "Our Historic Event Spaces",
+        "spaces_subtitle": "Select the ideal heritage venue for your upcoming celebration or gathering",
+        "planning_services": "Event Planning Services",
+        "step1_title": "Initial Consultation",
+        "step1_desc": "We will discuss your vision, requirements, and preferences to understand the scope of your event.",
+        "step2_title": "Customized Proposal",
+        "step2_desc": "Our team will create a detailed proposal including venue options, catering menus, and additional services.",
+        "step3_title": "Seamless Execution",
+        "step3_desc": "Our dedicated event coordinator will ensure every detail is perfectly executed on the day.",
+        "proposal_title": "Request an Event Proposal",
+        "proposal_subtitle": "Or connect directly with our concierge team via WhatsApp or phone above",
+        "book_wa": "Book via WhatsApp",
+        "call_concierge": "Call Concierge",
+        "instant_support": "Instant WhatsApp response • Tailored planning & site visit",
+        "form": {
+            "name": "Full Name",
+            "email": "Email Address",
+            "event_type": "Event Type",
+            "select_type": "Select Event Type",
+            "wedding": "Wedding",
+            "corporate": "Corporate Event",
+            "cultural": "Cultural Salon",
+            "other": "Other",
+            "date": "Preferred Date",
+            "guests": "Number of Guests",
+            "requirements": "Additional Requirements",
+            "submit": "Submit Request",
+            "submitting": "Submitting...",
+            "success": "Event proposal submitted successfully! We will be in touch soon.",
+            "error": "Failed to submit event proposal. Please try again."
+        }
     },
     "membership": {
         "title": "Be A Khan",
@@ -122,7 +164,52 @@
             "Personal concierge service",
             "Invitation to seasonal heritage celebrations"
         ],
-        "application_text": "Membership is by invitation or application. Our committee reviews all applications with a focus on creating a diverse community of cultural enthusiasts."
+        "application_text": "Membership is by invitation or application. Our committee reviews all applications with a focus on creating a diverse community of cultural enthusiasts.",
+        "hero_title": "Khan Wahoud Membership",
+        "hero_subtitle": "Join our exclusive community of heritage enthusiasts",
+        "benefits_subtitle": "Experience the privileges of being a Khan Wahoud member",
+        "apply_title": "Apply for Membership",
+        "apply_subtitle": "Join our exclusive community",
+        "first_name": "First Name",
+        "last_name": "Last Name",
+        "email": "Email Address",
+        "phone": "Phone Number",
+        "tier_label": "Preferred Membership Tier",
+        "tier_select": "Select a tier",
+        "interests_label": "Areas of Interest",
+        "about_label": "Tell us about yourself",
+        "about_placeholder": "Share your interests and what draws you to Khan Wahoud...",
+        "submit": "Submit Application",
+        "submitting": "Submitting...",
+        "success": "Your membership application has been submitted successfully! We will contact you soon.",
+        "error": "Failed to submit membership application. Please try again.",
+        "tiers": {
+            "heritage": "Heritage",
+            "legacy": "Legacy",
+            "royal": "Royal"
+        },
+        "interests": {
+            "cultural_events": "Cultural Events",
+            "fine_dining": "Fine Dining",
+            "historical_architecture": "Historical Architecture",
+            "art_exhibitions": "Art & Exhibitions",
+            "traditional_crafts": "Traditional Crafts",
+            "ottoman_heritage": "Ottoman Heritage"
+        },
+        "benefit_cards": {
+            "access_title": "Exclusive Access",
+            "access_desc": "Priority access to rooms, dining, and special events",
+            "vip_title": "VIP Treatment",
+            "vip_desc": "Personalized service and dedicated concierge support",
+            "community_title": "Cultural Community",
+            "community_desc": "Join a network of heritage and culture enthusiasts",
+            "events_title": "Member Events",
+            "events_desc": "Access to exclusive cultural and social gatherings",
+            "rooms_title": "Room Benefits",
+            "rooms_desc": "Preferential rates and complimentary upgrades",
+            "dining_title": "Dining Privileges",
+            "dining_desc": "Priority reservations and special dining experiences"
+        }
     },
     "restoration": {
         "title": "Refurbishment & Preservation",
@@ -134,15 +221,34 @@
         "sustainability_title": "Modern Sustainability",
         "sustainability_text": "While preserving historical authenticity, we've integrated sustainable systems for water conservation, energy efficiency, and waste management.",
         "video_title": "Restoration Documentary",
-        "video_subtitle": "Watch a glimpse on our restoration technique"
+        "video_subtitle": "Watch a glimpse on our restoration technique",
+        "pillars_title": "Restoration Pillars",
+        "before_after_title": "Before & After Pillars",
+        "before_after_subtitle": "Witness the transformation",
+        "before": "Before",
+        "after": "After",
+        "main_courtyard": "Main Courtyard",
+        "stone_archways": "Stone Archways",
+        "experience_khan": "Experience the Restored Khan",
+        "experience_desc": "Book your stay at Khan Wahoud and immerse yourself in centuries of restored heritage.",
+        "book_room": "Book a Room"
     },
     "contact": {
+        "badge": "Concierge & Inquiries",
         "title": "Contact Us",
         "subtitle": "Connect with Khan Wahoud",
         "address": "Khan Suleyman Pasha, Souk Midhat Pasha, Old Damascus, Syria",
         "email": "info@khanwahoud.com",
         "phone": "+963 930 012 015",
+        "whatsapp": "WhatsApp Concierge",
+        "whatsapp_chat": "Chat on WhatsApp",
+        "whatsapp_note": "Instant direct messaging",
         "location": "Khan Suleyman Pasha, Souk Midhat Pasha, Damascus, Syria",
+        "address_note": "Old Damascus, Midhat Pasha",
+        "directions": "Get Directions",
+        "call_note": "24/7 Front Desk",
+        "email_note": "Replies within 24 hours",
+        "form_desc": "Select the nature of your inquiry below and our hospitality team will attend to your request.",
         "form_titles": {
             "general": "General Inquiries",
             "booking": "Booking Inquiries",
@@ -155,10 +261,26 @@
             "phone": "Phone Number",
             "subject": "Subject",
             "message": "Your Message",
-            "submit": "Send Message"
-        }
+            "submit": "Send Message",
+            "check_in": "Check-in Date",
+            "check_out": "Check-out Date",
+            "guests": "Number of Guests"
+        },
+        "visit_us": "Visit Us",
+        "email_us": "Email Us",
+        "call_us": "Call Us",
+        "get_in_touch": "Send an Inquiry",
+        "instagram_title": "Follow Us on Instagram",
+        "instagram_desc": "Explore our visual archive, architectural restorations, and curated experiences in Old Damascus.",
+        "follow_instagram": "Follow @khanwahoud",
+        "map_title": "Our Historic Location",
+        "map_desc": "Nestled along the storied Midhat Pasha Street in the heart of the UNESCO-protected Old City of Damascus.",
+        "open_in_maps": "Open in Google Maps",
+        "success_msg": "Your message has been sent successfully! We will get back to you soon.",
+        "error_msg": "Failed to send message. Please try again."
     },
     "footer": {
+        "about": "A boutique hotel in the restored historical building of Khan Suleyman Pasha in Old Damascus.",
         "copyright": "© 2026 Khan Wahoud. All rights reserved.",
         "links": {
             "privacy": "Privacy Policy",
@@ -166,9 +288,7 @@
             "sitemap": "Sitemap"
         },
         "social": {
-            "instagram": "Instagram",
-            "facebook": "Facebook",
-            "twitter": "Twitter"
+            "instagram": "Instagram"
         }
     },
     "loading": {
@@ -183,7 +303,53 @@
         "rooms": "Room Inventory",
         "events": "Event Scheduling",
         "members": "Membership List",
-        "gallery": "Update Gallery"
+        "gallery": "Update Gallery",
+        "login_title": "Admin Login",
+        "email": "Email",
+        "password": "Password",
+        "forgot_password": "Forgot password?",
+        "login_btn": "Login",
+        "logging_in": "Logging in...",
+        "staff_note": "This login page is for hotel staff only.",
+        "assistance_note": "If you need assistance, please contact your administrator.",
+        "invalid_credentials": "Invalid email or password",
+        "connection_failed": "Failed to connect to the server",
+        "dashboard_title": "Admin Dashboard",
+        "logout": "Logout",
+        "tab_bookings": "Bookings",
+        "tab_rooms": "Rooms",
+        "tab_members": "Members",
+        "tab_gallery": "Gallery",
+        "upcoming_bookings": "Upcoming Bookings",
+        "add_booking": "Add New Booking",
+        "guest": "Guest",
+        "room": "Room",
+        "check_in": "Check-in",
+        "check_out": "Check-out",
+        "status": "Status",
+        "actions": "Actions",
+        "edit": "Edit",
+        "cancel": "Cancel",
+        "room_inventory": "Room Inventory",
+        "update_room_status": "Update Room Status",
+        "per_night": "/ night",
+        "edit_details": "Edit Details",
+        "change_status": "Change Status",
+        "membership_directory": "Membership Directory",
+        "add_member": "Add New Member",
+        "member": "Member",
+        "tier": "Tier",
+        "join_date": "Join Date",
+        "view": "View",
+        "image_gallery": "Image Gallery",
+        "upload_images": "Upload New Images",
+        "gallery_image": "Gallery Image",
+        "status_confirmed": "confirmed",
+        "status_pending": "pending",
+        "status_canceled": "canceled",
+        "status_available": "available",
+        "status_occupied": "occupied",
+        "status_maintenance": "maintenance"
     },
     "khan_wahoud": "Khan Wahoud",
     "khan_Suleyman": "Khan Suleyman Pasha Al-Azem",
@@ -199,5 +365,27 @@
     "reopening_desc": "Reopening as Khan Wahoud luxury boutique hotel",
     "when_desc": "Where heritage meets luxury in the heart of Old Damascus.",
     "book_text": "Book your stay at Khan Wahoud and immerse yourself in the rich history and luxury of Old Damascus.",
-    "book_text_two": "Book your stay at Khan Wahoud and immerse yourself in centuries of history combined with modern luxury."
+    "book_text_two": "Book your stay at Khan Wahoud and immerse yourself in centuries of history combined with modern luxury.",
+    "not_found": {
+        "title": "Page Not Found",
+        "desc": "The page you are looking for does not exist or has been moved.",
+        "return_home": "Return to Home"
+    },
+    "room_modal": {
+        "up_to_guests": "Up to {{count}} guests",
+        "amenities_title": "Room Amenities",
+        "full_name": "Full Name",
+        "email": "Email Address",
+        "check_in": "Check-in Date",
+        "check_out": "Check-out Date",
+        "special_requests": "Special Requests",
+        "per_night": "per night",
+        "taxes_included": "Includes taxes & fees",
+        "book_now": "Book Now",
+        "processing": "Processing...",
+        "cancellation_note": "* Free cancellation up to 48 hours before check-in",
+        "booking_success": "Booking successful! We will contact you shortly.",
+        "booking_failed": "Failed to book room. Please try again.",
+        "inquire_space": "Inquire About This Space"
+    }
 }

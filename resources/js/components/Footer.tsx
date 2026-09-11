@@ -3,8 +3,6 @@ import { Link } from "@inertiajs/react";
 import { useTranslation } from "react-i18next";
 import {
     Instagram,
-    Facebook,
-    Twitter,
     Mail,
     Phone,
     MapPin,
@@ -22,30 +20,18 @@ const Footer: React.FC = () => {
                     <div>
                         <div className="flex items-center gap-3 font-serif text-2xl font-bold mb-4">
                             <ImageOptimizer src="/images/logowahoud.png" alt="Khan Wahoud Logo" className="h-12 w-12 object-contain" />
-                            Khan Wahoud
+                            {t("khan_wahoud")}
                         </div>
-                        <p className="mb-6 opacity-75 max-w-xs">
-                            A boutique hotel in the restored historical building
-                            of Khan Suleyman Pasha in Old Damascus.
+                        <p className="mb-6 opacity-75 max-w-xs text-sm leading-relaxed">
+                            {t("footer.about", "A boutique hotel in the restored historical building of Khan Suleyman Pasha in Old Damascus.")}
                         </p>
-                        <div className="flex space-x-4">
+                        <div className="flex items-center gap-4">
                             <a
                                 href="https://instagram.com/khanwahoud" target="_blank" rel="noopener noreferrer"
-                                className="text-secondary-300 hover:text-primary-700 transition-colors"
+                                className="w-10 h-10 rounded-full border border-secondary-700/60 flex items-center justify-center text-secondary-300 hover:text-primary-400 hover:border-primary-500 hover:bg-primary-950/40 transition-all duration-300"
+                                aria-label="Instagram"
                             >
-                                <Instagram size={20} />
-                            </a>
-                            <a
-                                href="https://facebook.com/khanwahoud" target="_blank" rel="noopener noreferrer"
-                                className="text-secondary-300 hover:text-primary-700 transition-colors"
-                            >
-                                <Facebook size={20} />
-                            </a>
-                            <a
-                                href="https://twitter.com/khanwahoud" target="_blank" rel="noopener noreferrer"
-                                className="text-secondary-300 hover:text-primary-700 transition-colors"
-                            >
-                                <Twitter size={20} />
+                                <Instagram size={18} />
                             </a>
                         </div>
                     </div>
@@ -138,37 +124,39 @@ const Footer: React.FC = () => {
                             {t("contact.title")}
                         </h3>
                         <ul className="space-y-3">
-                            <li className="flex items-start">
+                            <li className="flex items-start gap-3">
                                 <MapPin
                                     size={18}
-                                    className="mr-2 mt-1 flex-shrink-0"
+                                    className="mt-1 flex-shrink-0 text-secondary-400"
                                 />
                                 <span className="opacity-75">
                                     {t("contact.address")}
                                 </span>
                             </li>
-                            <li className="flex items-center">
+                            <li className="flex items-center gap-3">
                                 <Mail
                                     size={18}
-                                    className="mr-2 flex-shrink-0"
+                                    className="flex-shrink-0 text-secondary-400"
                                 />
                                 <a
                                     href="mailto:info@khanwahoud.com"
+                                    dir="ltr"
                                     className="opacity-75 hover:opacity-100 transition-opacity"
                                 >
-                                    {t("contact.email")}
+                                    info@khanwahoud.com
                                 </a>
                             </li>
-                            <li className="flex items-center">
+                            <li className="flex items-center gap-3">
                                 <Phone
                                     size={18}
-                                    className="mr-2 flex-shrink-0"
+                                    className="flex-shrink-0 text-secondary-400"
                                 />
                                 <a
                                     href="tel:+963930012015"
-                                    className="opacity-75 hover:opacity-100 transition-opacity"
+                                    dir="ltr"
+                                    className="opacity-75 hover:opacity-100 transition-opacity inline-block"
                                 >
-                                    {t("contact.phone")}
+                                    +963 930 012 015
                                 </a>
                             </li>
                         </ul>
@@ -176,11 +164,11 @@ const Footer: React.FC = () => {
                 </div>
 
                 {/* Bottom Section */}
-                <div className="border-t border-accent-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
-                    <div className="text-sm opacity-75">
+                <div className="border-t border-accent-800 mt-12 pt-8 pb-16 lg:pb-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                    <div className="text-sm opacity-75 text-center md:text-start">
                         {t("footer.copyright")}
                     </div>
-                    <div className="flex space-x-6 mt-4 md:mt-0">
+                    <div className="flex items-center gap-6 mt-4 md:mt-0">
                         <a
                             href="#"
                             className="text-sm opacity-75 hover:opacity-100 transition-opacity"

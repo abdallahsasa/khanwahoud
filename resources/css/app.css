@@ -3,44 +3,23 @@
 
 @plugin 'tailwindcss-animate';
 
-/* Brand Fonts: Israr-Syria (Arabic Body) & Thmanyah Serif Display (Arabic Headlines) */
+/* Brand Fonts: Israr-Syria (Arabic Typography) */
 @font-face {
     font-family: 'Israr-Syria';
-    src: url('/fonts/Israr-Syria-Regular.ttf') format('truetype');
-    font-weight: 400;
+    src: url('/fonts/Israr-Syria-Regular.ttf') format('truetype'),
+         url('/fonts/israr-syria.ttf') format('truetype');
+    font-weight: 100 900;
     font-style: normal;
     font-display: swap;
 }
 
-@font-face {
-    font-family: 'Thmanyah Serif Display';
-    src: url('/fonts/thmanyah-serif-display-regular.woff2') format('woff2');
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Thmanyah Serif Display';
-    src: url('/fonts/thmanyah-serif-display-medium.woff2') format('woff2');
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Thmanyah Serif Display';
-    src: url('/fonts/thmanyah-serif-display-bold.woff2') format('woff2');
-    font-weight: 700;
-    font-style: normal;
-    font-display: swap;
-}
-
-/* Arabic Language Typography */
+/* Arabic Language Typography - Powered by Israr-Syria */
 :lang(ar),
 [dir="rtl"],
-html[lang="ar"] {
-    font-family: 'Israr-Syria', 'Montserrat', sans-serif;
+html[lang="ar"],
+.font-rtl {
+    font-family: 'Israr-Syria', sans-serif !important;
+    letter-spacing: normal !important;
 }
 
 :lang(ar) h1,
@@ -58,25 +37,70 @@ html[lang="ar"] h2,
 html[lang="ar"] h3,
 html[lang="ar"] h4,
 html[lang="ar"] .font-serif {
-    font-family: 'Thmanyah Serif Display', 'Cormorant Garamond', serif !important;
+    font-family: 'Israr-Syria', serif !important;
+    letter-spacing: normal !important;
 }
 
 :lang(ar) p,
 :lang(ar) span,
 :lang(ar) a,
 :lang(ar) button,
+:lang(ar) div,
 :lang(ar) .font-sans,
 [dir="rtl"] p,
 [dir="rtl"] span,
 [dir="rtl"] a,
 [dir="rtl"] button,
+[dir="rtl"] div,
 [dir="rtl"] .font-sans,
 html[lang="ar"] p,
 html[lang="ar"] span,
 html[lang="ar"] a,
 html[lang="ar"] button,
+html[lang="ar"] div,
 html[lang="ar"] .font-sans {
-    font-family: 'Israr-Syria', 'Montserrat', sans-serif;
+    font-family: 'Israr-Syria', sans-serif;
+    letter-spacing: normal !important;
+}
+
+/* RTL Global Adjustments */
+[dir="rtl"] {
+    text-align: right;
+}
+
+[dir="rtl"] .tracking-wider,
+[dir="rtl"] .tracking-widest,
+[dir="rtl"] [class*="tracking-"] {
+    letter-spacing: normal !important;
+}
+
+/* RTL Floating Call/WhatsApp Bar */
+@media (min-width: 901px) {
+    [dir="rtl"] #kw-callbar,
+    html[dir="rtl"] #kw-callbar,
+    html[lang="ar"] #kw-callbar {
+        right: auto !important;
+        left: 24px !important;
+    }
+}
+
+html[lang="ar"] #kw-callbar .kw-call-text,
+[dir="rtl"] #kw-callbar .kw-call-text {
+    display: none;
+}
+html[lang="ar"] #kw-callbar .kw-wa-text,
+[dir="rtl"] #kw-callbar .kw-wa-text {
+    display: none;
+}
+html[lang="ar"] #kw-callbar .kw-solid::after,
+[dir="rtl"] #kw-callbar .kw-solid::after {
+    content: "اتصال مباشر";
+    font-family: 'Israr-Syria', sans-serif;
+}
+html[lang="ar"] #kw-callbar .kw-line::after,
+[dir="rtl"] #kw-callbar .kw-line::after {
+    content: "واتساب";
+    font-family: 'Israr-Syria', sans-serif;
 }
 
 /* Global resets */
@@ -88,7 +112,7 @@ html[lang="ar"] .font-sans {
 
 /* CSS variable for your brown color */
 :root {
-    --brown2: #a67c52;
+    --brown2: #a6946a;
     /* ← replace with your actual brown2 value */
     --bgColorMenu: #1d1d27;
     --duration: 0.7s;
@@ -126,7 +150,7 @@ html[lang="ar"] .font-sans {
 }
 
 .Mui-active .map_btn::before {
-    background: #910e0b;
+    background: #771709;
 }
 
 /* label tooltip */
@@ -170,7 +194,7 @@ html[lang="ar"] .font-sans {
     height: 0;
     border-style: solid;
     border-width: 8px 6px 0;
-    border-color: #d49256 transparent transparent;
+    border-color: #a6946a transparent transparent;
 }
 
 /* move the deco under the active dot */

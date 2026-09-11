@@ -48,12 +48,12 @@ const RestorationPage: React.FC = () => {
 
     const beforeAfterSets = [
         {
-            title: 'Main Courtyard',
+            title: t('restoration.main_courtyard'),
             before: '/images/ruined 2.jpg',
             after: '/images/side hall.jpg',
         },
         {
-            title: 'Stone Archways',
+            title: t('restoration.stone_archways'),
             before: '/images/before 1.jpg',
             after: '/images/after 1.jpg',
         },
@@ -93,7 +93,7 @@ const RestorationPage: React.FC = () => {
             {/* Timeline */}
             <section className="bg-accent-50 py-16">
                 <div className="container mx-auto px-4">
-                    <SectionTitle title="Restoration Pillars" centered={true} className="mb-16" />
+                    <SectionTitle title={t('restoration.pillars_title')} centered={true} className="mb-16" />
 
                     {loading ? (
                         <div className="flex min-h-[400px] items-center justify-center">
@@ -123,13 +123,19 @@ const RestorationPage: React.FC = () => {
             {/* Before & After */}
             <section className="bg-white py-16">
                 <div className="container mx-auto px-4">
-                    <SectionTitle title="Before & After Pillars" subtitle="Witness the transformation" centered={true} className="mb-16" />
+                    <SectionTitle title={t('restoration.before_after_title')} subtitle={t('restoration.before_after_subtitle')} centered={true} className="mb-16" />
 
                     <div className="space-y-16">
                         {beforeAfterSets.map((set, index) => (
                             <div key={index} className="mx-auto max-w-4xl">
                                 <h3 className="mb-6 text-center font-serif text-2xl font-semibold">{set.title}</h3>
-                                <BeforeAfterSlider beforeImage={set.before} afterImage={set.after} className="mb-8" />
+                                <BeforeAfterSlider
+                                    beforeImage={set.before}
+                                    afterImage={set.after}
+                                    beforeLabel={t('restoration.before')}
+                                    afterLabel={t('restoration.after')}
+                                    className="mb-8"
+                                />
                             </div>
                         ))}
                     </div>
@@ -158,16 +164,16 @@ const RestorationPage: React.FC = () => {
             {/* CTA Section */}
             <section className="bg-white py-16">
                 <div className="container mx-auto px-4 text-center">
-                    <h2 className="mb-4 font-serif text-3xl font-bold">Experience the Restored Khan</h2>
+                    <h2 className="mb-4 font-serif text-3xl font-bold">{t('restoration.experience_khan')}</h2>
                     <p className="text-accent-700 mx-auto mb-8 max-w-2xl text-lg">
-                        Book your stay at Khan Wahoud and immerse yourself in centuries of restored heritage.
+                        {t('restoration.experience_desc')}
                     </p>
                     <div className="flex flex-col justify-center gap-4 sm:flex-row">
                         <Button to="/rooms" variant="primary">
-                            Book a Room
+                            {t('restoration.book_room')}
                         </Button>
                         <Button to="/contact" variant="outline">
-                            Contact Us
+                            {t('common.contact_us')}
                         </Button>
                     </div>
                 </div>

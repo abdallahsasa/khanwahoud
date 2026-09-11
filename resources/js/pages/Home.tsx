@@ -1,6 +1,5 @@
 import { Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
-import { BedDouble, Building, History, PartyPopper, Users, Utensils } from 'lucide-react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useInView } from 'react-intersection-observer';
@@ -21,39 +20,6 @@ const HomePage: React.FC = () => {
         triggerOnce: true,
         threshold: 0.1,
     });
-
-    const featureItems = [
-        {
-            icon: <History className="text-primary-700 h-10 w-10" />,
-            title: t('home.feature_titles.experience'),
-            link: '/experience',
-        },
-        {
-            icon: <BedDouble className="text-primary-700 h-10 w-10" />,
-            title: t('home.feature_titles.rooms'),
-            link: '/rooms',
-        },
-        {
-            icon: <Utensils className="text-primary-700 h-10 w-10" />,
-            title: t('home.feature_titles.dining'),
-            link: '/dining',
-        },
-        {
-            icon: <PartyPopper className="text-primary-700 h-10 w-10" />,
-            title: t('home.feature_titles.events'),
-            link: '/events',
-        },
-        {
-            icon: <Users className="text-primary-700 h-10 w-10" />,
-            title: t('home.feature_titles.membership'),
-            link: '/membership',
-        },
-        {
-            icon: <Building className="text-primary-700 h-10 w-10" />,
-            title: t('home.feature_titles.restoration'),
-            link: '/restoration',
-        },
-    ];
 
     const handleScroll = () => {
         window.scrollTo({
@@ -137,12 +103,12 @@ const HomePage: React.FC = () => {
             </section>
 
             {/* Introduction Section */}
-            <section className="bg-white py-20">
+            <section className="bg-secondary-50 py-20">
                 <div className="container mx-auto px-4">
                     <div className="mx-auto max-w-4xl text-center">
                         <SectionTitle title={t('home.intro_title')} centered={true} />
 
-                        <p className="text-lg leading-relaxed text-[#910e0b]">{t('home.intro_text')}</p>
+                        <p className="text-lg leading-relaxed text-accent-800">{t('home.intro_text')}</p>
 
                         <div className="mt-12">
                             <Button to="/experience" variant="outline">
@@ -154,25 +120,114 @@ const HomePage: React.FC = () => {
             </section>
 
             {/* Features Grid */}
-            <section ref={featuresRef} className="bg-secondary-50/50 py-20">
+            <section ref={featuresRef} className="bg-accent-950 py-24">
                 <div className="container mx-auto px-4">
-                    <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-                        {featureItems.map((feature, index) => (
+                    <div className="mb-16 text-center">
+                        <motion.p
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={featuresInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+                            transition={{ duration: 0.6 }}
+                            className="text-primary-500 text-[11px] tracking-[0.3em] uppercase font-sans font-medium mb-4"
+                        >
+                            {t('common.explore')}
+                        </motion.p>
+                        <motion.h2
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={featuresInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+                            transition={{ duration: 0.6, delay: 0.1 }}
+                            className="text-secondary-200 font-serif text-3xl md:text-4xl font-bold"
+                        >
+                            {t('khan_wahoud')}
+                        </motion.h2>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        {[
+                            {
+                                title: t('home.feature_titles.experience'),
+                                link: '/experience',
+                                image: '/images/hall.jpg',
+                                span: 'lg:col-span-2',
+                                height: 'h-72 md:h-80',
+                            },
+                            {
+                                title: t('home.feature_titles.rooms'),
+                                link: '/rooms',
+                                image: '/images/rooms.png',
+                                span: '',
+                                height: 'h-72 md:h-80',
+                            },
+                            {
+                                title: t('home.feature_titles.dining'),
+                                link: '/dining',
+                                image: '/images/courtyard_dining_new.png',
+                                span: '',
+                                height: 'h-72 md:h-80',
+                            },
+                            {
+                                title: t('home.feature_titles.events'),
+                                link: '/events',
+                                image: '/images/private_events_hero_new.png',
+                                span: 'lg:col-span-2',
+                                height: 'h-72 md:h-80',
+                            },
+                            {
+                                title: t('home.feature_titles.membership'),
+                                link: '/membership',
+                                image: '/images/exclusive 2.jpg',
+                                span: '',
+                                height: 'h-72 md:h-80',
+                            },
+                            {
+                                title: t('home.feature_titles.restoration'),
+                                link: '/restoration',
+                                image: '/images/center.jpg',
+                                span: 'lg:col-span-2',
+                                height: 'h-72 md:h-80',
+                            },
+                        ].map((item, index) => (
                             <motion.div
                                 key={index}
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={featuresInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                                initial={{ opacity: 0, y: 30 }}
+                                animate={featuresInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                                 transition={{
-                                    duration: 0.5,
+                                    duration: 0.6,
                                     delay: index * 0.1,
                                 }}
-                                className="bg-white hover:bg-secondary-50 group rounded-lg p-8 transition-all duration-300 hover:shadow-lg border border-secondary-200/50"
+                                className={`${item.span} ${item.height}`}
                             >
-                                <div className="mb-4 transform transition-transform duration-300 group-hover:scale-110">{feature.icon}</div>
-                                <h3 className="text-accent-900 mb-3 font-serif text-xl font-semibold">{feature.title}</h3>
-                                <Button to={feature.link} variant="text" className="text-primary-700 group-hover:text-primary-800">
-                                    {t('common.explore')}
-                                </Button>
+                                <Link
+                                    href={item.link}
+                                    className="group relative block h-full w-full overflow-hidden"
+                                >
+                                    {/* Image */}
+                                    <img
+                                        src={item.image}
+                                        alt={item.title}
+                                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                                    />
+
+                                    {/* Gradient overlay */}
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-all duration-500 group-hover:from-black/90 group-hover:via-black/30" />
+
+                                    {/* Border overlay */}
+                                    <div className="absolute inset-0 border border-secondary-300/10 transition-all duration-500 group-hover:border-secondary-300/25" />
+
+                                    {/* Content */}
+                                    <div className="absolute inset-x-0 bottom-0 p-6 md:p-8">
+                                        <h3 className="font-serif text-xl md:text-2xl font-semibold text-secondary-100 transition-transform duration-500 group-hover:-translate-y-2">
+                                            {item.title}
+                                        </h3>
+                                        <div className="mt-2 overflow-hidden">
+                                            <span className="inline-flex items-center gap-2 text-[11px] tracking-[0.2em] uppercase font-sans text-primary-400 opacity-0 translate-y-4 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0">
+                                                {t('common.explore')}
+                                                <svg className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                                </svg>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </Link>
                             </motion.div>
                         ))}
                     </div>
@@ -180,7 +235,7 @@ const HomePage: React.FC = () => {
             </section>
 
             {/* Map Section */}
-            <section className="bg-white py-20">
+            <section className="bg-secondary-50 py-20">
                 <div className="container mx-auto px-4">
                     <SectionTitle title={t('home.map_title')} subtitle={t('home.map_subtitle')} centered={true} />
 
@@ -203,10 +258,10 @@ const HomePage: React.FC = () => {
             </section>
 
             {/* CTA Section */}
-            <section className="bg-accent-50 py-20">
+            <section className="bg-secondary-100 py-20">
                 <div className="container mx-auto px-4 text-center">
                     <h2 className="mb-6 font-serif text-3xl font-bold md:text-4xl">{t('home.feature_titles.experience')}</h2>
-                    <p className="text-accent-800 mx-auto mb-8 max-w-2xl text-lg">{t('book_text')}</p>
+                    <p className="text-accent-900 mx-auto mb-8 max-w-2xl text-lg">{t('book_text')}</p>
                     <div className="flex flex-col justify-center space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4">
                         <Button to="/rooms" variant="primary" size="lg">
                             {t('common.book_now')}

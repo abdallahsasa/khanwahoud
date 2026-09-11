@@ -23,7 +23,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     }, [url]);
     return (
         <LoadingScreen>
-            <div className={`min-h-screen ${isRtl ? 'font-rtl' : ''}`}>
+            <div dir={isRtl ? 'rtl' : 'ltr'} className={`min-h-screen ${isRtl ? 'font-rtl' : ''}`}>
                 <Header />
                 <main>
                     <article>{children}</article>

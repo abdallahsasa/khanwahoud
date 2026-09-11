@@ -1,6 +1,7 @@
 import { Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { useInView } from 'react-intersection-observer';
 import Button from './Button';
 import ImageOptimizer from './ImageOptimizer';
@@ -19,6 +20,7 @@ type Props = {
 };
 
 export default function Event({ index, event }: Props) {
+    const { t } = useTranslation();
     const [ref, inView] = useInView({
         triggerOnce: true,
         threshold: 0.1,
@@ -81,7 +83,7 @@ export default function Event({ index, event }: Props) {
                 <h3 className="mb-4 font-serif text-2xl font-semibold">{event.title}</h3>
                 <p className="text-accent-700 mb-6">{event.description}</p>
 
-                <h4 className="mb-3 font-semibold">Features:</h4>
+                <h4 className="mb-3 font-semibold">{t('common.features')}</h4>
                 <ul className="mb-6 space-y-2">
                     {event.features.map((feature, idx) => (
                         <li key={idx} className="flex items-start">
@@ -93,7 +95,7 @@ export default function Event({ index, event }: Props) {
 
                 <Link href={'contact'}>
                     <Button variant="primary" className="cursor-pointer">
-                        Inquire About This Space
+                        {t('room_modal.inquire_space')}
                     </Button>
                 </Link>
             </motion.div>

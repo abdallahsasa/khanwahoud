@@ -1,6 +1,7 @@
 import { router } from '@inertiajs/react';
 import { Calendar, Clock, Home, Image, LogOut, Users, X } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import Button from '../components/Button';
 import api from '../utils/axios';
 
@@ -30,6 +31,7 @@ interface Member {
 }
 
 const AdminDashboard: React.FC = () => {
+    const { t } = useTranslation();
     const [activeTab, setActiveTab] = useState('bookings');
 
     // Mock authentication check
@@ -91,13 +93,13 @@ const AdminDashboard: React.FC = () => {
         <div className="bg-accent-50 min-h-screen pt-20 pb-16">
             <div className="container mx-auto mt-8 px-4">
                 <div className="mb-8 flex items-center justify-between">
-                    <h1 className="font-serif text-3xl font-bold">Admin Dashboard</h1>
+                    <h1 className="font-serif text-3xl font-bold">{t('admin.dashboard_title')}</h1>
                     <div className="flex items-center">
                         <Clock size={18} className="text-accent-500 mr-2" />
                         <span className="text-accent-500 mr-4">{new Date().toLocaleDateString()}</span>
                         <Button variant="outline" size="sm" onClick={() => router.visit('/admin')}>
                             <LogOut size={16} className="mr-1" />
-                            Logout
+                            {t('admin.logout')}
                         </Button>
                     </div>
                 </div>
@@ -114,7 +116,7 @@ const AdminDashboard: React.FC = () => {
                             onClick={() => setActiveTab('bookings')}
                         >
                             <Calendar size={16} className="mr-2 inline" />
-                            Bookings
+                            {t('admin.tab_bookings')}
                         </button>
                         <button
                             className={`px-6 py-3 text-sm font-medium ${
@@ -125,7 +127,7 @@ const AdminDashboard: React.FC = () => {
                             onClick={() => setActiveTab('rooms')}
                         >
                             <Home size={16} className="mr-2 inline" />
-                            Rooms
+                            {t('admin.tab_rooms')}
                         </button>
                         <button
                             className={`px-6 py-3 text-sm font-medium ${
@@ -136,7 +138,7 @@ const AdminDashboard: React.FC = () => {
                             onClick={() => setActiveTab('members')}
                         >
                             <Users size={16} className="mr-2 inline" />
-                            Members
+                            {t('admin.tab_members')}
                         </button>
                         <button
                             className={`px-6 py-3 text-sm font-medium ${
@@ -147,7 +149,7 @@ const AdminDashboard: React.FC = () => {
                             onClick={() => setActiveTab('gallery')}
                         >
                             <Image size={16} className="mr-2 inline" />
-                            Gallery
+                            {t('admin.tab_gallery')}
                         </button>
                     </div>
                 </div>
@@ -158,9 +160,9 @@ const AdminDashboard: React.FC = () => {
                     {activeTab === 'bookings' && (
                         <div>
                             <div className="mb-6 flex items-center justify-between">
-                                <h2 className="text-xl font-semibold">Upcoming Bookings</h2>
+                                <h2 className="text-xl font-semibold">{t('admin.upcoming_bookings')}</h2>
                                 <Button variant="primary" size="sm">
-                                    Add New Booking
+                                    {t('admin.add_booking')}
                                 </Button>
                             </div>
 
@@ -168,12 +170,12 @@ const AdminDashboard: React.FC = () => {
                                 <table className="w-full border-collapse">
                                     <thead>
                                         <tr className="bg-accent-50">
-                                            <th className="border-b p-3 text-left">Guest</th>
-                                            <th className="border-b p-3 text-left">Room</th>
-                                            <th className="border-b p-3 text-left">Check-in</th>
-                                            <th className="border-b p-3 text-left">Check-out</th>
-                                            <th className="border-b p-3 text-left">Status</th>
-                                            <th className="border-b p-3 text-left">Actions</th>
+                                            <th className="border-b p-3 text-left">{t('admin.guest')}</th>
+                                            <th className="border-b p-3 text-left">{t('admin.room')}</th>
+                                            <th className="border-b p-3 text-left">{t('admin.check_in')}</th>
+                                            <th className="border-b p-3 text-left">{t('admin.check_out')}</th>
+                                            <th className="border-b p-3 text-left">{t('admin.status')}</th>
+                                            <th className="border-b p-3 text-left">{t('admin.actions')}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -198,13 +200,17 @@ const AdminDashboard: React.FC = () => {
                                                                   : 'bg-red-100 text-red-800'
                                                         }`}
                                                     >
-                                                        {booking.status}
+                                                        {booking.status === 'confirmed'
+                                                            ? t('admin.status_confirmed')
+                                                            : booking.status === 'pending'
+                                                              ? t('admin.status_pending')
+                                                              : t('admin.status_canceled')}
                                                     </span>
                                                 </td>
                                                 <td className="border-b p-3">
                                                     <div className="flex space-x-2">
-                                                        <button className="text-primary-700 hover:text-primary-800">Edit</button>
-                                                        <button className="text-red-600 hover:text-red-800">Cancel</button>
+                                                        <button className="text-primary-700 hover:text-primary-800">{t('admin.edit')}</button>
+                                                        <button className="text-red-600 hover:text-red-800">{t('admin.cancel')}</button>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -219,9 +225,9 @@ const AdminDashboard: React.FC = () => {
                     {activeTab === 'rooms' && (
                         <div>
                             <div className="mb-6 flex items-center justify-between">
-                                <h2 className="text-xl font-semibold">Room Inventory</h2>
+                                <h2 className="text-xl font-semibold">{t('admin.room_inventory')}</h2>
                                 <Button variant="primary" size="sm">
-                                    Update Room Status
+                                    {t('admin.update_room_status')}
                                 </Button>
                             </div>
 
@@ -240,16 +246,20 @@ const AdminDashboard: React.FC = () => {
                                                               : 'bg-red-100 text-red-800'
                                                     }`}
                                                 >
-                                                    {room.status}
+                                                    {room.status === 'available'
+                                                        ? t('admin.status_available')
+                                                        : room.status === 'occupied'
+                                                          ? t('admin.status_occupied')
+                                                          : t('admin.status_maintenance')}
                                                 </span>
                                             </div>
                                         </div>
                                         <div className="p-4">
                                             <h3 className="mb-2 font-semibold">{room.name}</h3>
-                                            <p className="text-primary-700 font-bold">${room.price} / night</p>
+                                            <p className="text-primary-700 font-bold">${room.price} {t('admin.per_night')}</p>
                                             <div className="mt-4 flex justify-between">
-                                                <button className="text-primary-700 text-sm hover:underline">Edit Details</button>
-                                                <button className="text-primary-700 text-sm hover:underline">Change Status</button>
+                                                <button className="text-primary-700 text-sm hover:underline">{t('admin.edit_details')}</button>
+                                                <button className="text-primary-700 text-sm hover:underline">{t('admin.change_status')}</button>
                                             </div>
                                         </div>
                                     </div>
@@ -262,9 +272,9 @@ const AdminDashboard: React.FC = () => {
                     {activeTab === 'members' && (
                         <div>
                             <div className="mb-6 flex items-center justify-between">
-                                <h2 className="text-xl font-semibold">Membership Directory</h2>
+                                <h2 className="text-xl font-semibold">{t('admin.membership_directory')}</h2>
                                 <Button variant="primary" size="sm">
-                                    Add New Member
+                                    {t('admin.add_member')}
                                 </Button>
                             </div>
 
@@ -272,11 +282,11 @@ const AdminDashboard: React.FC = () => {
                                 <table className="w-full border-collapse">
                                     <thead>
                                         <tr className="bg-accent-50">
-                                            <th className="border-b p-3 text-left">Member</th>
-                                            <th className="border-b p-3 text-left">Email</th>
-                                            <th className="border-b p-3 text-left">Tier</th>
-                                            <th className="border-b p-3 text-left">Join Date</th>
-                                            <th className="border-b p-3 text-left">Actions</th>
+                                            <th className="border-b p-3 text-left">{t('admin.member')}</th>
+                                            <th className="border-b p-3 text-left">{t('admin.email')}</th>
+                                            <th className="border-b p-3 text-left">{t('admin.tier')}</th>
+                                            <th className="border-b p-3 text-left">{t('admin.join_date')}</th>
+                                            <th className="border-b p-3 text-left">{t('admin.actions')}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -300,8 +310,8 @@ const AdminDashboard: React.FC = () => {
                                                 <td className="border-b p-3">{member.joinDate}</td>
                                                 <td className="border-b p-3">
                                                     <div className="flex space-x-2">
-                                                        <button className="text-primary-700 hover:text-primary-800">View</button>
-                                                        <button className="text-primary-700 hover:text-primary-800">Edit</button>
+                                                        <button className="text-primary-700 hover:text-primary-800">{t('admin.view')}</button>
+                                                        <button className="text-primary-700 hover:text-primary-800">{t('admin.edit')}</button>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -316,9 +326,9 @@ const AdminDashboard: React.FC = () => {
                     {activeTab === 'gallery' && (
                         <div>
                             <div className="mb-6 flex items-center justify-between">
-                                <h2 className="text-xl font-semibold">Image Gallery</h2>
+                                <h2 className="text-xl font-semibold">{t('admin.image_gallery')}</h2>
                                 <Button variant="primary" size="sm">
-                                    Upload New Images
+                                    {t('admin.upload_images')}
                                 </Button>
                             </div>
 
@@ -327,7 +337,7 @@ const AdminDashboard: React.FC = () => {
                                     <div key={index} className="group bg-accent-200 relative h-40 overflow-hidden rounded-md">
                                         {/* Image would go here */}
                                         <div className="absolute inset-0 flex items-center justify-center">
-                                            <span className="text-accent-500">Gallery Image {index + 1}</span>
+                                            <span className="text-accent-500">{t('admin.gallery_image')} {index + 1}</span>
                                         </div>
 
                                         <div className="absolute top-2 right-2 opacity-0 transition-opacity group-hover:opacity-100">

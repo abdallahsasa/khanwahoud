@@ -6,12 +6,12 @@ const DamascusMap: React.FC = () => {
     const { i18n } = useTranslation();
 
     const steps = [
-        { id: 1, en: 'Roman', ar: 'الروماني', dates: '64 BC – 634 AD' },
-        { id: 2, en: 'Byzantine', ar: 'البيزنطي', dates: '330 – 636 AD' },
-        { id: 3, en: 'Zangid', ar: 'الزنكي', dates: '1127 – 1174 AD' },
-        { id: 4, ar: 'الأيوبي', en: 'Ayyubid', dates: '1171 – 1260 AD' },
-        { id: 5, en: 'Mamluk', ar: 'المملوكي', dates: '1250 – 1517 AD' },
-        { id: 6, en: 'Ottoman', ar: 'العثماني', dates: '1516 – 1918 AD' },
+        { id: 1, en: 'Roman', ar: 'الروماني', dates: '64 BC – 634 AD', dates_ar: '64 ق.م – 634 م' },
+        { id: 2, en: 'Byzantine', ar: 'البيزنطي', dates: '330 – 636 AD', dates_ar: '330 – 636 م' },
+        { id: 3, en: 'Zangid', ar: 'الزنكي', dates: '1127 – 1174 AD', dates_ar: '1127 – 1174 م' },
+        { id: 4, ar: 'الأيوبي', en: 'Ayyubid', dates: '1171 – 1260 AD', dates_ar: '1171 – 1260 م' },
+        { id: 5, en: 'Mamluk', ar: 'المملوكي', dates: '1250 – 1517 AD', dates_ar: '1250 – 1517 م' },
+        { id: 6, en: 'Ottoman', ar: 'العثماني', dates: '1516 – 1918 AD', dates_ar: '1516 – 1918 م' },
     ];
 
     const [activeStep, setActiveStep] = useState(1);
@@ -3140,13 +3140,14 @@ const DamascusMap: React.FC = () => {
                     <div className="absolute left-6 right-6 top-4 h-[2px] bg-secondary-300/40 -z-0" />
                     {/* Active progress line */}
                     <div
-                        className="absolute left-6 top-4 h-[2px] bg-primary-700 transition-all duration-500 -z-0"
+                        className={`absolute ${i18n?.language?.startsWith('ar') ? 'right-6' : 'left-6'} top-4 h-[2px] bg-primary-700 transition-all duration-500 -z-0`}
                         style={{ width: `calc(${((activeStep - 1) / (steps.length - 1)) * 100}% - 12px)` }}
                     />
                     {steps.map((label) => {
                         const isActive = label.id === activeStep;
                         const isPassed = label.id <= activeStep;
-                        const name = i18n?.language === "ar" ? label.ar : label.en;
+                        const isAr = Boolean(i18n?.language?.startsWith('ar'));
+                        const name = isAr ? label.ar : label.en;
                         return (
                             <button
                                 key={label.id}
@@ -3173,7 +3174,7 @@ const DamascusMap: React.FC = () => {
                                     >
                                         {name}
                                     </span>
-                                    <span className="hidden md:block text-[10px] text-secondary-500">{label.dates}</span>
+                                    <span dir="ltr" className="hidden md:inline-block text-[10px] text-secondary-500">{label.dates}</span>
                                 </div>
                             </button>
                         );

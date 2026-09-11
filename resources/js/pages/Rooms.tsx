@@ -165,10 +165,9 @@ const RoomsPage: React.FC = () => {
                         animate={roomsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                         transition={{ duration: 0.8 }}
                     >
-                        <h2 className="text-secondary-600 mb-6 font-serif text-5xl font-bold">Coming Soon</h2>
+                        <h2 className="text-secondary-600 mb-6 font-serif text-5xl font-bold">{t('rooms.coming_soon')}</h2>
                         <p className="text-accent-700 mx-auto max-w-2xl text-xl">
-                            We are currently preparing our luxurious rooms and accommodations to provide you with the finest Ottoman experience.
-                            Please check back with us shortly.
+                            {t('rooms.coming_soon_desc')}
                         </p>
                     </motion.div>
                 </div>

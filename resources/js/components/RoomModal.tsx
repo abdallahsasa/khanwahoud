@@ -11,6 +11,7 @@ import {
     Check,
 } from "lucide-react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -49,6 +50,7 @@ interface RoomModalProps {
 }
 
 const RoomModal: React.FC<RoomModalProps> = ({ room, onClose }) => {
+    const { t } = useTranslation();
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [checkIn, setCheckIn] = useState<Date | null>(null);
     const [checkOut, setCheckOut] = useState<Date | null>(null);
@@ -84,12 +86,12 @@ const RoomModal: React.FC<RoomModalProps> = ({ room, onClose }) => {
 
             if (response.status === 201) {
                 toast.success(
-                    "Booking successful! We will contact you shortly."
+                    t("room_modal.booking_success")
                 );
                 onClose();
             }
         } catch (error) {
-            toast.error("Failed to book room. Please try again.");
+            toast.error(t("room_modal.booking_failed"));
         } finally {
             setIsSubmitting(false);
         }
@@ -162,7 +164,7 @@ const RoomModal: React.FC<RoomModalProps> = ({ room, onClose }) => {
                                         className="text-accent-500 me-2"
                                     />
                                     <span>
-                                        Up to {room.maxOccupancy} guests
+                                        {t("room_modal.up_to_guests", { count: room.maxOccupancy })}
                                     </span>
                                 </div>
                             </div>
@@ -175,7 +177,7 @@ const RoomModal: React.FC<RoomModalProps> = ({ room, onClose }) => {
 
                             <div className="mb-8">
                                 <h3 className="text-lg font-semibold mb-4">
-                                    Room Amenities
+                                    {t("room_modal.amenities_title")}
                                 </h3>
                                 <div className="grid grid-cols-2 gap-4">
                                     {room.amenities.map((amenity, index) => (
@@ -203,7 +205,7 @@ const RoomModal: React.FC<RoomModalProps> = ({ room, onClose }) => {
                             >
                                 <div>
                                     <label className="block text-sm font-medium text-accent-700 mb-1">
-                                        Full Name
+                                        {t("room_modal.full_name")}
                                     </label>
                                     <input
                                         type="text"
@@ -219,7 +221,7 @@ const RoomModal: React.FC<RoomModalProps> = ({ room, onClose }) => {
 
                                 <div>
                                     <label className="block text-sm font-medium text-accent-700 mb-1">
-                                        Email Address
+                                        {t("room_modal.email")}
                                     </label>
                                     <input
                                         type="email"
@@ -236,7 +238,7 @@ const RoomModal: React.FC<RoomModalProps> = ({ room, onClose }) => {
                                 <div className="grid grid-cols-2 gap-4">
                                     <div>
                                         <label className="block text-sm font-medium text-accent-700 mb-1">
-                                            Check-in Date
+                                            {t("room_modal.check_in")}
                                         </label>
                                         <DatePicker
                                             selected={checkIn}
@@ -259,7 +261,7 @@ const RoomModal: React.FC<RoomModalProps> = ({ room, onClose }) => {
 
                                     <div>
                                         <label className="block text-sm font-medium text-accent-700 mb-1">
-                                            Check-out Date
+                                            {t("room_modal.check_out")}
                                         </label>
                                         <DatePicker
                                             selected={checkOut}
@@ -283,7 +285,7 @@ const RoomModal: React.FC<RoomModalProps> = ({ room, onClose }) => {
 
                                 <div>
                                     <label className="block text-sm font-medium text-accent-700 mb-1">
-                                        Special Requests
+                                        {t("room_modal.special_requests")}
                                     </label>
                                     <textarea
                                         {...register("notes")}
@@ -299,11 +301,11 @@ const RoomModal: React.FC<RoomModalProps> = ({ room, onClose }) => {
                                                 ${room.price}
                                             </span>
                                             <span className="text-accent-500 ms-2">
-                                                per night
+                                                {t("room_modal.per_night")}
                                             </span>
                                         </div>
                                         <div className="text-sm text-accent-500">
-                                            Includes taxes & fees
+                                            {t("room_modal.taxes_included")}
                                         </div>
                                     </div>
 
@@ -314,13 +316,12 @@ const RoomModal: React.FC<RoomModalProps> = ({ room, onClose }) => {
                                         disabled={isSubmitting}
                                     >
                                         {isSubmitting
-                                            ? "Processing..."
-                                            : "Book Now"}
+                                            ? t("room_modal.processing")
+                                            : t("room_modal.book_now")}
                                     </Button>
 
                                     <p className="text-sm text-accent-500 mt-4 text-center">
-                                        * Free cancellation up to 48 hours
-                                        before check-in
+                                        {t("room_modal.cancellation_note")}
                                     </p>
                                 </div>
                             </form>

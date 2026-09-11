@@ -16,11 +16,11 @@ const NotFoundPage: React.FC = () => {
                     transition={{ duration: 0.5 }}
                 >
                     <h1 className="text-primary-700 mb-4 font-serif text-6xl font-bold">404</h1>
-                    <h2 className="mb-4 text-2xl font-semibold">Page Not Found</h2>
-                    <p className="text-accent-700 mb-8">The page you're looking for doesn't exist or has been moved.</p>
+                    <h2 className="mb-4 text-2xl font-semibold">{t('not_found.title')}</h2>
+                    <p className="text-accent-700 mb-8">{t('not_found.desc')}</p>
                     <div className="flex flex-col justify-center space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4">
                         <Button to="/" variant="primary">
-                            Return to Home
+                            {t('not_found.return_home')}
                         </Button>
                         <Button to="/contact" variant="outline">
                             {t('common.contact_us')}

@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import {
     ReactCompareSlider,
     ReactCompareSliderImage,
@@ -15,10 +16,13 @@ interface BeforeAfterSliderProps {
 const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
     beforeImage,
     afterImage,
-    beforeLabel = "Before",
-    afterLabel = "After",
+    beforeLabel,
+    afterLabel,
     className = "",
 }) => {
+    const { t } = useTranslation();
+    const lblBefore = beforeLabel ?? t('restoration.before', 'Before');
+    const lblAfter = afterLabel ?? t('restoration.after', 'After');
     return (
         <div className={`relative ${className}`}>
             <ReactCompareSlider
@@ -44,10 +48,10 @@ const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
             />
 
             <div className="absolute top-4 left-4 bg-black/50 text-white px-3 py-1 rounded-full text-sm">
-                {beforeLabel}
+                {lblBefore}
             </div>
             <div className="absolute top-4 right-4 bg-black/50 text-white px-3 py-1 rounded-full text-sm">
-                {afterLabel}
+                {lblAfter}
             </div>
         </div>
     );

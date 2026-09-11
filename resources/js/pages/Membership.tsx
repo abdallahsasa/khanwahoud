@@ -60,14 +60,14 @@ const MembershipPage: React.FC = () => {
                 setSelectedInterests([]);
                 setFormMessage({
                     type: 'success',
-                    text: 'Your membership application has been submitted successfully! We will contact you soon.'
+                    text: t('membership.success')
                 });
             }
         } catch (error: any) {
             console.error('Error submitting membership application:', error);
             setFormMessage({
                 type: 'error',
-                text: error.response?.data?.message || 'Failed to submit membership application. Please try again.'
+                text: error.response?.data?.message || t('membership.error')
             });
             window.scrollTo({ top: e.currentTarget.offsetTop - 100, behavior: 'smooth' });
         } finally {
@@ -78,34 +78,43 @@ const MembershipPage: React.FC = () => {
     const benefits = [
         {
             icon: <Crown className="h-12 w-12" />,
-            title: 'Exclusive Access',
-            description: 'Priority access to rooms, dining, and special events',
+            title: t('membership.benefit_cards.access_title'),
+            description: t('membership.benefit_cards.access_desc'),
         },
         {
             icon: <Star className="h-12 w-12" />,
-            title: 'VIP Treatment',
-            description: 'Personalized service and dedicated concierge support',
+            title: t('membership.benefit_cards.vip_title'),
+            description: t('membership.benefit_cards.vip_desc'),
         },
         {
             icon: <Users className="h-12 w-12" />,
-            title: 'Cultural Community',
-            description: 'Join a network of heritage and culture enthusiasts',
+            title: t('membership.benefit_cards.community_title'),
+            description: t('membership.benefit_cards.community_desc'),
         },
         {
             icon: <Calendar className="h-12 w-12" />,
-            title: 'Member Events',
-            description: 'Access to exclusive cultural and social gatherings',
+            title: t('membership.benefit_cards.events_title'),
+            description: t('membership.benefit_cards.events_desc'),
         },
         {
             icon: <Key className="h-12 w-12" />,
-            title: 'Room Benefits',
-            description: 'Preferential rates and complimentary upgrades',
+            title: t('membership.benefit_cards.rooms_title'),
+            description: t('membership.benefit_cards.rooms_desc'),
         },
         {
             icon: <Coffee className="h-12 w-12" />,
-            title: 'Dining Privileges',
-            description: 'Priority reservations and special dining experiences',
+            title: t('membership.benefit_cards.dining_title'),
+            description: t('membership.benefit_cards.dining_desc'),
         },
+    ];
+
+    const interestOptions = [
+        { key: 'Cultural Events', label: t('membership.interests.cultural_events') },
+        { key: 'Fine Dining', label: t('membership.interests.fine_dining') },
+        { key: 'Historical Architecture', label: t('membership.interests.historical_architecture') },
+        { key: 'Art & Exhibitions', label: t('membership.interests.art_exhibitions') },
+        { key: 'Traditional Crafts', label: t('membership.interests.traditional_crafts') },
+        { key: 'Ottoman Heritage', label: t('membership.interests.ottoman_heritage') },
     ];
 
     return (
@@ -128,8 +137,8 @@ const MembershipPage: React.FC = () => {
                         animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                         transition={{ duration: 0.8 }}
                     >
-                        <h1 className="mb-4 font-serif text-4xl font-bold md:text-5xl lg:text-6xl">Khan Wahoud Membership</h1>
-                        <p className="font-serif text-xl italic opacity-90 md:text-2xl">Join our exclusive community of heritage enthusiasts</p>
+                        <h1 className="mb-4 font-serif text-4xl font-bold md:text-5xl lg:text-6xl">{t('membership.hero_title')}</h1>
+                        <p className="font-serif text-xl italic opacity-90 md:text-2xl">{t('membership.hero_subtitle')}</p>
                     </motion.div>
                 </div>
             </section>
@@ -138,8 +147,8 @@ const MembershipPage: React.FC = () => {
             <section className="bg-white py-16">
                 <div className="container mx-auto px-4">
                     <SectionTitle
-                        title="Membership Benefits"
-                        subtitle="Experience the privileges of being a Khan Wahoud member"
+                        title={t('membership.benefits_title')}
+                        subtitle={t('membership.benefits_subtitle')}
                         centered={true}
                         className="mb-12"
                     />
@@ -174,7 +183,7 @@ const MembershipPage: React.FC = () => {
             <section className="bg-white py-16">
                 <div className="container mx-auto px-4">
                     <div className="mx-auto max-w-3xl">
-                        <SectionTitle title="Apply for Membership" subtitle="Join our exclusive community" centered={true} className="mb-8" />
+                        <SectionTitle title={t('membership.apply_title')} subtitle={t('membership.apply_subtitle')} centered={true} className="mb-8" />
 
                         {formMessage && (
                             <div className={`mb-6 rounded-lg p-4 text-center ${
@@ -189,7 +198,7 @@ const MembershipPage: React.FC = () => {
                         <form onSubmit={handleSubmit} className="space-y-6">
                             <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                                 <div>
-                                    <label htmlFor="firstName" className="text-accent-700 mb-1 block text-sm font-medium">First Name</label>
+                                    <label htmlFor="firstName" className="text-accent-700 mb-1 block text-sm font-medium">{t('membership.first_name')}</label>
                                     <input
                                         type="text"
                                         id="firstName"
@@ -199,7 +208,7 @@ const MembershipPage: React.FC = () => {
                                     />
                                 </div>
                                 <div>
-                                    <label htmlFor="lastName" className="text-accent-700 mb-1 block text-sm font-medium">Last Name</label>
+                                    <label htmlFor="lastName" className="text-accent-700 mb-1 block text-sm font-medium">{t('membership.last_name')}</label>
                                     <input
                                         type="text"
                                         id="lastName"
@@ -212,7 +221,7 @@ const MembershipPage: React.FC = () => {
 
                             <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                                 <div>
-                                    <label htmlFor="email" className="text-accent-700 mb-1 block text-sm font-medium">Email Address</label>
+                                    <label htmlFor="email" className="text-accent-700 mb-1 block text-sm font-medium">{t('membership.email')}</label>
                                     <input
                                         type="email"
                                         id="email"
@@ -222,7 +231,7 @@ const MembershipPage: React.FC = () => {
                                     />
                                 </div>
                                 <div>
-                                    <label htmlFor="phone" className="text-accent-700 mb-1 block text-sm font-medium">Phone Number</label>
+                                    <label htmlFor="phone" className="text-accent-700 mb-1 block text-sm font-medium">{t('membership.phone')}</label>
                                     <input
                                         type="tel"
                                         id="phone"
@@ -234,59 +243,52 @@ const MembershipPage: React.FC = () => {
                             </div>
 
                             <div>
-                                <label className="text-accent-700 mb-1 block text-sm font-medium">Preferred Membership Tier</label>
+                                <label className="text-accent-700 mb-1 block text-sm font-medium">{t('membership.tier_label')}</label>
                                 <select
                                     className="border-accent-300 focus:ring-primary-700 focus:border-primary-700 w-full rounded-md border px-4 py-2 focus:ring-2"
                                     required
                                     value={selectedTier || ''}
                                     onChange={(e) => setSelectedTier(e.target.value)}
                                 >
-                                    <option value="">Select a tier</option>
-                                    <option value="Heritage">Heritage</option>
-                                    <option value="Legacy">Legacy</option>
-                                    <option value="Royal">Royal</option>
+                                    <option value="">{t('membership.tier_select')}</option>
+                                    <option value="Heritage">{t('membership.tiers.heritage')}</option>
+                                    <option value="Legacy">{t('membership.tiers.legacy')}</option>
+                                    <option value="Royal">{t('membership.tiers.royal')}</option>
                                 </select>
                             </div>
 
                             <div>
-                                <label className="text-accent-700 mb-1 block text-sm font-medium">Areas of Interest</label>
+                                <label className="text-accent-700 mb-1 block text-sm font-medium">{t('membership.interests_label')}</label>
                                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                                    {[
-                                        'Cultural Events',
-                                        'Fine Dining',
-                                        'Historical Architecture',
-                                        'Art & Exhibitions',
-                                        'Traditional Crafts',
-                                        'Ottoman Heritage',
-                                    ].map((interest) => (
-                                        <label key={interest} className="flex items-center">
+                                    {interestOptions.map((interest) => (
+                                        <label key={interest.key} className="flex items-center gap-2 cursor-pointer">
                                             <input
                                                 type="checkbox"
                                                 className="form-checkbox text-primary-700 rounded"
-                                                checked={selectedInterests.includes(interest)}
-                                                onChange={() => handleInterestChange(interest)}
+                                                checked={selectedInterests.includes(interest.key)}
+                                                onChange={() => handleInterestChange(interest.key)}
                                             />
-                                            <span className="ml-2">{interest}</span>
+                                            <span className="text-accent-800 text-sm">{interest.label}</span>
                                         </label>
                                     ))}
                                 </div>
                             </div>
 
                             <div>
-                                <label htmlFor="about" className="text-accent-700 mb-1 block text-sm font-medium">Tell us about yourself</label>
+                                <label htmlFor="about" className="text-accent-700 mb-1 block text-sm font-medium">{t('membership.about_label')}</label>
                                 <textarea
                                     id="about"
                                     name="about"
                                     rows={4}
                                     className="border-accent-300 focus:ring-primary-700 focus:border-primary-700 w-full rounded-md border px-4 py-2 focus:ring-2"
-                                    placeholder="Share your interests and what draws you to Khan Wahoud..."
+                                    placeholder={t('membership.about_placeholder')}
                                     required
                                 ></textarea>
                             </div>
 
                             <div className="flex justify-center">
                                 <Button type="submit" variant="primary" size="lg" disabled={formSubmitting}>
-                                    {formSubmitting ? 'Submitting...' : 'Submit Application'}
+                                    {formSubmitting ? t('membership.submitting') : t('membership.submit')}
                                 </Button>
                             </div>
                         </form>

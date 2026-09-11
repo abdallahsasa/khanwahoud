@@ -81,7 +81,7 @@ const DiningPage: React.FC = () => {
                                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary-700 hover:bg-primary-600 text-white font-medium text-sm transition-all duration-300 shadow-md hover:shadow-lg"
                             >
                                 <MessageCircle size={18} />
-                                <span>WhatsApp Inquiries</span>
+                                <span>{t('dining.whatsapp_inquiries')}</span>
                             </a>
                             <a
                                 href="tel:+963930012015"
@@ -96,7 +96,7 @@ const DiningPage: React.FC = () => {
             </section>
 
             {/* Intro Section */}
-            <section className="bg-white py-16">
+            <section className="bg-secondary-50 py-20">
                 <div className="container mx-auto px-4">
                     <div className="mx-auto max-w-3xl text-center">
                         <SectionTitle title={t('dining.experiences_title')} centered={true} className="mb-6" />
@@ -106,9 +106,9 @@ const DiningPage: React.FC = () => {
             </section>
 
             {/* Preview of Upcoming Culinary Spaces */}
-            <section className="bg-secondary-50/50 py-16">
+            <section className="bg-accent-950 py-24 border-t border-secondary-300/10">
                 <div className="container mx-auto px-4">
-                    <div className="space-y-16">
+                    <div className="space-y-20">
                         {diningExperiences.map((experience, index) => {
                             const [ref, inView] = useInView({
                                 triggerOnce: true,
@@ -119,48 +119,48 @@ const DiningPage: React.FC = () => {
                                 <div
                                     key={experience.id}
                                     ref={ref}
-                                    className={`flex flex-col ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-center gap-12`}
+                                    className={`flex flex-col ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-center gap-12 lg:gap-16`}
                                 >
                                     <motion.div
-                                        className="lg:w-1/2"
+                                        className="lg:w-1/2 w-full"
                                         initial={{
                                             opacity: 0,
-                                            x: index % 2 === 0 ? -50 : 50,
+                                            x: index % 2 === 0 ? -40 : 40,
                                         }}
                                         animate={
                                             inView
                                                 ? { opacity: 1, x: 0 }
                                                 : {
                                                       opacity: 0,
-                                                      x: index % 2 === 0 ? -50 : 50,
+                                                      x: index % 2 === 0 ? -40 : 40,
                                                   }
                                         }
                                         transition={{ duration: 0.8 }}
                                     >
-                                        <div className="relative overflow-hidden rounded-lg shadow-xl group">
+                                        <div className="relative overflow-hidden rounded-xl shadow-2xl group border border-secondary-300/15">
                                             <img
                                                 src={experience.image}
                                                 alt={experience.title}
-                                                className="h-80 w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                                className="h-80 md:h-96 w-full object-cover transition-transform duration-700 group-hover:scale-105"
                                             />
-                                            <div className="absolute top-4 right-4 bg-black/60 text-secondary-100 backdrop-blur-md px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase border border-secondary-300/30">
+                                            <div className="absolute top-4 right-4 rtl:right-auto rtl:left-4 bg-accent-950/80 text-secondary-100 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase border border-secondary-300/30 shadow-lg">
                                                 {t('dining.coming_soon')}
                                             </div>
                                         </div>
                                     </motion.div>
 
                                     <motion.div
-                                        className="lg:w-1/2"
+                                        className="lg:w-1/2 w-full"
                                         initial={{
                                             opacity: 0,
-                                            x: index % 2 === 0 ? 50 : -50,
+                                            x: index % 2 === 0 ? 40 : -40,
                                         }}
                                         animate={
                                             inView
                                                 ? { opacity: 1, x: 0 }
                                                 : {
                                                       opacity: 0,
-                                                      x: index % 2 === 0 ? 50 : -50,
+                                                      x: index % 2 === 0 ? 40 : -40,
                                                   }
                                         }
                                         transition={{
@@ -168,8 +168,11 @@ const DiningPage: React.FC = () => {
                                             delay: 0.2,
                                         }}
                                     >
-                                        <h3 className="mb-4 font-serif text-2xl md:text-3xl font-semibold text-accent-900">{experience.title}</h3>
-                                        <p className="text-accent-700 text-lg leading-relaxed">{experience.description}</p>
+                                        <span className="text-primary-500 text-xs tracking-[0.25em] rtl:tracking-normal uppercase font-sans font-medium mb-3 block">
+                                            {t('dining.subtag')}
+                                        </span>
+                                        <h3 className="mb-4 font-serif text-3xl md:text-4xl font-bold text-secondary-100">{experience.title}</h3>
+                                        <p className="text-secondary-300/80 text-base md:text-lg leading-relaxed font-light">{experience.description}</p>
                                     </motion.div>
                                 </div>
                             );
@@ -183,7 +186,7 @@ const DiningPage: React.FC = () => {
                 <div className="container mx-auto px-4 text-center">
                     <div className="mx-auto max-w-3xl">
                         <span className="text-xs font-semibold tracking-widest text-primary-400 uppercase mb-3 block">
-                            Khan Wahoud · Old Damascus
+                            {t('dining.location_tag')}
                         </span>
                         <h2 className="mb-6 font-serif text-3xl md:text-4xl font-bold text-secondary-200">
                             {t('dining.title')}

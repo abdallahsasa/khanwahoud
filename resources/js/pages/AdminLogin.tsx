@@ -2,10 +2,12 @@ import { router } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import { Lock } from 'lucide-react';
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import Button from '../components/Button';
 import api from '../utils/axios';
 
 const AdminLoginPage: React.FC = () => {
+    const { t } = useTranslation();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -25,12 +27,12 @@ const AdminLoginPage: React.FC = () => {
                 document.cookie = `adminToken=${response.data.token}; path=/; secure; samesite=strict`;
                 router.visit('/admin/dashboard');
             } else {
-                setError(response.data.message || 'Invalid email or password');
+                setError(response.data.message || t('admin.invalid_credentials'));
             }
         } catch (err) {
             console.log(err);
 
-            setError('Failed to connect to the server');
+            setError(t('admin.connection_failed'));
         } finally {
             setIsLoading(false);
         }
@@ -50,14 +52,14 @@ const AdminLoginPage: React.FC = () => {
                     </div>
                 </div>
 
-                <h2 className="mb-6 text-center font-serif text-2xl font-bold">Admin Login</h2>
+                <h2 className="mb-6 text-center font-serif text-2xl font-bold">{t('admin.login_title')}</h2>
 
                 {error && <div className="mb-6 rounded border border-red-400 bg-red-100 px-4 py-3 text-red-700">{error}</div>}
 
                 <form onSubmit={handleLogin}>
                     <div className="mb-4">
                         <label htmlFor="email" className="text-accent-700 mb-1 block text-sm font-medium">
-                            Email
+                            {t('admin.email')}
                         </label>
                         <input
                             type="email"
@@ -72,7 +74,7 @@ const AdminLoginPage: React.FC = () => {
 
                     <div className="mb-6">
                         <label htmlFor="password" className="text-accent-700 mb-1 block text-sm font-medium">
-                            Password
+                            {t('admin.password')}
                         </label>
                         <input
                             type="password"
@@ -85,19 +87,19 @@ const AdminLoginPage: React.FC = () => {
                         />
                         <div className="mt-1 text-right">
                             <a href="#" className="text-primary-700 text-sm hover:underline">
-                                Forgot password?
+                                {t('admin.forgot_password')}
                             </a>
                         </div>
                     </div>
 
                     <Button type="submit" variant="primary" className="mb-4 w-full" disabled={isLoading}>
-                        {isLoading ? 'Logging in...' : 'Login'}
+                        {isLoading ? t('admin.logging_in') : t('admin.login_btn')}
                     </Button>
 
                     <p className="text-accent-500 mt-6 text-center text-sm">
-                        This login page is for hotel staff only.
+                        {t('admin.staff_note')}
                         <br />
-                        If you need assistance, please contact your administrator.
+                        {t('admin.assistance_note')}
                     </p>
                 </form>
             </motion.div>

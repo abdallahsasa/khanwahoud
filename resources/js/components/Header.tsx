@@ -87,12 +87,12 @@ const Header: React.FC = () => {
                     {/* Desktop Navigation Halves (50% left, 50% right) */}
                     <nav className="hidden w-full items-center lg:flex">
                         {/* Left Group — Right-aligned towards center logo */}
-                        <div className="w-1/2 flex items-center justify-end space-x-8 xl:space-x-12 rtl:space-x-reverse pr-20 xl:pr-28 rtl:pr-0 rtl:pl-20 rtl:xl:pl-28">
+                        <div className="w-1/2 flex items-center justify-end gap-x-6 xl:gap-x-10 pr-12 xl:pr-20 rtl:pr-4 rtl:xl:pr-8 rtl:pl-12 rtl:xl:pl-20">
                             {leftNavItems.map((item) => (
                                 <Link
                                     key={item.path}
                                     href={item.path}
-                                    className={`whitespace-nowrap text-xs xl:text-sm tracking-[0.18em] uppercase transition-colors py-2 relative font-sans ${
+                                    className={`whitespace-nowrap text-xs xl:text-sm tracking-[0.14em] rtl:tracking-normal uppercase rtl:normal-case transition-colors py-2 relative font-sans ${
                                         isActive(item.path)
                                             ? 'text-white font-semibold border-b-2 border-primary-700'
                                             : 'text-secondary-300 hover:text-white'
@@ -104,12 +104,12 @@ const Header: React.FC = () => {
                         </div>
 
                         {/* Right Group — Left-aligned away from center logo */}
-                        <div className="w-1/2 flex items-center justify-start space-x-8 xl:space-x-12 rtl:space-x-reverse pl-20 xl:pl-28 pr-32 xl:pr-36 rtl:pl-32 rtl:xl:pl-36 rtl:pr-20 rtl:xl:pr-28">
+                        <div className="w-1/2 flex items-center justify-start gap-x-6 xl:gap-x-10 pl-12 xl:pl-20 pr-24 xl:pr-32 rtl:pl-24 rtl:xl:pl-32 rtl:pr-12 rtl:xl:pr-20">
                             {rightNavItems.map((item) => (
                                 <Link
                                     key={item.path}
                                     href={item.path}
-                                    className={`whitespace-nowrap text-xs xl:text-sm tracking-[0.18em] uppercase transition-colors py-2 relative font-sans ${
+                                    className={`whitespace-nowrap text-xs xl:text-sm tracking-[0.14em] rtl:tracking-normal uppercase rtl:normal-case transition-colors py-2 relative font-sans ${
                                         isActive(item.path)
                                             ? 'text-white font-semibold border-b-2 border-primary-700'
                                             : 'text-secondary-300 hover:text-white'
@@ -129,8 +129,8 @@ const Header: React.FC = () => {
                     </div>
 
                     {/* DESKTOP LANGUAGE SWITCHER PILL (Pinned to edge, never offsets the logo) */}
-                    <div className="hidden lg:block absolute right-4 lg:right-8 xl:right-12 rtl:right-auto rtl:left-4 rtl:lg:left-8 rtl:xl:left-12 top-1/2 -translate-y-1/2 z-20">
-                        <div className="flex items-center rounded-full border border-secondary-300/30 bg-accent-950/60 p-1 backdrop-blur-md shadow-lg">
+                    <div className="hidden lg:block absolute right-4 lg:right-6 xl:right-10 rtl:right-auto rtl:left-4 rtl:lg:left-6 rtl:xl:left-10 top-1/2 -translate-y-1/2 z-20">
+                        <div className="flex items-center gap-1 rounded-full border border-secondary-300/30 bg-accent-950/60 p-1 backdrop-blur-md shadow-lg">
                             <Globe size={14} className="mx-1.5 text-secondary-400" />
                             <button
                                 onClick={() => setLanguage('en')}
