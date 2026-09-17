@@ -5,11 +5,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="style"
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" />
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Philosopher:ital,wght@0,400;0,700;1,400;1,700&display=swap" />
     <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Philosopher:ital,wght@0,400;0,700;1,400;1,700&display=swap"
         media="print" onload="this.media='all'" />
+    <link rel="preload" href="/fonts/Logam-Regular.otf" as="font" type="font/otf" crossorigin>
     <link rel="preload" href="/fonts/Israr-Syria-Regular.ttf" as="font" type="font/ttf" crossorigin>
     <link rel="preload" href="/fonts/thmanyah-serif-display-regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/thmanyah-serif-display-bold.woff2" as="font" type="font/woff2" crossorigin>
@@ -135,37 +138,33 @@
             #kw-callbar {
                 display: flex;
                 align-items: center;
-                gap: 8px;
+                gap: 6px;
                 position: fixed;
                 left: 50%;
                 transform: translateX(-50%);
-                bottom: calc(14px + env(safe-area-inset-bottom));
+                bottom: calc(12px + env(safe-area-inset-bottom));
                 z-index: 9999;
-                background: rgba(24, 20, 17, 0.92);
+                background: rgba(24, 20, 17, 0.94);
                 -webkit-backdrop-filter: blur(12px);
                 backdrop-filter: blur(12px);
-                padding: 6px;
-                border-radius: 50px;
+                padding: 4px;
+                border-radius: 40px;
                 border: 1px solid rgba(233, 223, 204, 0.25);
-                box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
+                box-shadow: 0 6px 24px rgba(0, 0, 0, 0.45);
                 font-family: Montserrat, sans-serif;
                 width: auto;
                 max-width: calc(100% - 28px);
             }
 
             #kw-callbar a {
+                width: 40px;
+                height: 40px;
                 display: inline-flex;
                 align-items: center;
                 justify-content: center;
-                gap: 6px;
-                padding: 10px 18px;
-                border-radius: 40px;
-                font-size: 13px;
-                font-weight: 600;
-                text-decoration: none;
-                letter-spacing: .02em;
-                white-space: nowrap;
+                border-radius: 50%;
                 transition: all 0.25s ease;
+                box-sizing: border-box;
             }
 
             #kw-callbar .kw-solid {
@@ -181,7 +180,7 @@
             }
 
             body {
-                padding-bottom: 72px;
+                padding-bottom: 56px;
             }
         }
 
@@ -190,37 +189,35 @@
             #kw-callbar {
                 display: flex;
                 align-items: center;
-                gap: 10px;
+                gap: 6px;
                 position: fixed;
                 left: auto;
-                right: 24px;
-                bottom: 24px;
+                right: 20px;
+                bottom: 20px;
                 z-index: 9999;
-                background: rgba(24, 20, 17, 0.92);
+                background: rgba(24, 20, 17, 0.94);
                 -webkit-backdrop-filter: blur(12px);
                 backdrop-filter: blur(12px);
-                padding: 6px 8px;
-                border-radius: 50px;
+                padding: 4px;
+                border-radius: 40px;
                 border: 1px solid rgba(233, 223, 204, 0.25);
-                box-shadow: 0 10px 32px rgba(0, 0, 0, 0.45);
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
                 font-family: Montserrat, sans-serif;
             }
 
             #kw-callbar a {
+                width: 40px;
+                height: 40px;
                 display: inline-flex;
                 align-items: center;
                 justify-content: center;
-                gap: 6px;
-                padding: 10px 20px;
-                border-radius: 40px;
-                font-size: 13px;
-                font-weight: 600;
-                text-decoration: none;
+                border-radius: 50%;
                 transition: all 0.25s ease;
+                box-sizing: border-box;
             }
 
             #kw-callbar a:hover {
-                transform: translateY(-2px);
+                transform: scale(1.08);
             }
 
             #kw-callbar .kw-solid {
@@ -243,15 +240,64 @@
                 border-color: #F3EBDD;
                 background: rgba(255, 255, 255, 0.1);
             }
-
-            html[lang="ar"] #kw-callbar a,
-            [dir="rtl"] #kw-callbar a {
-                font-size: 16px;
-            }
         }
     </style>
 
-    <title inertia>{{ config('app.name', 'Laravel') }}</title>
+    @php
+        $isAr = app()->getLocale() === 'ar';
+        $siteName = $isAr ? 'خان وحود | Khan Wahoud' : 'Khan Wahoud';
+        $metaTitle = $isAr
+            ? 'خان وحود | فندق بوتيكي وتجربة تاريخية فاخرة في دمشق القديمة'
+            : 'Khan Wahoud | Luxury Boutique Hotel & Heritage in Old Damascus';
+        $metaDescription = $isAr
+            ? 'أهلاً بكم في خان وحود (خان سليمان باشا العظم)، فندق بوتيكي فاخر وتجربة ضيافة أصيلة في قلب دمشق القديمة، الشارع المستقيم. إقامة عثمانية راقية، طعام وتراث، وفعاليات خاصة.'
+            : 'Welcome to Khan Wahoud (Khan Suleyman Pasha al-Azem), a luxury boutique hotel in the heart of Old Damascus, Straight Street. Authentic Ottoman heritage, luxury dining, and private events.';
+
+        // Absolute URL for OG image & canonical URL
+        $ogImage = url('/images/og-image.jpg');
+        $canonicalUrl = url()->current();
+
+        // Enforce HTTPS if in production or behind SSL proxy
+        if (
+            str_starts_with(config('app.url'), 'https://') ||
+            request()->isSecure() ||
+            request()->header('X-Forwarded-Proto') === 'https' ||
+            request()->header('X-Forwarded-Ssl') === 'on' ||
+            app()->environment('production')
+        ) {
+            $ogImage = preg_replace('/^http:/i', 'https:', $ogImage);
+            $canonicalUrl = preg_replace('/^http:/i', 'https:', $canonicalUrl);
+        }
+    @endphp
+
+    <!-- Primary Meta Tags -->
+    <title inertia>{{ $metaTitle }}</title>
+    <meta name="title" content="{{ $metaTitle }}">
+    <meta name="description" content="{{ $metaDescription }}">
+    <link rel="canonical" href="{{ $canonicalUrl }}">
+
+    <!-- Open Graph / Facebook / WhatsApp / LinkedIn / Telegram -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ $canonicalUrl }}">
+    <meta property="og:site_name" content="{{ $siteName }}">
+    <meta property="og:title" content="{{ $metaTitle }}">
+    <meta property="og:description" content="{{ $metaDescription }}">
+    <meta property="og:image" content="{{ $ogImage }}">
+    <meta property="og:image:secure_url" content="{{ $ogImage }}">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="675">
+    <meta property="og:image:alt" content="{{ $metaTitle }}">
+    <meta property="og:locale" content="{{ $isAr ? 'ar_SY' : 'en_US' }}">
+    <meta property="og:locale:alternate" content="{{ $isAr ? 'en_US' : 'ar_SY' }}">
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="{{ $canonicalUrl }}">
+    <meta name="twitter:title" content="{{ $metaTitle }}">
+    <meta name="twitter:description" content="{{ $metaDescription }}">
+    <meta name="twitter:image" content="{{ $ogImage }}">
+    <meta name="twitter:image:alt" content="{{ $metaTitle }}">
 
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" href="/favicon.png" type="image/png">

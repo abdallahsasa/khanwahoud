@@ -17,7 +17,3 @@ Route::get('/language', function () {
     return response()->view('reload', ['url' => $previousUrl]);
 })->name('language.switch');
 
-// routes/web.php
-Route::get('/test', function () {
-    return view('test');
-});

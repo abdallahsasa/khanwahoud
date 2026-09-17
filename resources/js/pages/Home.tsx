@@ -9,14 +9,10 @@ import SectionTitle from '../components/SectionTitle';
 import YearAnimation from '../components/YearAnimation';
 
 const HomePage: React.FC = () => {
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
+    const isAr = i18n.language?.startsWith('ar');
 
     const [heroRef, heroInView] = useInView({
-        triggerOnce: true,
-        threshold: 0.1,
-    });
-
-    const [featuresRef, featuresInView] = useInView({
         triggerOnce: true,
         threshold: 0.1,
     });
@@ -37,51 +33,56 @@ const HomePage: React.FC = () => {
                     <div className="bg-accent-950 absolute inset-0 opacity-50"></div>
                 </div>
 
-                <div ref={heroRef} className="relative flex h-full flex-col items-center justify-center px-4 text-center text-white md:pt-24">
+                <div ref={heroRef} className="relative flex h-full flex-col items-center justify-between px-4 text-center text-white pt-32 sm:pt-36 md:pt-44 lg:pt-48 xl:pt-52 pb-14 md:pb-16 z-10">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                         transition={{ duration: 0.8 }}
-                        className="font-serif"
+                        className="font-serif w-full max-w-4xl mx-auto flex-shrink-0"
                     >
-                        <h1 className="text-secondary-300 mb-8 text-5xl font-bold md:text-7xl">{t('khan_wahoud')}</h1>
-
-                        <p className="text-secondary-300 mb-8 text-xl font-bold md:text-xl">{t('khan_Suleyman')}</p>
+                        <h1 className="text-secondary-300 mb-2 md:mb-3 text-4xl font-bold md:text-6xl tracking-wide">{t('khan_wahoud')}</h1>
+                        <span className="text-secondary-400/90 text-xs md:text-sm font-sans tracking-widest uppercase block mb-1">{t('at')}</span>
+                        <p className="text-secondary-300 mb-4 md:mb-6 text-base font-bold md:text-lg">
+                            {t('khan_Suleyman')}
+                            <br />
+                            {t('since_1736')}
+                        </p>
 
                         <YearAnimation />
                     </motion.div>
 
+                    {/* Centered between timeline bar and footer of the main image */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                         transition={{ duration: 0.8, delay: 0.9 }}
-                        className="mt-10 md:mt-14 flex justify-center w-full px-4"
+                        className="flex-1 flex items-center justify-center w-full px-4 my-auto py-2"
                     >
-                        <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
-                            {/* Rooms */}
+                        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 w-full max-w-4xl mx-auto">
+                            {/* Book Your Stay */}
                             <Link
                                 href="/rooms"
-                                className="group relative px-8 py-3.5 text-[11px] tracking-[0.25em] uppercase font-sans font-medium text-secondary-200 border border-secondary-300/30 backdrop-blur-sm bg-accent-950/30 transition-all duration-500 hover:bg-secondary-200/10 hover:border-secondary-300/60"
+                                className="group relative w-full sm:w-auto min-w-[190px] md:min-w-[210px] text-center flex items-center justify-center px-8 py-3.5 text-[11px] tracking-[0.25em] uppercase font-sans font-medium text-secondary-200 border border-secondary-300/30 backdrop-blur-sm bg-accent-950/30 transition-all duration-500 hover:bg-secondary-200/10 hover:border-secondary-300/60"
                             >
-                                <span className="relative z-10">{t('nav.rooms')}</span>
+                                <span className="relative z-10">{t('common.book_your_stay')}</span>
                                 <span className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[1px] w-0 bg-secondary-300 transition-all duration-500 group-hover:w-full" />
                             </Link>
 
-                            {/* The Khan Experience — Primary CTA */}
+                            {/* Book A Table — Primary CTA */}
                             <Link
-                                href="/experience"
-                                className="group relative px-10 py-3.5 text-[11px] tracking-[0.25em] uppercase font-sans font-semibold text-secondary-100 border border-primary-600/50 bg-primary-800/60 backdrop-blur-sm transition-all duration-500 hover:bg-primary-700/80 hover:border-primary-500/70 hover:shadow-[0_0_30px_rgba(158,43,33,0.2)]"
+                                href="/dining"
+                                className="group relative w-full sm:w-auto min-w-[190px] md:min-w-[210px] text-center flex items-center justify-center px-10 py-3.5 text-[11px] tracking-[0.25em] uppercase font-sans font-semibold text-secondary-100 border border-primary-600/50 bg-primary-800/60 backdrop-blur-sm transition-all duration-500 hover:bg-primary-700/80 hover:border-primary-500/70 hover:shadow-[0_0_30px_rgba(158,43,33,0.2)]"
                             >
-                                <span className="relative z-10">{t('nav.experience')}</span>
+                                <span className="relative z-10">{t('common.book_a_table')}</span>
                                 <span className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[1px] w-0 bg-primary-400 transition-all duration-500 group-hover:w-full" />
                             </Link>
 
                             {/* Private Events */}
                             <Link
                                 href="/events"
-                                className="group relative px-8 py-3.5 text-[11px] tracking-[0.25em] uppercase font-sans font-medium text-secondary-200 border border-secondary-300/30 backdrop-blur-sm bg-accent-950/30 transition-all duration-500 hover:bg-secondary-200/10 hover:border-secondary-300/60"
+                                className="group relative w-full sm:w-auto min-w-[190px] md:min-w-[210px] text-center flex items-center justify-center px-8 py-3.5 text-[11px] tracking-[0.25em] uppercase font-sans font-medium text-secondary-200 border border-secondary-300/30 backdrop-blur-sm bg-accent-950/30 transition-all duration-500 hover:bg-secondary-200/10 hover:border-secondary-300/60"
                             >
-                                <span className="relative z-10">{t('nav.events')}</span>
+                                <span className="relative z-10">{t('common.private_events')}</span>
                                 <span className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[1px] w-0 bg-secondary-300 transition-all duration-500 group-hover:w-full" />
                             </Link>
                         </div>
@@ -92,147 +93,92 @@ const HomePage: React.FC = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                     transition={{ duration: 0.8, delay: 1.2 }}
-                    className="absolute right-0 bottom-8 left-0 flex justify-center"
+                    className="absolute right-0 bottom-4 md:bottom-5 left-0 flex justify-center z-10 pointer-events-none"
                 >
-                    <button onClick={handleScroll} className="animate-bounce cursor-pointer focus:outline-none" aria-label={t('home.scroll')}>
-                        <div className="border-secondary-300 flex h-14 w-8 justify-center rounded-full border-2">
-                            <div className="bg-secondary-300 mt-2 h-4 w-1 rounded-full"></div>
+                    <button onClick={handleScroll} className="animate-bounce cursor-pointer focus:outline-none pointer-events-auto" aria-label={t('home.scroll')}>
+                        <div className="border-secondary-300 flex h-10 w-6 justify-center rounded-full border-2">
+                            <div className="bg-secondary-300 mt-1.5 h-3 w-1 rounded-full"></div>
                         </div>
                     </button>
                 </motion.div>
             </section>
 
             {/* Introduction Section */}
-            <section className="bg-secondary-50 py-20">
-                <div className="container mx-auto px-4">
-                    <div className="mx-auto max-w-4xl text-center">
-                        <SectionTitle title={t('home.intro_title')} centered={true} />
+            <section className="bg-secondary-50 py-20 md:py-28 overflow-hidden">
+                <div className="container mx-auto px-4 lg:px-8 max-w-7xl">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+                        {/* Left Column: Text & CTA */}
+                        <div className="lg:col-span-7 text-left rtl:text-right">
+                            <SectionTitle title={t('home.intro_title')} centered={false} />
 
-                        <p className="text-lg leading-relaxed text-accent-800">{t('home.intro_text')}</p>
+                            <p className="text-base sm:text-lg md:text-xl leading-relaxed text-accent-800 font-sans opacity-90 max-w-2xl mt-4">
+                                {t('home.intro_text')}
+                            </p>
 
-                        <div className="mt-12">
-                            <Button to="/experience" variant="outline">
-                                {t('common.learn_more')}
-                            </Button>
+                            <div className="mt-8 md:mt-10">
+                                <Button to="/experience" variant="outline">
+                                    {t('common.learn_more')}
+                                </Button>
+                            </div>
+                        </div>
+
+                        {/* Right Column: Architectural Image */}
+                        <div className="lg:col-span-5">
+                            <div className="relative mx-auto max-w-md lg:max-w-none">
+                                <div className="absolute -inset-2.5 rounded-2xl translate-x-2.5 translate-y-2.5 pointer-events-none hidden sm:block" />
+                                <div className="relative rounded-xl overflow-hidden shadow-2xl border border-secondary-300/40 aspect-[4/5] bg-accent-950/10">
+                                    <img
+                                        src="/images/interance.jpg"
+                                        alt={t('home.intro_title')}
+                                        className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                                        loading="lazy"
+                                    />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* Features Grid */}
-            <section ref={featuresRef} className="bg-accent-950 py-24">
-                <div className="container mx-auto px-4">
-                    <div className="mb-16 text-center">
-                        <motion.p
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={featuresInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-                            transition={{ duration: 0.6 }}
-                            className="text-primary-500 text-[11px] tracking-[0.3em] uppercase font-sans font-medium mb-4"
-                        >
-                            {t('common.explore')}
-                        </motion.p>
-                        <motion.h2
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={featuresInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-                            transition={{ duration: 0.6, delay: 0.1 }}
-                            className="text-secondary-200 font-serif text-3xl md:text-4xl font-bold"
-                        >
-                            {t('khan_wahoud')}
-                        </motion.h2>
-                    </div>
+            {/* Story / Accommodation Section */}
+            <section className="bg-secondary-50 py-20 md:py-28 overflow-hidden">
+                <div className="container mx-auto px-4 lg:px-8 max-w-7xl">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+                        {/* Left Column: Text & CTA */}
+                        <div className="lg:col-span-7 text-left rtl:text-right">
+                            <SectionTitle title={t('home.story_title')} centered={false} />
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                        {[
-                            {
-                                title: t('home.feature_titles.experience'),
-                                link: '/experience',
-                                image: '/images/hall.jpg',
-                                span: 'lg:col-span-2',
-                                height: 'h-72 md:h-80',
-                            },
-                            {
-                                title: t('home.feature_titles.rooms'),
-                                link: '/rooms',
-                                image: '/images/rooms.png',
-                                span: '',
-                                height: 'h-72 md:h-80',
-                            },
-                            {
-                                title: t('home.feature_titles.dining'),
-                                link: '/dining',
-                                image: '/images/courtyard_dining_new.png',
-                                span: '',
-                                height: 'h-72 md:h-80',
-                            },
-                            {
-                                title: t('home.feature_titles.events'),
-                                link: '/events',
-                                image: '/images/private_events_hero_new.png',
-                                span: 'lg:col-span-2',
-                                height: 'h-72 md:h-80',
-                            },
-                            {
-                                title: t('home.feature_titles.membership'),
-                                link: '/membership',
-                                image: '/images/exclusive 2.jpg',
-                                span: '',
-                                height: 'h-72 md:h-80',
-                            },
-                            {
-                                title: t('home.feature_titles.restoration'),
-                                link: '/restoration',
-                                image: '/images/center.jpg',
-                                span: 'lg:col-span-2',
-                                height: 'h-72 md:h-80',
-                            },
-                        ].map((item, index) => (
-                            <motion.div
-                                key={index}
-                                initial={{ opacity: 0, y: 30 }}
-                                animate={featuresInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-                                transition={{
-                                    duration: 0.6,
-                                    delay: index * 0.1,
-                                }}
-                                className={`${item.span} ${item.height}`}
-                            >
-                                <Link
-                                    href={item.link}
-                                    className="group relative block h-full w-full overflow-hidden"
-                                >
-                                    {/* Image */}
+                            <div className="space-y-4 text-base sm:text-lg md:text-xl leading-relaxed text-accent-800 font-sans opacity-90 max-w-2xl mt-4">
+                                <p>{t('home.story_p1')}</p>
+                                <p>{t('home.story_p2')}</p>
+                                <p>{t('home.story_p3')}</p>
+                            </div>
+
+                            <div className="mt-8 md:mt-10">
+                                <Button to="/rooms" variant="outline">
+                                    {t('common.book_your_stay')}
+                                </Button>
+                            </div>
+                        </div>
+
+                        {/* Right Column: Architectural Image */}
+                        <div className="lg:col-span-5">
+                            <div className="relative mx-auto max-w-md lg:max-w-none">
+                                <div className="absolute -inset-2.5 rounded-2xl translate-x-2.5 translate-y-2.5 pointer-events-none hidden sm:block" />
+                                <div className="relative rounded-xl overflow-hidden shadow-2xl border border-secondary-300/40 aspect-[4/5] bg-accent-950/10">
                                     <img
-                                        src={item.image}
-                                        alt={item.title}
-                                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                                        src="/images/center.jpg"
+                                        alt={t('home.story_title')}
+                                        className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                                        loading="lazy"
                                     />
-
-                                    {/* Gradient overlay */}
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-all duration-500 group-hover:from-black/90 group-hover:via-black/30" />
-
-                                    {/* Border overlay */}
-                                    <div className="absolute inset-0 border border-secondary-300/10 transition-all duration-500 group-hover:border-secondary-300/25" />
-
-                                    {/* Content */}
-                                    <div className="absolute inset-x-0 bottom-0 p-6 md:p-8">
-                                        <h3 className="font-serif text-xl md:text-2xl font-semibold text-secondary-100 transition-transform duration-500 group-hover:-translate-y-2">
-                                            {item.title}
-                                        </h3>
-                                        <div className="mt-2 overflow-hidden">
-                                            <span className="inline-flex items-center gap-2 text-[11px] tracking-[0.2em] uppercase font-sans text-primary-400 opacity-0 translate-y-4 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0">
-                                                {t('common.explore')}
-                                                <svg className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                                                </svg>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </Link>
-                            </motion.div>
-                        ))}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
+
 
             {/* Map Section */}
             <section className="bg-secondary-50 py-20">
@@ -241,6 +187,16 @@ const HomePage: React.FC = () => {
 
                     <div className="mt-12">
                         <DamascusMap />
+                    </div>
+
+                    <div className="mt-10 md:mt-12 flex justify-center">
+                        <Button
+                            to="/restoration"
+                            variant="outline"
+                            className="uppercase tracking-wider rtl:normal-case rtl:tracking-normal"
+                        >
+                            {t('nav.rebirth')}
+                        </Button>
                     </div>
                 </div>
             </section>

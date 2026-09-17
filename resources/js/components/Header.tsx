@@ -38,27 +38,26 @@ const Header: React.FC = () => {
         setIsMenuOpen(false);
     }, [url]);
 
-    // Left navigation group (before logo)
+    // Left navigation group (before logo) - matching design mockup
     const leftNavItems = [
-        { name: t('nav.dining'), path: '/dining' },
-        { name: t('nav.events'), path: '/events' },
+        { name: t('nav.the_khan'), path: '/experience' },
+        { name: t('nav.stay'), path: '/rooms' },
     ];
 
-    // Right navigation group (after logo)
+    // Right navigation group (after logo) - matching design mockup
     const rightNavItems = [
-        { name: t('nav.restoration'), path: '/restoration' },
-        { name: t('nav.rooms'), path: '/rooms' },
-        { name: t('nav.contact'), path: '/contact' },
+        { name: t('nav.events'), path: '/events' },
+        { name: t('nav.dine'), path: '/dining' },
+        { name: t('nav.rebirth'), path: '/restoration' },
     ];
 
     // All links for mobile menu
     const mobileNavItems = [
-        { name: t('nav.home'), path: '/' },
-        { name: t('nav.dining'), path: '/dining' },
+        { name: t('nav.the_khan'), path: '/experience' },
+        { name: t('nav.stay'), path: '/rooms' },
         { name: t('nav.events'), path: '/events' },
-        { name: t('nav.experience'), path: '/experience' },
-        { name: t('nav.restoration'), path: '/restoration' },
-        { name: t('nav.rooms'), path: '/rooms' },
+        { name: t('nav.dine'), path: '/dining' },
+        { name: t('nav.rebirth'), path: '/restoration' },
         { name: t('nav.contact'), path: '/contact' },
     ];
 
@@ -84,49 +83,57 @@ const Header: React.FC = () => {
                         </Link>
                     </div>
 
-                    {/* Desktop Navigation Halves (50% left, 50% right) */}
-                    <nav className="hidden w-full items-center lg:flex">
-                        {/* Left Group — Right-aligned towards center logo */}
-                        <div className="w-1/2 flex items-center justify-end gap-x-6 xl:gap-x-10 pr-12 xl:pr-20 rtl:pr-4 rtl:xl:pr-8 rtl:pl-12 rtl:xl:pl-20">
-                            {leftNavItems.map((item) => (
-                                <Link
-                                    key={item.path}
-                                    href={item.path}
-                                    className={`whitespace-nowrap text-xs xl:text-sm tracking-[0.14em] rtl:tracking-normal uppercase rtl:normal-case transition-colors py-2 relative font-sans ${
-                                        isActive(item.path)
-                                            ? 'text-white font-semibold border-b-2 border-primary-700'
-                                            : 'text-secondary-300 hover:text-white'
-                                    }`}
-                                >
-                                    {item.name}
-                                </Link>
-                            ))}
-                        </div>
+                    {/* Desktop Navigation: Perfectly Symmetrical Centered Unit */}
+                    <nav className="hidden w-full items-center justify-center lg:flex">
+                        <div className="flex items-center justify-center gap-x-6 xl:gap-x-10">
+                            {/* Left Wing (Exact same width as Right Wing) */}
+                            <div className="w-[280px] xl:w-[340px] flex items-center justify-around rtl:justify-around">
+                                {leftNavItems.map((item) => (
+                                    <Link
+                                        key={item.path}
+                                        href={item.path}
+                                        className={`whitespace-nowrap text-xs xl:text-sm tracking-[0.14em] rtl:tracking-normal uppercase rtl:normal-case transition-colors py-2 relative font-sans ${
+                                            isActive(item.path)
+                                                ? 'text-white font-semibold border-b-2 border-primary-700'
+                                                : 'text-secondary-300 hover:text-white'
+                                        }`}
+                                    >
+                                        {item.name}
+                                    </Link>
+                                ))}
+                            </div>
 
-                        {/* Right Group — Left-aligned away from center logo */}
-                        <div className="w-1/2 flex items-center justify-start gap-x-6 xl:gap-x-10 pl-12 xl:pl-20 pr-24 xl:pr-32 rtl:pl-24 rtl:xl:pl-32 rtl:pr-12 rtl:xl:pr-20">
-                            {rightNavItems.map((item) => (
-                                <Link
-                                    key={item.path}
-                                    href={item.path}
-                                    className={`whitespace-nowrap text-xs xl:text-sm tracking-[0.14em] rtl:tracking-normal uppercase rtl:normal-case transition-colors py-2 relative font-sans ${
-                                        isActive(item.path)
-                                            ? 'text-white font-semibold border-b-2 border-primary-700'
-                                            : 'text-secondary-300 hover:text-white'
-                                    }`}
-                                >
-                                    {item.name}
-                                </Link>
-                            ))}
+                            {/* Center Brand Logo (Exactly in the middle between both wings) */}
+                            <Link
+                                href="/"
+                                className="transition-transform hover:scale-105 duration-300 block px-2 flex-shrink-0"
+                                aria-label="Khan Wahoud"
+                            >
+                                <img
+                                    src="/images/logowahoud.png"
+                                    alt="Khan Wahoud"
+                                    className="h-16 xl:h-20 w-auto object-contain drop-shadow-md"
+                                />
+                            </Link>
+
+                            {/* Right Wing (Exact same width as Left Wing) */}
+                            <div className="w-[280px] xl:w-[340px] flex items-center justify-between rtl:justify-between px-2">
+                                {rightNavItems.map((item) => (
+                                    <Link
+                                        key={item.path}
+                                        href={item.path}
+                                        className={`whitespace-nowrap text-xs xl:text-sm tracking-[0.14em] rtl:tracking-normal uppercase rtl:normal-case transition-colors py-2 relative font-sans ${
+                                            isActive(item.path)
+                                                ? 'text-white font-semibold border-b-2 border-primary-700'
+                                                : 'text-secondary-300 hover:text-white'
+                                        }`}
+                                    >
+                                        {item.name}
+                                    </Link>
+                                ))}
+                            </div>
                         </div>
                     </nav>
-
-                    {/* TRUE DEAD-CENTER BRAND LOGO (100% mathematically centered) */}
-                    <div className="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 pointer-events-auto">
-                        <Link href="/" className="transition-transform hover:scale-105 duration-300 block p-1" aria-label="Khan Wahoud">
-                            <img src="/images/logowahoud.png" alt="Khan Wahoud" className="h-16 xl:h-20 w-auto object-contain drop-shadow-md" />
-                        </Link>
-                    </div>
 
                     {/* DESKTOP LANGUAGE SWITCHER PILL (Pinned to edge, never offsets the logo) */}
                     <div className="hidden lg:block absolute right-4 lg:right-6 xl:right-10 rtl:right-auto rtl:left-4 rtl:lg:left-6 rtl:xl:left-10 top-1/2 -translate-y-1/2 z-20">

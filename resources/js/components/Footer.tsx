@@ -124,14 +124,21 @@ const Footer: React.FC = () => {
                             {t("contact.title")}
                         </h3>
                         <ul className="space-y-3">
-                            <li className="flex items-start gap-3">
-                                <MapPin
-                                    size={18}
-                                    className="mt-1 flex-shrink-0 text-secondary-400"
-                                />
-                                <span className="opacity-75">
-                                    {t("contact.address")}
-                                </span>
+                            <li>
+                                <a
+                                    href="https://maps.app.goo.gl/WczTjT3Vac5dNxmk9"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-start gap-3 opacity-75 hover:opacity-100 transition-opacity group"
+                                >
+                                    <MapPin
+                                        size={18}
+                                        className="mt-1 flex-shrink-0 text-secondary-400 group-hover:text-primary-400 transition-colors"
+                                    />
+                                    <span className="group-hover:underline">
+                                        {t("contact.address")}
+                                    </span>
+                                </a>
                             </li>
                             <li className="flex items-center gap-3">
                                 <Mail

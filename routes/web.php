@@ -4,7 +4,6 @@ use App\Http\Controllers\Api\EventController;
 use App\Http\Controllers\Api\RoomController;
 use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\LoginController;
 
 // Public routes
 Route::get('/', [PageController::class, 'home'])->name('home');

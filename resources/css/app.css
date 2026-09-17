@@ -3,6 +3,28 @@
 
 @plugin 'tailwindcss-animate';
 
+@theme {
+    --font-serif: 'Philosopher', 'Cormorant Garamond', serif;
+    --font-sans: 'Logam', 'Montserrat', sans-serif;
+}
+
+/* Brand Fonts: Logam */
+@font-face {
+    font-family: 'Logam';
+    src: url('/fonts/Logam-Regular.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Logam';
+    src: url('/fonts/LogamRounded-Regular.otf') format('opentype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
 /* Brand Fonts: Israr-Syria (Arabic Typography) */
 @font-face {
     font-family: 'Israr-Syria';
@@ -69,6 +91,64 @@ html[lang="ar"] .font-sans {
     letter-spacing: normal !important;
 }
 
+/* English Version Typography: Philosopher for headlines, Logam for text */
+html:not([lang="ar"]) body,
+html[lang="en"] body,
+:lang(en) {
+    font-family: 'Logam', 'Montserrat', sans-serif;
+}
+
+html:not([lang="ar"]) h1,
+html:not([lang="ar"]) h2,
+html:not([lang="ar"]) h3,
+html:not([lang="ar"]) h4,
+html:not([lang="ar"]) h5,
+html:not([lang="ar"]) h6,
+html:not([lang="ar"]) .font-serif,
+html[lang="en"] h1,
+html[lang="en"] h2,
+html[lang="en"] h3,
+html[lang="en"] h4,
+html[lang="en"] h5,
+html[lang="en"] h6,
+html[lang="en"] .font-serif,
+:lang(en) h1,
+:lang(en) h2,
+:lang(en) h3,
+:lang(en) h4,
+:lang(en) h5,
+:lang(en) h6,
+:lang(en) .font-serif {
+    font-family: 'Philosopher', 'Cormorant Garamond', serif;
+}
+
+html:not([lang="ar"]) p,
+html:not([lang="ar"]) span,
+html:not([lang="ar"]) a,
+html:not([lang="ar"]) li,
+html:not([lang="ar"]) button,
+html:not([lang="ar"]) input,
+html:not([lang="ar"]) textarea,
+html:not([lang="ar"]) .font-sans,
+html[lang="en"] p,
+html[lang="en"] span,
+html[lang="en"] a,
+html[lang="en"] li,
+html[lang="en"] button,
+html[lang="en"] input,
+html[lang="en"] textarea,
+html[lang="en"] .font-sans,
+:lang(en) p,
+:lang(en) span,
+:lang(en) a,
+:lang(en) li,
+:lang(en) button,
+:lang(en) input,
+:lang(en) textarea,
+:lang(en) .font-sans {
+    font-family: 'Logam', 'Montserrat', sans-serif;
+}
+
 /* RTL Global Adjustments */
 [dir="rtl"] {
     text-align: right;
@@ -100,7 +180,7 @@ html[lang="ar"] #kw-callbar .kw-wa-text,
 }
 html[lang="ar"] #kw-callbar .kw-solid::after,
 [dir="rtl"] #kw-callbar .kw-solid::after {
-    content: "اتصال مباشر";
+    content: "اتصال";
     font-family: 'Israr-Syria', sans-serif;
 }
 html[lang="ar"] #kw-callbar .kw-line::after,

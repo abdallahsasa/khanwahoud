@@ -5,6 +5,9 @@ export default {
     content: ['./resources/**/*.{js,ts,jsx,tsx,blade.php}', './pages/**/*.{js,ts,jsx,tsx,blade.php}', './components/**/*.{js,ts,jsx,tsx,blade.php}'],
     theme: {
         extend: {
+            spacing: {
+                '26': '6.5rem',
+            },
             colors: {
                 primary: {
                     50: '#fef3f1',
@@ -47,8 +50,8 @@ export default {
                 },
             },
             fontFamily: {
-                serif: ['Cormorant Garamond', 'Thmanyah Serif Display', 'El Messiri', ...fontFamily.serif],
-                sans: ['Montserrat', 'Israr-Syria', 'Noto Kufi Arabic', ...fontFamily.sans],
+                serif: ['Philosopher', 'Cormorant Garamond', 'Thmanyah Serif Display', 'El Messiri', ...fontFamily.serif],
+                sans: ['Logam', 'Montserrat', 'Israr-Syria', 'Noto Kufi Arabic', ...fontFamily.sans],
             },
         },
     },

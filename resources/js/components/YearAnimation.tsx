@@ -32,7 +32,7 @@ const timelineEvents: TimelineEvent[] = [
         description: 'major_desc',
     },
     {
-        year: 2025,
+        year: 2026,
         title: 'modern_rebirth',
         description: 'reopening_desc',
     },
@@ -119,7 +119,7 @@ const YearAnimation: React.FC = () => {
                         className="bg-primary-700 absolute top-0 left-0 h-full"
                         initial={{ width: '0%' }}
                         animate={{
-                            width: `${((currentYear - 1736) / (2025 - 1736)) * 100}%`,
+                            width: `${((currentYear - 1736) / (2026 - 1736)) * 100}%`,
                         }}
                         transition={{ duration: 0.1 }}
                     />
