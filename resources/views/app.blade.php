@@ -317,21 +317,19 @@
 
     {{-- Persistent luxury floating contact pill (Call & WhatsApp) --}}
     <div id="kw-callbar">
-        <a class="kw-solid" href="tel:+963930012015" aria-label="Call to reserve">
-            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"
+        <a class="kw-solid" href="tel:+963930012015" aria-label="Call to reserve" title="Call">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
                 stroke-linecap="round" stroke-linejoin="round">
                 <path
                     d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
             </svg>
-            <span class="kw-call-text">Call</span>
         </a>
         <a class="kw-line" href="https://wa.me/963930012015" target="_blank" rel="noopener"
-            aria-label="Chat on WhatsApp">
-            <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor">
+            aria-label="Chat on WhatsApp" title="WhatsApp">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
                 <path
                     d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm5.79 14.07c-.24.67-1.4 1.24-1.92 1.32-.5.08-1.15.11-3.32-.78-2.77-1.15-4.56-3.96-4.7-4.14-.14-.19-1.12-1.49-1.12-2.84 0-1.35.71-2.01.96-2.28.25-.27.55-.34.73-.34.18 0 .36.01.52.02.17.01.39-.06.61.47.23.55.78 1.9.85 2.04.07.14.12.31.02.5-.09.19-.14.31-.28.47-.14.16-.29.35-.42.47-.14.14-.29.3-.12.59.16.29.73 1.21 1.57 1.95 1.08.96 1.99 1.26 2.27 1.4.28.14.44.12.61-.07.17-.19.71-.83.9-1.11.19-.28.38-.24.64-.14.26.09 1.64.77 1.92.91.28.14.47.21.54.33.07.12.07.7-.17 1.37z" />
             </svg>
-            <span class="kw-wa-text">WhatsApp</span>
         </a>
     </div>
 
