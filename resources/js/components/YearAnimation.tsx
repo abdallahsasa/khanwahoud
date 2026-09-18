@@ -48,7 +48,7 @@ const YearAnimation: React.FC = () => {
 
     useEffect(() => {
         if (inView) {
-            const animationDuration = 7500; // 7.5 seconds total (slower, legible pace)
+            const animationDuration = 22500; // 7.5 seconds total (slower, legible pace)
             const totalYears = timelineEvents[timelineEvents.length - 1].year - timelineEvents[0].year;
             const yearInterval = animationDuration / totalYears;
 

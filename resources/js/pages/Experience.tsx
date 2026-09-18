@@ -150,33 +150,6 @@ const ExperiencePage: React.FC = () => {
                 </div>
             </section>
 
-            {/* Gallery Section */}
-            <section ref={galleryRef} className="bg-accent-50 py-20">
-                <div className="container mx-auto px-4">
-                    <SectionTitle title={t('experience.gallery_title')} centered={true} className="mb-12" />
-
-                    <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-                        {galleryImages.map((image, index) => (
-                            <motion.div
-                                key={index}
-                                className="h-64 overflow-hidden rounded-lg shadow-lg md:h-80"
-                                initial={{ opacity: 0, y: 50 }}
-                                animate={galleryInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-                                transition={{
-                                    duration: 0.6,
-                                    delay: index * 0.1,
-                                }}
-                            >
-                                <img
-                                    src={image}
-                                    alt={`Khan Wahoud Gallery ${index + 1}`}
-                                    className="h-full w-full object-cover transition-transform duration-700 hover:scale-110"
-                                />
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-            </section>
 
             {/* CTA Section */}
             <section className="bg-primary-700 py-20 text-white">

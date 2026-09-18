@@ -170,24 +170,7 @@ html[lang="en"] .font-sans,
     }
 }
 
-html[lang="ar"] #kw-callbar .kw-call-text,
-[dir="rtl"] #kw-callbar .kw-call-text {
-    display: none;
-}
-html[lang="ar"] #kw-callbar .kw-wa-text,
-[dir="rtl"] #kw-callbar .kw-wa-text {
-    display: none;
-}
-html[lang="ar"] #kw-callbar .kw-solid::after,
-[dir="rtl"] #kw-callbar .kw-solid::after {
-    content: "اتصال";
-    font-family: 'Israr-Syria', sans-serif;
-}
-html[lang="ar"] #kw-callbar .kw-line::after,
-[dir="rtl"] #kw-callbar .kw-line::after {
-    content: "واتساب";
-    font-family: 'Israr-Syria', sans-serif;
-}
+
 
 /* Global resets */
 :root {

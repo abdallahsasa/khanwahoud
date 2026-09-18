@@ -23,7 +23,24 @@ const HomePage: React.FC = () => {
             behavior: 'smooth',
         });
     };
+    const galleryImages = [
+        '/images/IMG_4643.JPEG',
+        '/images/IMG_3772.png',
+        '/images/1fa4b053-9d90-4471-ada4-730779b8b750.jpg',
+        '/images/IMG_4466.JPEG',
+        '/images/IMG_4474.JPEG',
+        '/images/IMG_4465.JPEG',
+    ];
 
+    const [vipRef, vipInView] = useInView({
+        triggerOnce: true,
+        threshold: 0.1,
+    });
+
+    const [galleryRef, galleryInView] = useInView({
+        triggerOnce: true,
+        threshold: 0.1,
+    });
     return (
         <div className="min-h-screen">
             {/* Hero Section */}
@@ -201,17 +218,34 @@ const HomePage: React.FC = () => {
                 </div>
             </section>
 
-            {/* Image Banner */}
-            <section className="relative h-96">
-                <div className="absolute inset-0">
-                    <div className="bg-accent-950 bg-opacity-40 absolute inset-0"></div>
-                </div>
+            {/* Gallery Section */}
+            <section ref={galleryRef} className="bg-accent-50 py-20">
+                <div className="container mx-auto px-4">
+                    <SectionTitle title={t('experience.gallery_title')} centered={true} className="mb-12" />
 
-                <div className="relative flex h-full flex-col items-center justify-center px-4 text-center text-white">
-                    <h2 className="mb-6 font-serif text-3xl font-bold md:text-4xl">{t('khan_wahoud')}</h2>
-                    <p className="mx-auto max-w-2xl text-lg md:text-xl">{t('when_desc')}</p>
+                    <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                        {galleryImages.map((image, index) => (
+                            <motion.div
+                                key={index}
+                                className="h-64 overflow-hidden rounded-lg shadow-lg md:h-80"
+                                initial={{ opacity: 0, y: 50 }}
+                                animate={galleryInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+                                transition={{
+                                    duration: 0.6,
+                                    delay: index * 0.1,
+                                }}
+                            >
+                                <img
+                                    src={image}
+                                    alt={`Khan Wahoud Gallery ${index + 1}`}
+                                    className="h-full w-full object-cover transition-transform duration-700 hover:scale-110"
+                                />
+                            </motion.div>
+                        ))}
+                    </div>
                 </div>
             </section>
+
 
             {/* CTA Section */}
             <section className="bg-secondary-100 py-20">
