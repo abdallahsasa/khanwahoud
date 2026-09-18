@@ -79,7 +79,7 @@ const HomePage: React.FC = () => {
                             {/* Book Your Stay */}
                             <Link
                                 href="/rooms"
-                                className="group relative w-full sm:w-auto min-w-[190px] md:min-w-[210px] text-center flex items-center justify-center px-8 py-3.5 text-[11px] tracking-[0.25em] uppercase font-sans font-medium text-secondary-200 border border-secondary-300/30 backdrop-blur-sm bg-accent-950/30 transition-all duration-500 hover:bg-secondary-200/10 hover:border-secondary-300/60"
+                                className="group relative w-full sm:w-auto min-w-[190px] md:min-w-[210px] text-center flex items-center justify-center px-8 py-3.5 text-[11px] rtl:text-xs md:rtl:text-sm tracking-[0.25em] rtl:tracking-normal uppercase rtl:normal-case font-sans font-medium text-secondary-200 border border-secondary-300/30 backdrop-blur-sm bg-accent-950/30 transition-all duration-500 hover:bg-secondary-200/10 hover:border-secondary-300/60"
                             >
                                 <span className="relative z-10">{t('common.book_your_stay')}</span>
                                 <span className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[1px] w-0 bg-secondary-300 transition-all duration-500 group-hover:w-full" />
@@ -88,7 +88,7 @@ const HomePage: React.FC = () => {
                             {/* Book A Table — Primary CTA */}
                             <Link
                                 href="/dining"
-                                className="group relative w-full sm:w-auto min-w-[190px] md:min-w-[210px] text-center flex items-center justify-center px-10 py-3.5 text-[11px] tracking-[0.25em] uppercase font-sans font-semibold text-secondary-100 border border-primary-600/50 bg-primary-800/60 backdrop-blur-sm transition-all duration-500 hover:bg-primary-700/80 hover:border-primary-500/70 hover:shadow-[0_0_30px_rgba(158,43,33,0.2)]"
+                                className="group relative w-full sm:w-auto min-w-[190px] md:min-w-[210px] text-center flex items-center justify-center px-10 py-3.5 text-[11px] rtl:text-xs md:rtl:text-sm tracking-[0.25em] rtl:tracking-normal uppercase rtl:normal-case font-sans font-semibold text-secondary-100 border border-primary-600/50 bg-primary-800/60 backdrop-blur-sm transition-all duration-500 hover:bg-primary-700/80 hover:border-primary-500/70 hover:shadow-[0_0_30px_rgba(158,43,33,0.2)]"
                             >
                                 <span className="relative z-10">{t('common.book_a_table')}</span>
                                 <span className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[1px] w-0 bg-primary-400 transition-all duration-500 group-hover:w-full" />
@@ -97,7 +97,7 @@ const HomePage: React.FC = () => {
                             {/* Private Events */}
                             <Link
                                 href="/events"
-                                className="group relative w-full sm:w-auto min-w-[190px] md:min-w-[210px] text-center flex items-center justify-center px-8 py-3.5 text-[11px] tracking-[0.25em] uppercase font-sans font-medium text-secondary-200 border border-secondary-300/30 backdrop-blur-sm bg-accent-950/30 transition-all duration-500 hover:bg-secondary-200/10 hover:border-secondary-300/60"
+                                className="group relative w-full sm:w-auto min-w-[190px] md:min-w-[210px] text-center flex items-center justify-center px-8 py-3.5 text-[11px] rtl:text-xs md:rtl:text-sm tracking-[0.25em] rtl:tracking-normal uppercase rtl:normal-case font-sans font-medium text-secondary-200 border border-secondary-300/30 backdrop-blur-sm bg-accent-950/30 transition-all duration-500 hover:bg-secondary-200/10 hover:border-secondary-300/60"
                             >
                                 <span className="relative z-10">{t('common.private_events')}</span>
                                 <span className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[1px] w-0 bg-secondary-300 transition-all duration-500 group-hover:w-full" />

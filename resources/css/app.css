@@ -69,6 +69,15 @@ html[lang="ar"] .font-serif {
     letter-spacing: normal !important;
 }
 
+/* Ensure the year counter numerals always use the luxury serif Philosopher font */
+.kw-year-number,
+:lang(ar) .kw-year-number,
+[dir="rtl"] .kw-year-number,
+html[lang="ar"] .kw-year-number {
+    font-family: 'Philosopher', 'Cormorant Garamond', serif !important;
+    font-variant-numeric: normal;
+}
+
 :lang(ar) p,
 :lang(ar) span,
 :lang(ar) a,

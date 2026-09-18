@@ -100,7 +100,7 @@ const YearAnimation: React.FC = () => {
                 transition={{ duration: 0.5 }}
                 className="text-center"
             >
-                <div className="text-secondary-300 font-serif text-8xl font-bold md:text-9xl">{format(new Date(currentYear, 0), 'yyyy')}</div>
+                <div className="text-secondary-300 font-serif kw-year-number text-8xl font-bold md:text-9xl" dir="ltr">{format(new Date(currentYear, 0), 'yyyy')}</div>
 
                 <motion.div
                     key={currentEventIndex}
