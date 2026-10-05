@@ -38,7 +38,7 @@ const DiningPage: React.FC = () => {
     return (
         <div className="min-h-screen">
             {/* Hero Banner with Coming Soon Badge */}
-            <section ref={heroRef} className="relative pt-36 pb-24 md:pt-64 md:pb-32 overflow-hidden">
+            <section ref={heroRef} className="relative pt-32 pb-20 md:pt-44 md:pb-24 overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <img
                         src="/images/courtyard_dining_new.png"
@@ -55,42 +55,18 @@ const DiningPage: React.FC = () => {
                         animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                         transition={{ duration: 0.8 }}
                     >
-                        {/* Luxury Coming Soon Pill */}
-                        <div className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full border border-secondary-200/40 text-secondary-100 text-xs font-semibold tracking-widest uppercase mb-6 bg-black/40 backdrop-blur-md shadow-lg">
-                            <span className="w-2 h-2 rounded-full bg-primary-500 animate-pulse"></span>
-                            <span>{t('dining.coming_soon')}</span>
-                        </div>
+
 
                         <h1 className="mb-6 font-serif text-4xl font-bold md:text-5xl lg:text-6xl text-secondary-100">
                             {t('dining.title')}
                         </h1>
 
-                        <p className="font-serif text-xl md:text-2xl text-secondary-300 italic mb-8 max-w-2xl mx-auto">
-                            {t('dining.subtitle')}
-                        </p>
 
                         <p className="text-secondary-200/90 text-base md:text-lg leading-relaxed max-w-2xl mx-auto mb-10">
                             {t('dining.coming_soon_desc')}
                         </p>
 
-                        <div className="flex flex-wrap items-center justify-center gap-4">
-                            <a
-                                href="https://wa.me/963930012015"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary-700 hover:bg-primary-600 text-white font-medium text-sm transition-all duration-300 shadow-md hover:shadow-lg"
-                            >
-                                <MessageCircle size={18} />
-                                <span>{t('dining.whatsapp_inquiries')}</span>
-                            </a>
-                            <a
-                                href="tel:+963930012015"
-                                className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-secondary-300/50 bg-white/10 hover:bg-white/20 text-secondary-100 font-medium text-sm backdrop-blur-sm transition-all duration-300"
-                            >
-                                <Phone size={18} />
-                                <span>+963 930 012 015</span>
-                            </a>
-                        </div>
+
                     </motion.div>
                 </div>
             </section>
@@ -131,9 +107,9 @@ const DiningPage: React.FC = () => {
                                             inView
                                                 ? { opacity: 1, x: 0 }
                                                 : {
-                                                      opacity: 0,
-                                                      x: index % 2 === 0 ? -40 : 40,
-                                                  }
+                                                    opacity: 0,
+                                                    x: index % 2 === 0 ? -40 : 40,
+                                                }
                                         }
                                         transition={{ duration: 0.8 }}
                                     >
@@ -159,9 +135,9 @@ const DiningPage: React.FC = () => {
                                             inView
                                                 ? { opacity: 1, x: 0 }
                                                 : {
-                                                      opacity: 0,
-                                                      x: index % 2 === 0 ? 40 : -40,
-                                                  }
+                                                    opacity: 0,
+                                                    x: index % 2 === 0 ? 40 : -40,
+                                                }
                                         }
                                         transition={{
                                             duration: 0.8,

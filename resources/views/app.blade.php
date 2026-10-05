@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" @class(['dark' => ($appearance ?? 'system') == 'dark'])>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8">
@@ -7,39 +7,20 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" as="style"
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Philosopher:ital,wght@0,400;0,700;1,400;1,700&display=swap" />
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Philosopher:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-        media="print" onload="this.media='all'" />
+    <link href="https://fonts.googleapis.com/css2?family=Philosopher:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="preload" href="/fonts/Logam-Regular.otf" as="font" type="font/otf" crossorigin>
     <link rel="preload" href="/fonts/Israr-Syria-Regular.ttf" as="font" type="font/ttf" crossorigin>
     <link rel="preload" href="/fonts/thmanyah-serif-display-regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/thmanyah-serif-display-bold.woff2" as="font" type="font/woff2" crossorigin>
 
-    {{-- Inline script to detect system dark mode preference and apply it immediately --}}
-    <script>
-        (function () {
-            const appearance = '{{ $appearance ?? "system" }}';
-
-            if (appearance === 'system') {
-                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-                if (prefersDark) {
-                    document.documentElement.classList.add('dark');
-                }
-            }
-        })();
-    </script>
-
-    {{-- Inline style to set the HTML background color based on our theme in app.css --}}
     <style>
-        html {
-            background-color: #FFFFF5;
-        }
-
-        html.dark {
-            background-color: #000000;
+        html,
+        html.dark,
+        body,
+        body.dark,
+        #app {
+            background-color: #FFFFF5 !important;
         }
     </style>
 
@@ -168,15 +149,15 @@
             }
 
             #kw-callbar .kw-solid {
-                background: #9E2B21;
+                background: #8C2323;
                 color: #fff;
-                box-shadow: 0 2px 10px rgba(158, 43, 33, 0.35);
+                box-shadow: 0 2px 10px rgba(140, 35, 35, 0.35);
             }
 
             #kw-callbar .kw-line {
-                border: 1px solid rgba(233, 223, 204, 0.4);
-                background: rgba(255, 255, 255, 0.04);
-                color: #F3EBDD;
+                border: 1px solid rgba(233, 223, 204, 0.2);
+                background: #2A2422;
+                color: #FFFFFF;
             }
 
             body {
@@ -221,24 +202,25 @@
             }
 
             #kw-callbar .kw-solid {
-                background: #9E2B21;
+                background: #8C2323;
                 color: #fff;
-                box-shadow: 0 4px 14px rgba(158, 43, 33, 0.4);
+                box-shadow: 0 4px 14px rgba(140, 35, 35, 0.4);
             }
 
             #kw-callbar .kw-solid:hover {
-                background: #b53227;
+                background: #9E2B21;
             }
 
             #kw-callbar .kw-line {
-                border: 1px solid rgba(233, 223, 204, 0.4);
-                background: rgba(255, 255, 255, 0.04);
-                color: #F3EBDD;
+                border: 1px solid rgba(233, 223, 204, 0.2);
+                background: #2A2422;
+                color: #FFFFFF;
+                box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
             }
 
             #kw-callbar .kw-line:hover {
-                border-color: #F3EBDD;
-                background: rgba(255, 255, 255, 0.1);
+                background: #38312D;
+                color: #FFFFFF;
             }
         }
     </style>

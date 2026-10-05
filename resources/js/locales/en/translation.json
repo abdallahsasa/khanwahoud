@@ -38,12 +38,15 @@
         "hero_tagline_2": "Reimagined in 2023",
         "explore_btn": "Explore Khan Wahoud",
         "intro_title": "Welcome to Khan Wahoud",
-        "intro_text": "A Herit age Botique Hotel.... nestled within one of the last caravanserai that were built in the world, the meticulously restored walls of Khan Suleyman Pasha in the heart of Old Damascus. Experience a harmonious blend of damascene & Ottoman grandeur, architectural authenticity, and modern comfort.",
-        "story_title": "Begin your Story",
-        "story_p1": "Khan Wahoud offers more than accommodation. It offers a stay within a restored Damascene/Ottoman khan, where the courtyard continues the purpose it has carried for centuries.",
-        "story_p2": "Wake within a 1736 caravanserai, surrounded by history and the vibrant rhythm of life within the Khan.",
-        "story_p3": "Thoughtfully restored rooms and suites invite a new generation of travellers to become part of its story.",
-        "map_title": "Located in the Heart of Historic Damascus",
+        "intro_text": "A Heritage Boutique Hotel, nestled within one of the last caravanserai that were built in the world, the meticulously restored walls of Khan Suleyman Pasha in the heart of Old Damascus. Experience a harmonious blend of Damascene & Ottoman grandeur, architectural authenticity, and modern comfort.",
+        "intro_p1": "A HERITAGE BOUTIQUE HOTEL, IN THE HEART OF OLD DAMASCUS.",
+        "intro_p2": "NESTLED WITHIN ONE OF THE LAST CARAVANSERAI THAT WERE BUILT IN THE WORLD, THE METICULOUSLY RESTORED WALLS OF KHAN SULEYMAN PASHA.",
+        "intro_p3": "EXPERIENCE A HARMONIOUS BLEND OF DAMASCENE & OTTOMAN GRANDEUR, ARCHITECTURAL AUTHENTICITY, AND MODERN COMFORT.",
+        "story_title": "begin your STORY",
+        "story_p1": "KHAN WAHOUD OFFERS MORE THAN ACCOMMODATION. IT OFFERS A STAY SURROUNDED BY HISTORY AND THE VIBRANT RHYTHM OF LIFE.",
+        "story_p2": "WHERE OUR GUEST ROOMS ARE ARRANGED AROUND THE HISTORIC COURTYARD. THE HEART OF THE KHAN’S EXPERIENCE.",
+        "story_p3": "OUR THOUGHTFULLY RESTORED ROOMS INVITE A NEW GENERATION OF TRAVELERS TO WAKE WITHIN DAMASCENE HERITAGE AND BECOME PART OF ITS STORY.",
+        "map_title": "in the heart of OLD DAMASCUS",
         "map_subtitle": "Khan Suleyman Pasha is at the heart of the old city of Damascus, right on one of the most ancient and famous biblical streets, The Straight Street, Souk Midhat Pasha, that was built by the Romans, witnessed Paul the Apostle, and marks the passage of the famous Silk Road's caravans.",
         "feature_titles": {
             "experience": "The Khan Experience",
@@ -66,34 +69,117 @@
         "gallery_title": "Visual Journey"
     },
     "rooms": {
-        "title": "Rooms & Accommodation",
-        "subtitle": "Ottoman Elegance, Modern Comfort",
-        "intro": "Each room at Khan Wahoud tells its own story, blending Ottoman architectural elements with contemporary luxury. Choose your preferred sanctuary within our historic walls.",
-        "room_types": {
-            "governors_suite": {
-                "name": "The Governor's Suite",
-                "description": "Once the private quarters of visiting Ottoman officials, this spacious suite features original stone arches, a private courtyard, and premium amenities.",
-                "amenities": "King bed, Private courtyard, Ottoman-style bath, Luxury linens, 24-hour concierge"
+        "title": "Rooms & Suites",
+        "subtitle": "welcome Within",
+        "tagline_lead": "in the heart of history,",
+        "tagline_main": "welcome Within",
+        "intro": "At Khan Wahoud, your room is set around the historic courtyard.Each room within the Khan carries its own architectural character layouts and historic details may vary.",
+        "booking_bar": {
+            "check_in": "Check-In",
+            "check_out": "Check-Out",
+            "guests": "Guests",
+            "room_type": "Room Category",
+            "all_categories": "All Categories",
+            "search_btn": "Check Availability",
+            "adults_count": "{{count}} Guest",
+            "adults_count_plural": "{{count}} Guests"
+        },
+        "categories": {
+            "heritage": {
+                "id": "heritage",
+                "name": "Heritage Grand Suite",
+                "tag": "Signature Master Suite",
+                "description": "Our most prestigious accommodation featuring restored 18th-century stone arches, soaring ceilings, handcrafted Damascene mother-of-pearl furnishings, and an authentic Ottoman-style private bath.",
+                "size": "65 m²",
+                "bed": "King Bed",
+                "capacity": "4 Guests",
+                "view": "Courtyard View",
+                "starting_price": "$450",
+                "highlights": [
+                    "Original 1736 Restored Stone Arches",
+                    "Authentic Ottoman-Style Marble Bath",
+                    "Bespoke Hand-Inlaid Syrian Furnishings",
+                    "Dedicated 24/7 Butler Service",
+                    "Evening Damascene Herbal Tea Ritual",
+                    "High-Speed Fiber Wi-Fi & Smart Climate"
+                ]
             },
-            "merchants_quarters": {
-                "name": "The Merchant's Quarters",
-                "description": "Inspired by the wealthy traders who once stayed in the Khan, these rooms feature authentic trading artifacts and luxurious furnishings.",
-                "amenities": "Queen bed, Traditional seating area, Modern bathroom, Work desk, Evening tea service"
+            "courtyard": {
+                "id": "courtyard",
+                "name": "Courtyard Deluxe Room",
+                "tag": "Fountain & Garden View",
+                "description": "Serene rooms overlooking the historic central courtyard and marble fountain, filled with natural morning light, gentle water sounds, and traditional Syrian woodwork.",
+                "size": "42 m²",
+                "bed": "Queen Bed",
+                "capacity": "3 Guests",
+                "view": "Fountain View",
+                "starting_price": "$280",
+                "highlights": [
+                    "Panoramic Windows to Central Courtyard",
+                    "Artisanal Damascene Woodwork Details",
+                    "Luxury Rain Shower & Brass Accents",
+                    "Complimentary Courtyard Breakfast",
+                    "Bespoke Organic Damask Rose Amenities",
+                    "Quiet Acoustic Insulation"
+                ]
             },
-            "minaret_view": {
-                "name": "The Minaret View Room",
-                "description": "Offering stunning views of nearby minarets, these rooms capture the spiritual ambiance of Old Damascus.",
-                "amenities": "Twin beds or Queen bed, Panoramic window, Traditional furnishings, En-suite bathroom"
-            },
-            "caravan_courtyard": {
-                "name": "Caravanserai Room",
-                "description": "Overlooking our central courtyard, these rooms echo the history of traveling merchant caravans with authentic design elements.",
-                "amenities": "Queen bed, Courtyard view, Handcrafted furniture, Rainfall shower"
+            "panoramic": {
+                "id": "panoramic",
+                "name": "Panoramic Damascus Suite",
+                "tag": "Old City Skyline View",
+                "description": "Elevated suites with private views gazing over the ancient Straight Street, Souk Midhat Pasha, and the minaret skyline of historic Damascus.",
+                "size": "55 m²",
+                "bed": "King Bed",
+                "capacity": "3 Guests",
+                "view": "Skyline View",
+                "starting_price": "$380",
+                "highlights": [
+                    "Panoramic Views of the Old City Skyline",
+                    "Private Balcony / Extended Window Lounge",
+                    "Freestanding Soaking Tub & Rain Shower",
+                    "Curated Historical Art & Architecture Books",
+                    "Fresh Seasonal Fruit & Baklava Welcome",
+                    "In-Suite Breakfast Service Available"
+                ]
             }
         },
-        "booking_info": "Room rates include complimentary breakfast, evening cultural activities, and access to our Ottoman bath experience. Direct booking guarantees the best available rate.",
-        "coming_soon": "Coming Soon",
-        "coming_soon_desc": "We are currently preparing our luxurious rooms and accommodations to provide you with the finest Ottoman experience. Please check back with us shortly."
+        "specs": {
+            "area": "Space",
+            "bedding": "Bedding",
+            "occupancy": "Occupancy",
+            "view": "View",
+            "from_rate": "From",
+            "night": "per night",
+            "reserve_now": "RESERVE SUITE",
+            "explore_details": "EXPLORE DETAILS",
+            "inquire": "Inquire with Concierge"
+        },
+        "inclusions": {
+            "title": "Heritage Privileges Included With Every Stay",
+            "subtitle": "Honoring the ancient Caravanserai hospitality tradition with modern refinement",
+            "item1_title": "Courtyard Breakfast",
+            "item1_desc": "Freshly prepared Damascene breakfast served daily in the sunlit open-air courtyard.",
+            "item2_title": "Concierge & Butler",
+            "item2_desc": "Dedicated personal assistance for private Old Damascus tours, transport, and dining.",
+            "item3_title": "Afternoon Tea Ritual",
+            "item3_desc": "Traditional Syrian tea and aromatic infusions accompanied by artisanal Levantine pastries.",
+            "item4_title": "Private Heritage Access",
+            "item4_desc": "Exclusive resident access to the restored arches, historical galleries, and peaceful lounges."
+        },
+        "modal": {
+            "title": "Suite Reservation & Inquiry",
+            "whatsapp_action": "Instant WhatsApp Booking",
+            "call_action": "Call Hotel Concierge",
+            "whatsapp_desc": "Connect directly with our reservation concierge with your dates pre-filled for immediate confirmation.",
+            "overview_tab": "Suite Overview",
+            "amenities_tab": "Amenities & Comfort",
+            "reserve_tab": "Direct Reservation",
+            "checkin_out": "Stay Dates",
+            "dates_selected": "{{checkIn}} to {{checkOut}}",
+            "select_dates_prompt": "Select your desired dates to check availability",
+            "rates_note": "Rates include local taxes, heritage breakfast, and complimentary high-speed Wi-Fi.",
+            "close": "Close"
+        }
     },
     "dining": {
         "title": "Food & Drink",
@@ -291,7 +377,9 @@
         "error_msg": "Failed to send message. Please try again."
     },
     "footer": {
-        "about": "A boutique hotel in the restored historical building of Khan Suleyman Pasha in Old Damascus.",
+        "about": "A HERITAGE BOUTIQUE HOTEL HISTORICAL BUILDING OF KHAN SULEYMAN PASHA IN OLD DAMASCUS.",
+        "experiences": "Experiences",
+        "explore": "Explore",
         "copyright": "© 2026 Khan Wahoud. All rights reserved.",
         "links": {
             "privacy": "Privacy Policy",

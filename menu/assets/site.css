@@ -10,7 +10,7 @@
   --night: #1C1712;
   --night-2: #262019;
   --line: #DCD2BE;
-  --serif: "Cormorant Garamond", Georgia, serif;
+  --serif: "Philosopher", "Cormorant Garamond", Georgia, serif;
   --sans: "Montserrat", -apple-system, sans-serif;
 }
 html.ar, body.ar { --serif: "El Messiri", serif; --sans: "Noto Kufi Arabic", sans-serif; }

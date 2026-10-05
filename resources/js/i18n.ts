@@ -16,7 +16,7 @@ i18n.use(LanguageDetector)
             },
         },
         fallbackLng: 'en',
-        debug: false,
+        returnObjects: true,
         interpolation: {
             escapeValue: false,
         },

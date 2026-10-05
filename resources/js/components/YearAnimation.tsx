@@ -93,36 +93,48 @@ const YearAnimation: React.FC = () => {
     }, [inView]);
 
     return (
-        <div ref={ref} className="relative mx-auto max-w-4xl">
+        <div ref={ref} className="relative mx-auto max-w-4xl px-4">
             <motion.div
                 initial={{ opacity: 0 }}
                 animate={inView ? { opacity: 1 } : { opacity: 0 }}
                 transition={{ duration: 0.5 }}
                 className="text-center"
             >
-                <div className="text-secondary-300 font-serif kw-year-number text-8xl font-bold md:text-9xl" dir="ltr">{format(new Date(currentYear, 0), 'yyyy')}</div>
+                <div
+                    className="text-white font-serif kw-year-number text-7xl sm:text-8xl md:text-9xl font-normal drop-shadow-[0_4px_24px_rgba(0,0,0,0.85)] tracking-wide"
+                    dir="ltr"
+                >
+                    {format(new Date(currentYear, 0), 'yyyy')}
+                </div>
 
                 <motion.div
                     key={currentEventIndex}
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
+                    exit={{ opacity: 0, y: -12 }}
                     transition={{ duration: 0.3 }}
-                    className="mt-8"
+                    className="mt-4 sm:mt-5 max-w-2xl mx-auto"
                 >
-                    <h3 className="mb-2 font-serif text-2xl">{t(timelineEvents[currentEventIndex].title)}</h3>
-                    <p className="text-secondary-300/80">{t(timelineEvents[currentEventIndex].description)}</p>
+                    <h3 className="font-serif text-base sm:text-lg md:text-xl font-normal uppercase tracking-[0.2em] text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]">
+                        &ldquo;{t(timelineEvents[currentEventIndex].title)}&rdquo;
+                    </h3>
+                    <p className="font-serif text-xs sm:text-sm md:text-base font-normal uppercase tracking-[0.14em] text-white/90 drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)] mt-1.5 leading-relaxed">
+                        &ldquo;{t(timelineEvents[currentEventIndex].description)}&rdquo;
+                    </p>
                 </motion.div>
 
-                <div className="bg-accent-800 relative mt-8 h-2 overflow-hidden rounded-full">
-                    <motion.div
-                        className="bg-primary-700 absolute top-0 left-0 h-full"
-                        initial={{ width: '0%' }}
-                        animate={{
-                            width: `${((currentYear - 1736) / (2026 - 1736)) * 100}%`,
-                        }}
-                        transition={{ duration: 0.1 }}
-                    />
+                {/* Refined Burgundy Timeline Bar matching mockup */}
+                <div className="mx-auto mt-6 sm:mt-7 w-full max-w-sm sm:max-w-md md:max-w-lg">
+                    <div className="relative h-[8px] sm:h-[8px] rounded-full overflow-hidden bg-[#450010]/80 border border-[#771709]/50 shadow-[0_2px_8px_rgba(0,0,0,0.5)]">
+                        <motion.div
+                            className="bg-[#8A2424] absolute top-0 left-0 h-full rounded-full shadow-[0_0_10px_rgba(158,43,33,0.9)]"
+                            initial={{ width: '0%' }}
+                            animate={{
+                                width: `${((currentYear - 1736) / (2026 - 1736)) * 100}%`,
+                            }}
+                            transition={{ duration: 0.1 }}
+                        />
+                    </div>
                 </div>
             </motion.div>
         </div>
@@ -130,3 +142,4 @@ const YearAnimation: React.FC = () => {
 };
 
 export default YearAnimation;
+

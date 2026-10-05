@@ -13,7 +13,10 @@ class RoomController extends Controller
 
     public function render()
     {
-        return Inertia::render('Rooms');
+        $rooms = Room::orderBy('id', 'asc')->get();
+        return Inertia::render('Rooms', [
+            'dbRooms' => $rooms
+        ]);
     }
 
     public function store(Request $request)
@@ -23,19 +26,51 @@ class RoomController extends Controller
             'description' => 'required|string',
             'price' => 'required|numeric|min:0',
             'category' => 'required|string|max:255',
-            'images' => 'required|array|min:1',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-            'amenities' => 'required|array|min:1',
-            'amenities.*' => 'string',
-            'size' => 'required|numeric|min:0',
-            'max_occupancy' => 'required|integer|min:1',
+            'images' => 'nullable',
+            'amenities' => 'nullable',
+            'size' => 'nullable|numeric|min:0',
+            'max_occupancy' => 'nullable|integer|min:1',
         ]);
 
-
         $imagePaths = [];
-        foreach ($request->file('images') as $image) {
-            $path = $image->store('rooms', 'public');
-            $imagePaths[] = $path;
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                if ($image && $image->isValid()) {
+                    $path = $image->store('rooms', 'public');
+                    $imagePaths[] = $path;
+                }
+            }
+        } elseif ($request->filled('images')) {
+            $rawImgs = $request->input('images');
+            if (is_array($rawImgs)) {
+                $imagePaths = $rawImgs;
+            } elseif (is_string($rawImgs)) {
+                $decoded = json_decode($rawImgs, true);
+                $imagePaths = is_array($decoded) ? $decoded : array_filter(array_map('trim', explode(',', $rawImgs)));
+            }
+        }
+
+        if (empty($imagePaths)) {
+            $imagePaths = ['rooms/rooms.png'];
+        }
+
+        $amenities = [];
+        if ($request->filled('amenities')) {
+            $rawAmenities = $request->input('amenities');
+            if (is_array($rawAmenities)) {
+                $amenities = $rawAmenities;
+            } elseif (is_string($rawAmenities)) {
+                $decoded = json_decode($rawAmenities, true);
+                if (is_array($decoded)) {
+                    $amenities = $decoded;
+                } else {
+                    $amenities = array_values(array_filter(array_map('trim', preg_split('/[\r\n,]+/', $rawAmenities))));
+                }
+            }
+        }
+
+        if (empty($amenities)) {
+            $amenities = ['Courtyard View', 'Free Wi-Fi', 'Heritage Breakfast'];
         }
 
         $room = Room::create([
@@ -44,14 +79,14 @@ class RoomController extends Controller
             'price' => $validated['price'],
             'category' => $validated['category'],
             'images' => $imagePaths,
-            'amenities' => $validated['amenities'],
-            'size' => $validated['size'],
-            'max_occupancy' => $validated['max_occupancy'],
+            'amenities' => $amenities,
+            'size' => $validated['size'] ?? 45,
+            'max_occupancy' => $validated['max_occupancy'] ?? 2,
         ]);
 
         return response()->json([
             'message' => 'Room created successfully',
-            'room' => $room,
+            'room' => $room->fresh(),
         ], 201);
     }
 
@@ -136,5 +171,29 @@ class RoomController extends Controller
             ->exists();
 
         return response()->json(['available' => $isAvailable]);
+    }
+
+    public function destroy($room)
+    {
+        $record = Room::findOrFail($room);
+        
+        $images = $record->images;
+        if (is_string($images)) {
+            $images = json_decode($images, true);
+        }
+        if (is_array($images)) {
+            foreach ($images as $img) {
+                if (is_string($img) && !str_starts_with($img, 'http') && !str_starts_with($img, '/images/')) {
+                    $cleanPath = ltrim(str_replace('/storage/', '', $img), '/');
+                    Storage::disk('public')->delete($cleanPath);
+                }
+            }
+        }
+
+        $record->delete();
+
+        return response()->json([
+            'message' => 'Room deleted successfully'
+        ]);
     }
 }

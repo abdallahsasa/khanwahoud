@@ -21,7 +21,7 @@ const SectionTitle: React.FC<SectionTitleProps> = ({ title, subtitle, centered =
     return (
         <div ref={ref} className={containerClasses}>
             <motion.h2
-                className={`font-serif text-3xl font-bold md:text-4xl lg:text-5xl ${whiteText ? 'text-white' : 'text-accent-950'}`}
+                className={`font-serif text-3xl font-bold md:text-4xl lg:text-5xl ${whiteText ? 'text-white' : 'text-[#781C1D]'}`}
                 initial={{ opacity: 0, y: 20 }}
                 animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.6 }}

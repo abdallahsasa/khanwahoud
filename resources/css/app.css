@@ -8,6 +8,12 @@
     --font-sans: 'Logam', 'Montserrat', sans-serif;
 }
 
+html,
+body,
+#app {
+    background-color: #FFFFF5 !important;
+}
+
 /* Brand Fonts: Logam */
 @font-face {
     font-family: 'Logam';
@@ -23,6 +29,20 @@
     font-weight: 700;
     font-style: normal;
     font-display: swap;
+}
+
+/* Humanist body font for editorial readability (avoids all-caps display font) */
+.font-body,
+.font-montserrat {
+    font-family: 'Montserrat', sans-serif !important;
+    text-transform: none;
+}
+:lang(ar) .font-body,
+:lang(ar) .font-montserrat,
+[dir="rtl"] .font-body,
+[dir="rtl"] .font-montserrat {
+    font-family: 'Israr-Syria', sans-serif !important;
+    text-transform: none;
 }
 
 /* Brand Fonts: Israr-Syria (Arabic Typography) */
@@ -100,7 +120,7 @@ html[lang="ar"] .font-sans {
     letter-spacing: normal !important;
 }
 
-/* English Version Typography: Philosopher for headlines, Logam for text */
+/* English Version Typography: Philosopher for headlines and serif, Logam for text */
 html:not([lang="ar"]) body,
 html[lang="en"] body,
 :lang(en) {
@@ -113,22 +133,26 @@ html:not([lang="ar"]) h3,
 html:not([lang="ar"]) h4,
 html:not([lang="ar"]) h5,
 html:not([lang="ar"]) h6,
-html:not([lang="ar"]) .font-serif,
 html[lang="en"] h1,
 html[lang="en"] h2,
 html[lang="en"] h3,
 html[lang="en"] h4,
 html[lang="en"] h5,
 html[lang="en"] h6,
-html[lang="en"] .font-serif,
 :lang(en) h1,
 :lang(en) h2,
 :lang(en) h3,
 :lang(en) h4,
 :lang(en) h5,
-:lang(en) h6,
-:lang(en) .font-serif {
+:lang(en) h6 {
     font-family: 'Philosopher', 'Cormorant Garamond', serif;
+}
+
+.font-serif,
+.font-serif *:not(.font-sans):not(.font-body):not([class*="font-sans"]),
+.font-philosopher,
+.font-philosopher *:not(.font-sans):not(.font-body):not([class*="font-sans"]) {
+    font-family: 'Philosopher', 'Cormorant Garamond', serif !important;
 }
 
 html:not([lang="ar"]) p,

@@ -19,6 +19,8 @@ Route::prefix('api')->group(function () {
     Route::get('/rooms/show/{id}', [RoomController::class, 'show']);
     Route::post('/rooms/create', [RoomController::class, 'store']);
     Route::post('/rooms/update/{id}', [RoomController::class, 'update']);
+    Route::delete('/rooms/{room}', [RoomController::class, 'destroy']);
+    Route::post('/rooms/{room}/delete', [RoomController::class, 'destroy']);
 
     Route::post('bookings/create', [BookingController::class, 'store']);
 

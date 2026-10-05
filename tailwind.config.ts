@@ -51,6 +51,7 @@ export default {
             },
             fontFamily: {
                 serif: ['Philosopher', 'Cormorant Garamond', 'Thmanyah Serif Display', 'El Messiri', ...fontFamily.serif],
+                philosopher: ['Philosopher', 'Cormorant Garamond', 'serif'],
                 sans: ['Logam', 'Montserrat', 'Israr-Syria', 'Noto Kufi Arabic', ...fontFamily.sans],
             },
         },

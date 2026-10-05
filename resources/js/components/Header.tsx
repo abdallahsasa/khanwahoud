@@ -38,26 +38,26 @@ const Header: React.FC = () => {
         setIsMenuOpen(false);
     }, [url]);
 
-    // Left navigation group (before logo) - matching design mockup
+    // Left navigation group (before logo): The Khan - Rebirth
     const leftNavItems = [
         { name: t('nav.the_khan'), path: '/experience' },
-        { name: t('nav.stay'), path: '/rooms' },
+        { name: t('nav.rebirth'), path: '/restoration' },
     ];
 
-    // Right navigation group (after logo) - matching design mockup
+    // Right navigation group (after logo): Stay - Events - Dine
     const rightNavItems = [
+        { name: t('nav.stay'), path: '/rooms' },
         { name: t('nav.events'), path: '/events' },
         { name: t('nav.dine'), path: '/dining' },
-        { name: t('nav.rebirth'), path: '/restoration' },
     ];
 
     // All links for mobile menu
     const mobileNavItems = [
         { name: t('nav.the_khan'), path: '/experience' },
+        { name: t('nav.rebirth'), path: '/restoration' },
         { name: t('nav.stay'), path: '/rooms' },
         { name: t('nav.events'), path: '/events' },
         { name: t('nav.dine'), path: '/dining' },
-        { name: t('nav.rebirth'), path: '/restoration' },
         { name: t('nav.contact'), path: '/contact' },
     ];
 

@@ -48,13 +48,21 @@ class RoomResource extends Resource
             Forms\Components\TextInput::make('category')
                 ->required()
                 ->maxLength(255)
+                ->datalist([
+                    'Heritage Sanctuary',
+                    'Courtyard Sanctuary',
+                    'Panoramic Sanctuary',
+                    'Royal Heritage Suite',
+                    'Garden Retreat',
+                ])
                 ->label(__('Category')),
             Forms\Components\FileUpload::make('images')
                 ->multiple()
                 ->disk('public')
                 ->directory('rooms')
                 ->image()
-                ->maxFiles(5)
+                ->maxFiles(12)
+                ->reorderable()
                 ->required()
                 ->label(__('Images'))
                 ->enableReordering()
@@ -62,8 +70,8 @@ class RoomResource extends Resource
                 ->enableDownload()
                 ->preserveFilenames()
                 ->dehydrateStateUsing(function ($state) {
-                    // Convert associative UUID => path to plain array of values
-                    return json_encode(array_values($state ?? []));
+                    if (empty($state)) return [];
+                    return is_array($state) ? array_values($state) : [];
                 }),
             Forms\Components\Textarea::make('amenities')
                 ->required()
@@ -105,16 +113,18 @@ class RoomResource extends Resource
                         $images = is_array($decoded) ? $decoded : [];
                     }
 
-                    // If it's not a valid array, fallback to empty array
                     if (!is_array($images)) {
                         $images = [];
                     }
 
-                    // Return first image or null
-                    return $images[0] ?? null;
+                    return $images;
                 })
+                ->circular()
+                ->stacked()
+                ->limit(3)
+                ->limitedRemainingText()
                 ->disk('public')
-                ->defaultImageUrl(asset('images/placeholder.jpg')),
+                ->defaultImageUrl(asset('images/rooms.png')),
             Tables\Columns\TextColumn::make('size')
                 ->label(__('Size'))
                 ->numeric()
@@ -156,6 +166,7 @@ class RoomResource extends Resource
         ])
         ->actions([
             Tables\Actions\EditAction::make(),
+            Tables\Actions\DeleteAction::make(),
         ])
         ->bulkActions([
             Tables\Actions\BulkActionGroup::make([

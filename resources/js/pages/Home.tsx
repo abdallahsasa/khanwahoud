@@ -17,6 +17,16 @@ const HomePage: React.FC = () => {
         threshold: 0.1,
     });
 
+    const [introRef, introInView] = useInView({
+        triggerOnce: true,
+        threshold: 0.1,
+    });
+
+    const [storyRef, storyInView] = useInView({
+        triggerOnce: true,
+        threshold: 0.1,
+    });
+
     const handleScroll = () => {
         window.scrollTo({
             top: window.innerHeight,
@@ -44,113 +54,152 @@ const HomePage: React.FC = () => {
     return (
         <div className="min-h-screen">
             {/* Hero Section */}
-            <section className="relative h-screen">
+            <section className="relative h-screen min-h-[660px] flex flex-col justify-between overflow-hidden">
                 <div className="absolute inset-0 z-0">
-                    <img src={'/images/side hall high.jpg'} alt="Luxury Room" className="h-full w-full object-cover" />
-                    <div className="bg-accent-950 absolute inset-0 opacity-50"></div>
+                    <img
+                        src="/images/hero.jpg"
+                        alt="Khan Wahoud Courtyard"
+                        className="h-full w-full object-cover object-center"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-black/65 pointer-events-none" />
                 </div>
 
-                <div ref={heroRef} className="relative flex h-full flex-col items-center justify-between px-4 text-center text-white pt-32 sm:pt-36 md:pt-44 lg:pt-48 xl:pt-52 pb-14 md:pb-16 z-10">
+                {/* Top Title Group */}
+                <div ref={heroRef} className="relative z-10 w-full pt-24 sm:pt-28 md:pt-32 lg:pt-36 px-4 text-center">
                     <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                        initial={{ opacity: 0, y: 18 }}
+                        animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
                         transition={{ duration: 0.8 }}
-                        className="font-serif w-full max-w-4xl mx-auto flex-shrink-0"
+                        className="max-w-4xl mx-auto"
                     >
-                        <h1 className="text-secondary-300 mb-2 md:mb-3 text-4xl font-bold md:text-6xl tracking-wide">{t('khan_wahoud')}</h1>
-                        <span className="text-secondary-400/90 text-xs md:text-sm font-sans tracking-widest uppercase block mb-1">{t('at')}</span>
-                        <p className="text-secondary-300 mb-4 md:mb-6 text-base font-bold md:text-lg">
-                            {t('khan_Suleyman')}
-                            <br />
-                            {t('since_1736')}
-                        </p>
-
-                        <YearAnimation />
-                    </motion.div>
-
-                    {/* Centered between timeline bar and footer of the main image */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                        transition={{ duration: 0.8, delay: 0.9 }}
-                        className="flex-1 flex items-center justify-center w-full px-4 my-auto py-2"
-                    >
-                        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 w-full max-w-4xl mx-auto">
-                            {/* Book Your Stay */}
-                            <Link
-                                href="/rooms"
-                                className="group relative w-full sm:w-auto min-w-[190px] md:min-w-[210px] text-center flex items-center justify-center px-8 py-3.5 text-[11px] rtl:text-xs md:rtl:text-sm tracking-[0.25em] rtl:tracking-normal uppercase rtl:normal-case font-sans font-medium text-secondary-200 border border-secondary-300/30 backdrop-blur-sm bg-accent-950/30 transition-all duration-500 hover:bg-secondary-200/10 hover:border-secondary-300/60"
-                            >
-                                <span className="relative z-10">{t('common.book_your_stay')}</span>
-                                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[1px] w-0 bg-secondary-300 transition-all duration-500 group-hover:w-full" />
-                            </Link>
-
-                            {/* Book A Table — Primary CTA */}
-                            <Link
-                                href="/dining"
-                                className="group relative w-full sm:w-auto min-w-[190px] md:min-w-[210px] text-center flex items-center justify-center px-10 py-3.5 text-[11px] rtl:text-xs md:rtl:text-sm tracking-[0.25em] rtl:tracking-normal uppercase rtl:normal-case font-sans font-semibold text-secondary-100 border border-primary-600/50 bg-primary-800/60 backdrop-blur-sm transition-all duration-500 hover:bg-primary-700/80 hover:border-primary-500/70 hover:shadow-[0_0_30px_rgba(158,43,33,0.2)]"
-                            >
-                                <span className="relative z-10">{t('common.book_a_table')}</span>
-                                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[1px] w-0 bg-primary-400 transition-all duration-500 group-hover:w-full" />
-                            </Link>
-
-                            {/* Private Events */}
-                            <Link
-                                href="/events"
-                                className="group relative w-full sm:w-auto min-w-[190px] md:min-w-[210px] text-center flex items-center justify-center px-8 py-3.5 text-[11px] rtl:text-xs md:rtl:text-sm tracking-[0.25em] rtl:tracking-normal uppercase rtl:normal-case font-sans font-medium text-secondary-200 border border-secondary-300/30 backdrop-blur-sm bg-accent-950/30 transition-all duration-500 hover:bg-secondary-200/10 hover:border-secondary-300/60"
-                            >
-                                <span className="relative z-10">{t('common.private_events')}</span>
-                                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[1px] w-0 bg-secondary-300 transition-all duration-500 group-hover:w-full" />
-                            </Link>
+                        <h1 className="text-white font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-[0.16em] uppercase font-normal drop-shadow-[0_3px_14px_rgba(0,0,0,0.85)] mb-1 sm:mb-1.5">
+                            {t('khan_wahoud')}
+                        </h1>
+                        <span className="text-white/80 text-[11px] sm:text-xs md:text-sm font-sans tracking-[0.3em] uppercase block my-0.5 sm:my-1">
+                            {t('at')}
+                        </span>
+                        <div className="text-white font-serif tracking-[0.18em] uppercase text-xs sm:text-sm md:text-base font-normal drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
+                            <p className="leading-snug">{t('khan_Suleyman')}</p>
+                            <p className="mt-0.5 text-[11px] sm:text-xs md:text-sm tracking-[0.22em] text-white/90">{t('since_1736')}</p>
                         </div>
                     </motion.div>
                 </div>
 
+                {/* Center Year & Description */}
+                <div className="relative z-10 w-full px-4 text-center my-auto py-2">
+                    <YearAnimation />
+                </div>
+
+                {/* Bottom CTA Buttons matching the exact mockup */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                    transition={{ duration: 0.8, delay: 1.2 }}
-                    className="absolute right-0 bottom-4 md:bottom-5 left-0 flex justify-center z-10 pointer-events-none"
+                    transition={{ duration: 0.8, delay: 0.4 }}
+                    className="relative z-10 w-full px-4 pb-10 sm:pb-12 md:pb-14"
                 >
-                    <button onClick={handleScroll} className="animate-bounce cursor-pointer focus:outline-none pointer-events-auto" aria-label={t('home.scroll')}>
-                        <div className="border-secondary-300 flex h-10 w-6 justify-center rounded-full border-2">
-                            <div className="bg-secondary-300 mt-1.5 h-3 w-1 rounded-full"></div>
-                        </div>
-                    </button>
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 md:gap-5 max-w-4xl mx-auto">
+                        {/* Book A Table */}
+                        <Link
+                            href="/dining"
+                            className="w-full sm:w-auto min-w-[170px] sm:min-w-[195px] text-center px-7 sm:px-8 py-2.5 sm:py-3 rounded-full bg-[#EDE3D8] hover:bg-[#F6EFE7] text-[#4A1516] text-xs sm:text-sm tracking-[0.16em] uppercase font-sans font-semibold shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300"
+                        >
+                            {t('common.book_a_table')}
+                        </Link>
+
+                        {/* Book Your Stay (Primary Center) */}
+                        <Link
+                            href="/rooms"
+                            className="w-full sm:w-auto min-w-[185px] sm:min-w-[210px] text-center px-8 sm:px-10 py-2.5 sm:py-3 rounded-full bg-[#781C1D] hover:bg-[#8D2223] text-white text-xs sm:text-sm tracking-[0.16em] uppercase font-sans font-semibold shadow-xl hover:shadow-2xl hover:scale-[1.02] transition-all duration-300"
+                        >
+                            {t('common.book_your_stay')}
+                        </Link>
+
+                        {/* Private Events */}
+                        <Link
+                            href="/events"
+                            className="w-full sm:w-auto min-w-[170px] sm:min-w-[195px] text-center px-7 sm:px-8 py-2.5 sm:py-3 rounded-full bg-[#EDE3D8] hover:bg-[#F6EFE7] text-[#4A1516] text-xs sm:text-sm tracking-[0.16em] uppercase font-sans font-semibold shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300"
+                        >
+                            {t('common.private_events')}
+                        </Link>
+                    </div>
                 </motion.div>
             </section>
 
             {/* Introduction Section */}
-            <section className="bg-secondary-50 py-20 md:py-28 overflow-hidden">
-                <div className="container mx-auto px-4 lg:px-8 max-w-7xl">
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
-                        {/* Left Column: Text & CTA */}
-                        <div className="lg:col-span-7 text-left rtl:text-right">
-                            <SectionTitle title={t('home.intro_title')} centered={false} />
+            <section ref={introRef} className="w-full bg-[#FFFFF5] py-12 sm:py-16 md:py-20 lg:py-24 overflow-hidden">
+                <div className="max-w-[1180px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-12 xl:gap-16 items-start">
+                        {/* Left Column (Text & Button) */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={introInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                            transition={{ duration: 0.8 }}
+                            className="lg:col-span-7 flex flex-col justify-start text-left rtl:text-right h-auto lg:h-[460px] xl:h-[480px]"
+                        >
+                            <div className="max-w-[560px] w-full mx-auto lg:mx-0 h-full flex flex-col justify-between py-1">
+                                {/* Top: Headline - Aligned flush with top of image */}
+                                <h2 className="font-serif text-3xl sm:text-4xl lg:text-[40px] xl:text-[44px] text-[#781C1D] leading-[1.1] pt-0 mt-0">
+                                    <span className="italic font-normal lowercase">{isAr ? 'أهلاً بكم في ' : 'welcome to '}</span>
+                                    <span className="font-bold">{isAr ? 'خان وحود' : 'Khan Wahoud'}</span>
+                                </h2>
 
-                            <p className="text-base sm:text-lg md:text-xl leading-relaxed text-accent-800 font-sans opacity-90 max-w-2xl mt-4">
-                                {t('home.intro_text')}
-                            </p>
-
-                            <div className="mt-8 md:mt-10">
-                                <Button to="/experience" variant="outline">
-                                    {t('common.learn_more')}
-                                </Button>
-                            </div>
-                        </div>
-
-                        {/* Right Column: Architectural Image */}
-                        <div className="lg:col-span-5">
-                            <div className="relative mx-auto max-w-md lg:max-w-none">
-                                <div className="absolute -inset-2.5 rounded-2xl translate-x-2.5 translate-y-2.5 pointer-events-none hidden sm:block" />
-                                <div className="relative rounded-xl overflow-hidden shadow-2xl border border-secondary-300/40 aspect-[4/5] bg-accent-950/10">
-                                    <img
-                                        src="/images/interance.jpg"
-                                        alt={t('home.intro_title')}
-                                        className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-                                        loading="lazy"
-                                    />
+                                {/* Middle: Paragraphs with exact casing for Logam */}
+                                <div className="space-y-4 sm:space-y-5 my-auto py-4 text-[12px] sm:text-[13px] md:text-[13.5px] lg:text-[15px] leading-[1.65] sm:leading-[1.7] text-[#231D16] font-sans font-medium tracking-[0.08em] sm:tracking-[0.1em] rtl:normal-case rtl:font-sans rtl:tracking-normal">
+                                    <p>
+                                        {isAr ? (
+                                            t('home.intro_p1')
+                                        ) : (
+                                            <>
+                                                A HERITAGE BOUTIQUE HOTEL,<br />
+                                                IN THE HEART OF OLD DAMASCUS.
+                                            </>
+                                        )}
+                                    </p>
+                                    <p>
+                                        {isAr ? (
+                                            t('home.intro_p2')
+                                        ) : (
+                                            <>
+                                                NESTLED WITHIN ONE OF THE LAST CARAVANSERAI THAT<br className="hidden sm:inline" />
+                                                {' '}WERE BUILT IN THE WORLD, THE METICULOUSLY RESTORED<br className="hidden sm:inline" />
+                                                {' '}WALLS OF KHAN SULEYMAN PASHA.
+                                            </>
+                                        )}
+                                    </p>
+                                    <p>
+                                        {isAr ? (
+                                            t('home.intro_p3')
+                                        ) : (
+                                            <>
+                                                EXPERIENCE A HARMONIOUS BLEND OF DAMASCENE &<br className="hidden sm:inline" />
+                                                {' '}OTTOMAN GRANDEUR, ARCHITECTURAL AUTHENTICITY,<br className="hidden sm:inline" />
+                                                {' '}AND MODERN COMFORT.
+                                            </>
+                                        )}
+                                    </p>
                                 </div>
+
+                                {/* Bottom: Centered Discover More Button aligned with bottom of image */}
+                                <div className="flex justify-center pt-2">
+                                    <Link
+                                        href="/experience"
+                                        className="inline-flex items-center justify-center rounded-xl border border-[#781C1D] text-[#781C1D] hover:bg-[#781C1D] hover:text-white px-8 sm:px-10 py-2 sm:py-2.5 text-xs sm:text-[13px] font-sans font-medium tracking-[0.16em] uppercase transition-all duration-300 shadow-sm hover:shadow-md text-center"
+                                    >
+                                        {isAr ? t('common.learn_more') : 'DISCOVER MORE'}
+                                    </Link>
+                                </div>
+                            </div>
+                        </motion.div>
+
+                        {/* Right Column: Architectural Photo with exact matching height */}
+                        <div className="lg:col-span-5 flex justify-center lg:justify-end rtl:lg:justify-start">
+                            <div className="w-full max-w-[320px] sm:max-w-[360px] lg:max-w-none lg:w-auto h-auto lg:h-[460px] xl:h-[480px] aspect-[3/4] overflow-hidden">
+                                <img
+                                    src="/images/courtyard_section.png"
+                                    alt="Khan Wahoud Courtyard"
+                                    className="w-full h-full object-cover object-center"
+                                    loading="lazy"
+                                />
                             </div>
                         </div>
                     </div>
@@ -158,70 +207,135 @@ const HomePage: React.FC = () => {
             </section>
 
             {/* Story / Accommodation Section */}
-            <section className="bg-secondary-50 py-20 md:py-28 overflow-hidden">
-                <div className="container mx-auto px-4 lg:px-8 max-w-7xl">
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
-                        {/* Left Column: Text & CTA */}
-                        <div className="lg:col-span-7 text-left rtl:text-right">
-                            <SectionTitle title={t('home.story_title')} centered={false} />
-
-                            <div className="space-y-4 text-base sm:text-lg md:text-xl leading-relaxed text-accent-800 font-sans opacity-90 max-w-2xl mt-4">
-                                <p>{t('home.story_p1')}</p>
-                                <p>{t('home.story_p2')}</p>
-                                <p>{t('home.story_p3')}</p>
-                            </div>
-
-                            <div className="mt-8 md:mt-10">
-                                <Button to="/rooms" variant="outline">
-                                    {t('common.book_your_stay')}
-                                </Button>
+            <section ref={storyRef} className="w-full bg-[#FFFFF5] py-12 sm:py-16 md:py-20 lg:py-24 overflow-hidden">
+                <div className="max-w-[1180px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-12 xl:gap-16 items-start">
+                        {/* Left Column: Bedroom Photo with exact matching height */}
+                        <div className="lg:col-span-5 flex justify-center lg:justify-start rtl:lg:justify-end order-2 lg:order-1">
+                            <div className="w-full max-w-[320px] sm:max-w-[360px] lg:max-w-none lg:w-auto h-auto lg:h-[460px] xl:h-[480px] aspect-[3/4] overflow-hidden">
+                                <img
+                                    src="/images/story_section.png"
+                                    alt="Khan Wahoud Suite"
+                                    className="w-full h-full object-cover object-center"
+                                    loading="lazy"
+                                />
                             </div>
                         </div>
 
-                        {/* Right Column: Architectural Image */}
-                        <div className="lg:col-span-5">
-                            <div className="relative mx-auto max-w-md lg:max-w-none">
-                                <div className="absolute -inset-2.5 rounded-2xl translate-x-2.5 translate-y-2.5 pointer-events-none hidden sm:block" />
-                                <div className="relative rounded-xl overflow-hidden shadow-2xl border border-secondary-300/40 aspect-[4/5] bg-accent-950/10">
-                                    <img
-                                        src="/images/center.jpg"
-                                        alt={t('home.story_title')}
-                                        className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-                                        loading="lazy"
-                                    />
+                        {/* Right Column (Text & Button) */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={storyInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                            transition={{ duration: 0.8 }}
+                            className="lg:col-span-7 flex flex-col justify-start text-left rtl:text-right h-auto lg:h-[460px] xl:h-[480px] order-1 lg:order-2"
+                        >
+                            <div className="max-w-[560px] w-full mx-auto lg:mx-0 h-full flex flex-col justify-between py-1">
+                                {/* Top: Headline - Aligned flush with top of image */}
+                                <h2 className="font-serif text-3xl sm:text-4xl lg:text-[40px] xl:text-[44px] text-[#781C1D] leading-[1.1] pt-0 mt-0">
+                                    <span className="italic font-normal lowercase">{isAr ? 'ابدأ ' : 'begin your '}</span>
+                                    <span className="font-bold uppercase">{isAr ? 'قصتك' : 'STORY'}</span>
+                                </h2>
+
+                                {/* Middle: Paragraphs with Logam styling */}
+                                <div className="space-y-4 sm:space-y-5 my-auto py-4 text-[12px] sm:text-[13px] md:text-[13.5px] lg:text-[15px] leading-[1.65] sm:leading-[1.7] text-[#231D16] font-sans font-medium tracking-[0.08em] sm:tracking-[0.1em] rtl:normal-case rtl:font-sans rtl:tracking-normal">
+                                    <p>
+                                        {isAr ? (
+                                            t('home.story_p1')
+                                        ) : (
+                                            <>
+                                                KHAN WAHOUD OFFERS MORE THAN ACCOMMODATION. IT<br className="hidden sm:inline" />
+                                                {' '}OFFERS A STAY SURROUNDED BY HISTORY AND THE VIBRANT<br className="hidden sm:inline" />
+                                                {' '}RHYTHM OF LIFE.
+                                            </>
+                                        )}
+                                    </p>
+                                    <p>
+                                        {isAr ? (
+                                            t('home.story_p2')
+                                        ) : (
+                                            <>
+                                                WHERE OUR GUEST ROOMS ARE ARRANGED AROUND THE<br className="hidden sm:inline" />
+                                                {' '}HISTORIC COURTYARD. THE HEART OF THE KHAN’S EXPERIENCE.
+                                            </>
+                                        )}
+                                    </p>
+                                    <p>
+                                        {isAr ? (
+                                            t('home.story_p3')
+                                        ) : (
+                                            <>
+                                                OUR THOUGHTFULLY RESTORED ROOMS INVITE A NEW<br className="hidden sm:inline" />
+                                                {' '}GENERATION OF TRAVELERS TO WAKE WITHIN DAMASCENE<br className="hidden sm:inline" />
+                                                {' '}HERITAGE AND BECOME PART OF ITS STORY.
+                                            </>
+                                        )}
+                                    </p>
+                                </div>
+
+                                {/* Bottom: Centered CTA Button aligned with bottom of image */}
+                                <div className="flex justify-center pt-2">
+                                    <Link
+                                        href="/rooms"
+                                        className="inline-flex items-center justify-center rounded-xl border border-[#781C1D] text-[#781C1D] hover:bg-[#781C1D] hover:text-white px-8 sm:px-10 py-2 sm:py-2.5 text-xs sm:text-[13px] font-sans font-medium tracking-[0.16em] uppercase transition-all duration-300 shadow-sm hover:shadow-md text-center"
+                                    >
+                                        {isAr ? t('common.book_your_stay') : 'BOOK YOUR STAY'}
+                                    </Link>
                                 </div>
                             </div>
-                        </div>
+                        </motion.div>
                     </div>
                 </div>
             </section>
 
 
             {/* Map Section */}
-            <section className="bg-secondary-50 py-20">
+            <section className="bg-[#FFFFF5] py-20 md:py-24">
                 <div className="container mx-auto px-4">
-                    <SectionTitle title={t('home.map_title')} subtitle={t('home.map_subtitle')} centered={true} />
+                    <div className="text-center max-w-4xl mx-auto">
+                        {/* Headline */}
+                        <h2 className="font-serif text-3xl sm:text-4xl md:text-[40px] lg:text-[45px] text-[#781C1D] leading-[1.15] mb-6 sm:mb-7">
+                            <span className="italic font-normal lowercase">{isAr ? 'في قلب ' : 'in the heart of '}</span>
+                            <span className="font-bold">{isAr ? 'دمشق القديمة' : 'OLD DAMASCUS'}</span>
+                        </h2>
+
+                        {/* Subtitle */}
+                        <p className="text-[13px] sm:text-[14px] md:text-[15px] leading-[1.75] sm:leading-[1.85] text-[#1C1C1C] font-sans font-medium uppercase tracking-[0.14em] max-w-4xl mx-auto rtl:normal-case rtl:font-sans rtl:tracking-normal rtl:text-base rtl:leading-relaxed">
+                            {isAr ? (
+                                t('home.map_subtitle')
+                            ) : (
+                                <>
+                                    KHAN SULEYMAN PASHA IS AT THE HEART OF THE OLD CITY OF DAMASCUS, RIGHT ON ONE<br className="hidden md:inline" />{' '}
+                                    OF THE MOST ANCIENT AND FAMOUS BIBLICAL STREETS, THE STRAIGHT STREET, SOUK<br className="hidden md:inline" />{' '}
+                                    MIDHAT PASHA, THAT WAS BUILT BY THE ROMANS, WITNESSED PAUL THE APOSTLE, AND<br className="hidden md:inline" />{' '}
+                                    MARKS THE PASSAGE OF THE FAMOUS SILK ROAD'S CARAVANS.
+                                </>
+                            )}
+                        </p>
+                    </div>
 
                     <div className="mt-12">
                         <DamascusMap />
                     </div>
 
                     <div className="mt-10 md:mt-12 flex justify-center">
-                        <Button
-                            to="/restoration"
-                            variant="outline"
-                            className="uppercase tracking-wider rtl:normal-case rtl:tracking-normal"
-                        >
-                            {t('nav.rebirth')}
-                        </Button>
+                        {/* Centered CTA Button */}
+                        <div className="mt-8 sm:mt-10 lg:mt-12 flex justify-center">
+                            <Link
+                                href="/restoration"
+                                className="inline-flex items-center justify-center rounded-xl border border-[#781C1D] text-[#781C1D] hover:bg-[#781C1D] hover:text-white px-8 sm:px-10 py-2 sm:py-2.5 text-xs sm:text-[13px] font-sans font-medium tracking-[0.16em] uppercase transition-all duration-300 shadow-sm hover:shadow-md text-center"
+                            >
+                                {t('nav.rebirth')}
+                            </Link>
+                        </div>
+
                     </div>
                 </div>
             </section>
 
             {/* Gallery Section */}
-            <section ref={galleryRef} className="bg-accent-50 py-20">
+            <section ref={galleryRef} className="bg-[#FFFFF5] py-20">
                 <div className="container mx-auto px-4">
-                    <SectionTitle title={t('experience.gallery_title')} centered={true} className="mb-12" />
+                    <SectionTitle title={t('experience.gallery_title')} centered={true} className="mb-12 text-[#781C1D]" />
 
                     <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
                         {galleryImages.map((image, index) => (
@@ -247,21 +361,7 @@ const HomePage: React.FC = () => {
             </section>
 
 
-            {/* CTA Section */}
-            <section className="bg-secondary-100 py-20">
-                <div className="container mx-auto px-4 text-center">
-                    <h2 className="mb-6 font-serif text-3xl font-bold md:text-4xl">{t('home.feature_titles.experience')}</h2>
-                    <p className="text-accent-900 mx-auto mb-8 max-w-2xl text-lg">{t('book_text')}</p>
-                    <div className="flex flex-col justify-center space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4">
-                        <Button to="/rooms" variant="primary" size="lg">
-                            {t('common.book_now')}
-                        </Button>
-                        <Button to="/contact" variant="outline" size="lg">
-                            {t('common.contact_us')}
-                        </Button>
-                    </div>
-                </div>
-            </section>
+
         </div>
     );
 };
