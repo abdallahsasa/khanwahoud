@@ -21,7 +21,14 @@ class BookingResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-calendar';
 
-   public static function getNavigationLabel(): string
+    public static function canViewAny(): bool
+    {
+        /** @var \App\Models\User|null $user */
+        $user = auth()->user();
+        return $user && $user->hasPermission('bookings');
+    }
+
+    public static function getNavigationLabel(): string
     {
         return __('Bookings'); 
     }

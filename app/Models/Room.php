@@ -9,11 +9,15 @@ class Room extends Model
 {
     protected $fillable = [
         'name',
+        'name_ar',
         'description',
+        'description_ar',
         'price',
         'category',
+        'category_ar',
         'images',
         'amenities',
+        'amenities_ar',
         'size',
         'max_occupancy'
     ];
@@ -21,6 +25,7 @@ class Room extends Model
     protected $casts = [
         'images' => 'array',
         'amenities' => 'array',
+        'amenities_ar' => 'array',
         'price' => 'decimal:2'
     ];
 

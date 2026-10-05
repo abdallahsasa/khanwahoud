@@ -24,6 +24,13 @@ class EventResource extends Resource
         return __('Events');
     }
 
+    public static function canViewAny(): bool
+    {
+        /** @var \App\Models\User|null $user */
+        $user = auth()->user();
+        return $user && $user->hasPermission('events');
+    }
+
     public static function form(Form $form): Form
     {
         return $form

@@ -54,7 +54,7 @@ const HomePage: React.FC = () => {
     return (
         <div className="min-h-screen">
             {/* Hero Section */}
-            <section className="relative h-screen min-h-[660px] flex flex-col justify-between overflow-hidden">
+            <section className="relative min-h-[100dvh] flex flex-col justify-between overflow-hidden pb-4 sm:pb-0">
                 <div className="absolute inset-0 z-0">
                     <img
                         src="/images/hero.jpg"
@@ -72,21 +72,21 @@ const HomePage: React.FC = () => {
                         transition={{ duration: 0.8 }}
                         className="max-w-4xl mx-auto"
                     >
-                        <h1 className="text-white font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-[0.16em] uppercase font-normal drop-shadow-[0_3px_14px_rgba(0,0,0,0.85)] mb-1 sm:mb-1.5">
+                        <h1 className="text-white font-serif text-2xl sm:text-4xl md:text-5xl lg:text-6xl tracking-[0.14em] sm:tracking-[0.16em] uppercase font-normal drop-shadow-[0_3px_14px_rgba(0,0,0,0.85)] mb-1 sm:mb-1.5">
                             {t('khan_wahoud')}
                         </h1>
-                        <span className="text-white/80 text-[11px] sm:text-xs md:text-sm font-sans tracking-[0.3em] uppercase block my-0.5 sm:my-1">
+                        <span className="text-white/80 text-[10px] sm:text-xs md:text-sm font-sans tracking-[0.25em] sm:tracking-[0.3em] uppercase block my-0.5 sm:my-1">
                             {t('at')}
                         </span>
-                        <div className="text-white font-serif tracking-[0.18em] uppercase text-xs sm:text-sm md:text-base font-normal drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
+                        <div className="text-white font-serif tracking-[0.14em] sm:tracking-[0.18em] uppercase text-xs sm:text-sm md:text-base font-normal drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
                             <p className="leading-snug">{t('khan_Suleyman')}</p>
-                            <p className="mt-0.5 text-[11px] sm:text-xs md:text-sm tracking-[0.22em] text-white/90">{t('since_1736')}</p>
+                            <p className="mt-0.5 text-[10px] sm:text-xs md:text-sm tracking-[0.18em] sm:tracking-[0.22em] text-white/90">{t('since_1736')}</p>
                         </div>
                     </motion.div>
                 </div>
 
                 {/* Center Year & Description */}
-                <div className="relative z-10 w-full px-4 text-center my-auto py-2">
+                <div className="relative z-10 w-full px-4 text-center my-auto py-2 sm:py-4">
                     <YearAnimation />
                 </div>
 
@@ -95,13 +95,13 @@ const HomePage: React.FC = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                     transition={{ duration: 0.8, delay: 0.4 }}
-                    className="relative z-10 w-full px-4 pb-10 sm:pb-12 md:pb-14"
+                    className="relative z-10 w-full px-4 pb-12 sm:pb-12 md:pb-14"
                 >
-                    <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 md:gap-5 max-w-4xl mx-auto">
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-4 md:gap-5 max-w-xs sm:max-w-4xl mx-auto w-full">
                         {/* Book A Table */}
                         <Link
                             href="/dining"
-                            className="w-full sm:w-auto min-w-[170px] sm:min-w-[195px] text-center px-7 sm:px-8 py-2.5 sm:py-3 rounded-full bg-[#EDE3D8] hover:bg-[#F6EFE7] text-[#4A1516] text-xs sm:text-sm tracking-[0.16em] uppercase font-sans font-semibold shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300"
+                            className="w-full sm:w-auto min-w-[160px] sm:min-w-[195px] text-center px-6 sm:px-8 py-2.5 sm:py-3 rounded-full bg-[#EDE3D8] hover:bg-[#F6EFE7] text-[#4A1516] text-xs sm:text-sm tracking-[0.12em] sm:tracking-[0.16em] uppercase font-sans font-semibold shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300"
                         >
                             {t('common.book_a_table')}
                         </Link>
@@ -109,7 +109,7 @@ const HomePage: React.FC = () => {
                         {/* Book Your Stay (Primary Center) */}
                         <Link
                             href="/rooms"
-                            className="w-full sm:w-auto min-w-[185px] sm:min-w-[210px] text-center px-8 sm:px-10 py-2.5 sm:py-3 rounded-full bg-[#781C1D] hover:bg-[#8D2223] text-white text-xs sm:text-sm tracking-[0.16em] uppercase font-sans font-semibold shadow-xl hover:shadow-2xl hover:scale-[1.02] transition-all duration-300"
+                            className="w-full sm:w-auto min-w-[170px] sm:min-w-[210px] text-center px-6 sm:px-10 py-2.5 sm:py-3 rounded-full bg-[#781C1D] hover:bg-[#8D2223] text-white text-xs sm:text-sm tracking-[0.12em] sm:tracking-[0.16em] uppercase font-sans font-semibold shadow-xl hover:shadow-2xl hover:scale-[1.02] transition-all duration-300"
                         >
                             {t('common.book_your_stay')}
                         </Link>
@@ -117,7 +117,7 @@ const HomePage: React.FC = () => {
                         {/* Private Events */}
                         <Link
                             href="/events"
-                            className="w-full sm:w-auto min-w-[170px] sm:min-w-[195px] text-center px-7 sm:px-8 py-2.5 sm:py-3 rounded-full bg-[#EDE3D8] hover:bg-[#F6EFE7] text-[#4A1516] text-xs sm:text-sm tracking-[0.16em] uppercase font-sans font-semibold shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300"
+                            className="w-full sm:w-auto min-w-[160px] sm:min-w-[195px] text-center px-6 sm:px-8 py-2.5 sm:py-3 rounded-full bg-[#EDE3D8] hover:bg-[#F6EFE7] text-[#4A1516] text-xs sm:text-sm tracking-[0.12em] sm:tracking-[0.16em] uppercase font-sans font-semibold shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300"
                         >
                             {t('common.private_events')}
                         </Link>

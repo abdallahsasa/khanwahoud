@@ -19,6 +19,13 @@ class ContactInquiryResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-envelope';
 
+    public static function canViewAny(): bool
+    {
+        /** @var \App\Models\User|null $user */
+        $user = auth()->user();
+        return $user && $user->hasPermission('contact_inquiries');
+    }
+
     public static function getNavigationLabel(): string
     {
         return __('Contact Inquiries');

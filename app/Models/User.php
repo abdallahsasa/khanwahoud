@@ -24,6 +24,8 @@ class User extends Authenticatable implements FilamentUser
         'email',
         'password',
         'is_admin',
+        'role',
+        'permissions',
     ];
 
     /**
@@ -47,7 +49,53 @@ class User extends Authenticatable implements FilamentUser
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
             'is_admin' => 'boolean',
+            'permissions' => 'array',
         ];
+    }
+
+    /**
+     * Check if user is Super Admin.
+     */
+    public function isSuperAdmin(): bool
+    {
+        if ($this->email === 'admin@wahoud.com') {
+            return true;
+        }
+
+        if ($this->role === 'super_admin') {
+            return true;
+        }
+
+        if ($this->role === 'sub_admin') {
+            return false;
+        }
+
+        return (bool) $this->is_admin;
+    }
+
+    /**
+     * Check if user is Sub Admin.
+     */
+    public function isSubAdmin(): bool
+    {
+        return $this->role === 'sub_admin' && !$this->isSuperAdmin();
+    }
+
+    /**
+     * Check if user has permission for a specific section/resource.
+     */
+    public function hasPermission(string $permission): bool
+    {
+        if ($this->isSuperAdmin()) {
+            return true;
+        }
+
+        $perms = $this->permissions ?? [];
+        if (is_string($perms)) {
+            $perms = json_decode($perms, true) ?? [];
+        }
+
+        return is_array($perms) && in_array($permission, $perms, true);
     }
 
     /**
@@ -55,6 +103,15 @@ class User extends Authenticatable implements FilamentUser
      */
     public function canAccessPanel(Panel $panel): bool
     {
-        return (bool) $this->is_admin;
+        if ($this->isSuperAdmin()) {
+            return true;
+        }
+
+        $perms = $this->permissions ?? [];
+        if (is_string($perms)) {
+            $perms = json_decode($perms, true) ?? [];
+        }
+
+        return $this->role === 'sub_admin' && is_array($perms) && !empty($perms);
     }
 }

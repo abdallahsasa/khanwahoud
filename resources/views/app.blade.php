@@ -119,27 +119,33 @@
             #kw-callbar {
                 display: flex;
                 align-items: center;
-                gap: 6px;
+                gap: 5px;
                 position: fixed;
-                left: 50%;
-                transform: translateX(-50%);
-                bottom: calc(12px + env(safe-area-inset-bottom));
+                right: 12px;
+                left: auto;
+                transform: none;
+                bottom: calc(10px + env(safe-area-inset-bottom));
                 z-index: 9999;
                 background: rgba(24, 20, 17, 0.94);
                 -webkit-backdrop-filter: blur(12px);
                 backdrop-filter: blur(12px);
-                padding: 4px;
+                padding: 3px;
                 border-radius: 40px;
                 border: 1px solid rgba(233, 223, 204, 0.25);
-                box-shadow: 0 6px 24px rgba(0, 0, 0, 0.45);
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
                 font-family: Montserrat, sans-serif;
                 width: auto;
-                max-width: calc(100% - 28px);
+            }
+
+            [dir="rtl"] #kw-callbar,
+            html[dir="rtl"] #kw-callbar {
+                right: auto;
+                left: 12px;
             }
 
             #kw-callbar a {
-                width: 40px;
-                height: 40px;
+                width: 36px;
+                height: 36px;
                 display: inline-flex;
                 align-items: center;
                 justify-content: center;

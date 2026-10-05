@@ -30,7 +30,11 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
-            ->login()->brandLogo(null)->brandName('')
+            ->login()
+            ->profile()
+            ->brandLogo(fn () => asset('images/logowahoud.png'))
+            ->brandLogoHeight('2.5rem')
+            ->brandName('Khan Wahoud')
             ->colors([
                 'primary' => Color::Amber,
             ])
@@ -42,9 +46,8 @@ class AdminPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
-                    \App\Filament\Widgets\LanguageSwitcher::class,
-
+                \App\Filament\Widgets\StatsOverview::class,
+                \App\Filament\Widgets\LanguageSwitcher::class,
             ])
             ->middleware([
                 EncryptCookies::class,
@@ -63,9 +66,7 @@ class AdminPanelProvider extends PanelProvider
                                 SetLocale::class,
 
             ])
-            ->resources([
-                RoomResource::class,
-            ]);
+        ;
     }
 
 

@@ -101,7 +101,7 @@ const YearAnimation: React.FC = () => {
                 className="text-center"
             >
                 <div
-                    className="text-white font-serif kw-year-number text-7xl sm:text-8xl md:text-9xl font-normal drop-shadow-[0_4px_24px_rgba(0,0,0,0.85)] tracking-wide"
+                    className="text-white font-serif kw-year-number text-5xl sm:text-7xl md:text-9xl font-normal drop-shadow-[0_4px_24px_rgba(0,0,0,0.85)] tracking-wide leading-none"
                     dir="ltr"
                 >
                     {format(new Date(currentYear, 0), 'yyyy')}
@@ -113,19 +113,19 @@ const YearAnimation: React.FC = () => {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -12 }}
                     transition={{ duration: 0.3 }}
-                    className="mt-4 sm:mt-5 max-w-2xl mx-auto"
+                    className="mt-2.5 sm:mt-5 max-w-2xl mx-auto px-2"
                 >
-                    <h3 className="font-serif text-base sm:text-lg md:text-xl font-normal uppercase tracking-[0.2em] text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]">
+                    <h3 className="font-serif text-xs sm:text-base md:text-xl font-normal uppercase tracking-[0.16em] sm:tracking-[0.2em] text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]">
                         &ldquo;{t(timelineEvents[currentEventIndex].title)}&rdquo;
                     </h3>
-                    <p className="font-serif text-xs sm:text-sm md:text-base font-normal uppercase tracking-[0.14em] text-white/90 drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)] mt-1.5 leading-relaxed">
+                    <p className="font-serif text-[11px] sm:text-sm md:text-base font-normal uppercase tracking-[0.1em] sm:tracking-[0.14em] text-white/90 drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)] mt-1 sm:mt-1.5 leading-snug sm:leading-relaxed max-w-xs sm:max-w-xl mx-auto">
                         &ldquo;{t(timelineEvents[currentEventIndex].description)}&rdquo;
                     </p>
                 </motion.div>
 
                 {/* Refined Burgundy Timeline Bar matching mockup */}
-                <div className="mx-auto mt-6 sm:mt-7 w-full max-w-sm sm:max-w-md md:max-w-lg">
-                    <div className="relative h-[8px] sm:h-[8px] rounded-full overflow-hidden bg-[#450010]/80 border border-[#771709]/50 shadow-[0_2px_8px_rgba(0,0,0,0.5)]">
+                <div className="mx-auto mt-3.5 sm:mt-7 w-full max-w-[200px] sm:max-w-md md:max-w-lg">
+                    <div className="relative h-[6px] sm:h-[8px] rounded-full overflow-hidden bg-[#450010]/80 border border-[#771709]/50 shadow-[0_2px_8px_rgba(0,0,0,0.5)]">
                         <motion.div
                             className="bg-[#8A2424] absolute top-0 left-0 h-full rounded-full shadow-[0_0_10px_rgba(158,43,33,0.9)]"
                             initial={{ width: '0%' }}

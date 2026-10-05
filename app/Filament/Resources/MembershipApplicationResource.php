@@ -24,6 +24,13 @@ class MembershipApplicationResource extends Resource
         return __('Membership Applications');
     }
 
+    public static function canViewAny(): bool
+    {
+        /** @var \App\Models\User|null $user */
+        $user = auth()->user();
+        return $user && $user->hasPermission('membership_applications');
+    }
+
     public static function form(Form $form): Form
     {
         return $form

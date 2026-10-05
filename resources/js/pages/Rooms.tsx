@@ -28,12 +28,16 @@ interface RoomsPageProps {
     dbRooms?: Array<{
         id: number | string;
         name: string;
+        name_ar?: string;
         description?: string;
+        description_ar?: string;
         price: number | string;
         category?: string;
+        category_ar?: string;
         size?: number | string;
         max_occupancy?: number | string;
         amenities?: string[] | string;
+        amenities_ar?: string[] | string;
         images?: string[] | string;
         formatted_images?: string[];
     }>;
@@ -176,15 +180,23 @@ const RoomsPage: React.FC<RoomsPageProps> = ({ dbRooms = [] }) => {
                     ? r.formatted_images
                     : (Array.isArray(r.images) && r.images.length > 0 ? r.images : ['/images/rooms.png']);
 
+                const roomName = (isAr && r.name_ar && r.name_ar.trim() !== '') ? r.name_ar : r.name;
+                const roomDesc = (isAr && r.description_ar && r.description_ar.trim() !== '') ? r.description_ar : (r.description || '');
+                const roomCat = (isAr && r.category_ar && r.category_ar.trim() !== '') ? r.category_ar : (r.category || 'Heritage');
+
+                const chosenAmenities = (isAr && r.amenities_ar && (Array.isArray(r.amenities_ar) ? r.amenities_ar.length > 0 : String(r.amenities_ar).trim() !== ''))
+                    ? r.amenities_ar
+                    : r.amenities;
+
                 let parsedAmenities: string[] = [];
-                if (Array.isArray(r.amenities)) {
-                    parsedAmenities = r.amenities;
-                } else if (typeof r.amenities === 'string') {
+                if (Array.isArray(chosenAmenities)) {
+                    parsedAmenities = chosenAmenities;
+                } else if (typeof chosenAmenities === 'string') {
                     try {
-                        const d = JSON.parse(r.amenities);
-                        parsedAmenities = Array.isArray(d) ? d : [r.amenities];
+                        const d = JSON.parse(chosenAmenities);
+                        parsedAmenities = Array.isArray(d) ? d : [chosenAmenities];
                     } catch {
-                        parsedAmenities = r.amenities.split(',').map((s) => s.trim()).filter(Boolean);
+                        parsedAmenities = chosenAmenities.split(',').map((s) => s.trim()).filter(Boolean);
                     }
                 }
                 if (parsedAmenities.length === 0) {
@@ -200,9 +212,9 @@ const RoomsPage: React.FC<RoomsPageProps> = ({ dbRooms = [] }) => {
 
                 return {
                     id: String(r.id),
-                    name: r.name,
-                    tag: isAr ? `${cat} المميز` : `${cat} Sanctuary`,
-                    description: r.description || '',
+                    name: roomName,
+                    tag: isAr ? (r.category_ar || `${cat} المميز`) : `${cat} Sanctuary`,
+                    description: roomDesc,
                     size: r.size ? `${r.size} ${isAr ? 'م²' : 'm²'}` : (isAr ? '٥٠ م²' : '50 m²'),
                     bed: isAr ? (cat.toLowerCase().includes('court') ? 'سرير كوين' : 'سرير كينغ') : (cat.toLowerCase().includes('court') ? 'Queen Bed' : 'King Bed'),
                     capacity: r.max_occupancy ? `${r.max_occupancy} ${isAr ? 'نزلاء' : 'Guests'}` : `3 ${isAr ? 'نزلاء' : 'Guests'}`,

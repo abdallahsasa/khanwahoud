@@ -38,6 +38,17 @@ const Header: React.FC = () => {
         setIsMenuOpen(false);
     }, [url]);
 
+    useEffect(() => {
+        if (isMenuOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+        return () => {
+            document.body.style.overflow = '';
+        };
+    }, [isMenuOpen]);
+
     // Left navigation group (before logo): The Khan - Rebirth
     const leftNavItems = [
         { name: t('nav.the_khan'), path: '/experience' },
@@ -70,16 +81,16 @@ const Header: React.FC = () => {
         <header
             className={`fixed top-0 left-0 right-0 z-40 w-full transition-all duration-300 ${
                 isScrolled
-                    ? 'bg-accent-950/95 py-3 shadow-2xl backdrop-blur-md border-b border-secondary-300/10'
-                    : 'bg-gradient-to-b from-accent-950/85 via-accent-950/40 to-transparent py-5'
+                    ? 'bg-accent-950/95 py-2 sm:py-3 shadow-2xl backdrop-blur-md border-b border-secondary-300/10'
+                    : 'bg-gradient-to-b from-accent-950/85 via-accent-950/40 to-transparent py-2.5 sm:py-3 lg:py-5'
             }`}
         >
             <div className="relative w-full max-w-[1920px] mx-auto px-4 lg:px-8 xl:px-12">
-                <div className="flex items-center justify-between min-h-[64px]">
+                <div className="flex items-center justify-between min-h-[52px] sm:min-h-[64px]">
                     {/* Mobile Brand (Left on Mobile) */}
                     <div className="flex items-center lg:hidden">
                         <Link href="/" className="flex items-center">
-                            <img src="/images/logowahoud.png" alt="Khan Wahoud" className="h-14 w-auto object-contain" />
+                            <img src="/images/logowahoud.png" alt="Khan Wahoud" className="h-11 sm:h-13 w-auto object-contain" />
                         </Link>
                     </div>
 
@@ -197,59 +208,86 @@ const Header: React.FC = () => {
 
             {/* Mobile Navigation Drawer */}
             <div
-                className={`bg-accent-950/98 fixed inset-0 z-50 transform backdrop-blur-lg transition-transform duration-300 lg:hidden ${
-                    isMenuOpen ? 'translate-x-0' : '-translate-x-full rtl:translate-x-full'
+                className={`bg-[#140E0C] fixed inset-0 z-[100000] overflow-y-auto transform transition-all duration-300 lg:hidden ${
+                    isMenuOpen ? 'opacity-100 translate-x-0 pointer-events-auto' : 'opacity-0 -translate-x-full rtl:translate-x-full pointer-events-none'
                 }`}
             >
-                <div className="container mx-auto h-screen px-6 py-8 flex flex-col justify-between">
+                <div className="min-h-full flex flex-col justify-between px-6 py-7 max-w-md mx-auto">
                     <div>
-                        <div className="flex items-center justify-between pb-6 border-b border-accent-800">
-                            <img src="/images/logowahoud.png" alt="Khan Wahoud" className="h-12 w-auto" />
+                        {/* Drawer Top Header */}
+                        <div className="flex items-center justify-between pb-5 border-b border-[#EAE2CC]/15">
+                            <Link href="/" onClick={() => setIsMenuOpen(false)} className="flex items-center gap-3">
+                                <img src="/images/logowahoud.png" alt="Khan Wahoud" className="h-12 w-auto object-contain drop-shadow" />
+                                <span className="font-serif text-lg tracking-[0.14em] uppercase text-[#FFFFF5] font-semibold">
+                                    {t('khan_wahoud')}
+                                </span>
+                            </Link>
                             <button
-                                className="text-secondary-300 focus:outline-none"
+                                className="w-10 h-10 rounded-full bg-white/10 hover:bg-[#781C1D] text-[#EAE2CC] hover:text-white flex items-center justify-center transition-all duration-200 cursor-pointer"
                                 onClick={() => setIsMenuOpen(false)}
                                 aria-label="Close menu"
                             >
-                                <X size={24} />
+                                <X size={22} />
                             </button>
                         </div>
 
-                        <nav className="mt-8 flex flex-col space-y-3">
+                        {/* Navigation Links */}
+                        <nav className="mt-8 flex flex-col space-y-2">
                             {mobileNavItems.map((item) => (
                                 <Link
                                     key={item.path}
                                     href={item.path}
-                                    className={`py-2 text-lg tracking-wider transition-colors border-b border-accent-800/40 ${
+                                    onClick={() => setIsMenuOpen(false)}
+                                    className={`py-3.5 px-3 rounded-xl text-base tracking-[0.14em] uppercase font-sans transition-all duration-200 flex items-center justify-between border-b border-white/5 ${
                                         isActive(item.path)
-                                            ? 'text-primary-600 font-medium'
-                                            : 'text-secondary-300 hover:text-white'
+                                            ? 'text-white bg-[#781C1D]/60 font-semibold border-l-4 rtl:border-l-0 rtl:border-r-4 border-[#C93A1E]'
+                                            : 'text-[#EAE2CC]/90 hover:text-white hover:bg-white/5'
                                     }`}
                                 >
-                                    {item.name}
+                                    <span>{item.name}</span>
+                                    <span className="text-xs opacity-40">→</span>
                                 </Link>
                             ))}
                         </nav>
+
+                        {/* Quick CTA inside Mobile Menu */}
+                        <div className="mt-8 pt-6 border-t border-[#EAE2CC]/15 grid grid-cols-2 gap-3">
+                            <Link
+                                href="/rooms"
+                                onClick={() => setIsMenuOpen(false)}
+                                className="text-center py-3 px-3 rounded-xl bg-[#781C1D] hover:bg-[#9E2B21] text-white text-xs uppercase tracking-wider font-semibold shadow-md transition-all"
+                            >
+                                {t('common.book_your_stay')}
+                            </Link>
+                            <Link
+                                href="/dining"
+                                onClick={() => setIsMenuOpen(false)}
+                                className="text-center py-3 px-3 rounded-xl bg-[#EDE3D8] hover:bg-white text-[#4A1516] text-xs uppercase tracking-wider font-semibold shadow-md transition-all"
+                            >
+                                {t('common.book_a_table')}
+                            </Link>
+                        </div>
                     </div>
 
                     {/* Language Switcher in Mobile Drawer Bottom */}
-                    <div className="pb-8 pt-4 border-t border-accent-800 flex items-center justify-between">
-                        <div className="flex items-center gap-2 text-secondary-400 text-sm">
-                            <Globe size={18} />
+                    <div className="pt-8 pb-4 mt-8 border-t border-[#EAE2CC]/15 flex items-center justify-between">
+                        <div className="flex items-center gap-2 text-[#EAE2CC]/80 text-xs tracking-wider uppercase font-sans">
+                            <Globe size={16} />
                             <span>{t('nav.language')}</span>
                         </div>
-                        <div className="flex items-center rounded-full border border-secondary-300/30 p-1">
+                        <div className="flex items-center rounded-full border border-[#EAE2CC]/25 bg-black/40 p-1">
                             <button
                                 onClick={() => setLanguage('en')}
-                                className={`rounded-full px-4 py-1 text-sm font-sans ${
-                                    !isAr ? 'bg-primary-700 text-white font-medium' : 'text-secondary-300'
+                                className={`rounded-full px-3.5 py-1 text-xs font-sans transition-all ${
+                                    !isAr ? 'bg-[#781C1D] text-white font-medium shadow-sm' : 'text-[#EAE2CC]/80 hover:text-white'
                                 }`}
                             >
                                 English
                             </button>
                             <button
                                 onClick={() => setLanguage('ar')}
-                                className={`rounded-full px-4 py-1 text-sm font-serif ${
-                                    isAr ? 'bg-primary-700 text-white font-medium' : 'text-secondary-300'
+                                className={`rounded-full px-3.5 py-1 text-xs font-serif transition-all ${
+                                    isAr ? 'bg-[#781C1D] text-white font-medium shadow-sm' : 'text-[#EAE2CC]/80 hover:text-white'
                                 }`}
                             >
                                 العربية

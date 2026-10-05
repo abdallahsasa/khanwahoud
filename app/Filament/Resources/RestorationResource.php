@@ -22,6 +22,13 @@ class RestorationResource extends Resource
     {
         return __('Restorations');
     }
+
+    public static function canViewAny(): bool
+    {
+        /** @var \App\Models\User|null $user */
+        $user = auth()->user();
+        return $user && $user->hasPermission('restorations');
+    }
     public static function getCreateFormAction(): Action
     {
         return Action::make('create')

@@ -19,6 +19,13 @@ class EventRequestResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    public static function canViewAny(): bool
+    {
+        /** @var \App\Models\User|null $user */
+        $user = auth()->user();
+        return $user && $user->hasPermission('event_requests');
+    }
+
     public static function getNavigationLabel(): string
     {
         return __('Event Requests');
