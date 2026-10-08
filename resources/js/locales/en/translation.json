@@ -150,7 +150,7 @@
             "view": "View",
             "from_rate": "From",
             "night": "per night",
-            "reserve_now": "RESERVE SUITE",
+            "reserve_now": "RESERVE ROOM",
             "explore_details": "EXPLORE DETAILS",
             "inquire": "Inquire with Concierge"
         },
@@ -170,6 +170,7 @@
             "title": "Suite Reservation & Inquiry",
             "whatsapp_action": "Instant WhatsApp Booking",
             "call_action": "Call Hotel Concierge",
+            "email_action": "Email Reservations",
             "whatsapp_desc": "Connect directly with our reservation concierge with your dates pre-filled for immediate confirmation.",
             "overview_tab": "Suite Overview",
             "amenities_tab": "Amenities & Comfort",

@@ -12,6 +12,7 @@ import {
     Check,
     MessageCircle,
     Phone,
+    Mail,
     Coffee,
     Compass,
     Sparkles,
@@ -457,20 +458,7 @@ const RoomsPage: React.FC<RoomsPageProps> = ({ dbRooms = [] }) => {
 
                                     {/* Gallery Controls Top-Right (Shuffle + Counter) */}
                                     <div className="absolute top-4 right-4 rtl:right-auto rtl:left-4 z-10 flex items-center gap-1.5 pointer-events-auto">
-                                        {totalImgs > 1 && (
-                                            <button
-                                                type="button"
-                                                onClick={(e) => {
-                                                    e.stopPropagation();
-                                                    handleShuffleRoomImages(room.id, imgs);
-                                                }}
-                                                title={isAr ? 'تبديل عشوائي لترتيب الصور' : 'Shuffle photo order'}
-                                                className="px-2.5 py-1 rounded-full bg-white/20 hover:bg-[#781C1D] text-white text-[10px] font-sans font-medium backdrop-blur-md border border-white/25 shadow-md flex items-center gap-1 transition-all duration-200 active:scale-95 cursor-pointer"
-                                            >
-                                                <Shuffle size={11} className="transition-transform group-hover:rotate-180" />
-                                                <span>{isAr ? 'تبديل' : 'Shuffle'}</span>
-                                            </button>
-                                        )}
+
                                         <button
                                             type="button"
                                             onClick={(e) => {
@@ -627,70 +615,6 @@ const RoomsPage: React.FC<RoomsPageProps> = ({ dbRooms = [] }) => {
                 </div>
             </section>
 
-            {/* Heritage Privileges & Inclusions Banner */}
-            <section ref={inclusionsRef} className="bg-[#FAF7EE] py-20 md:py-24 border-y border-[#781C1D]/15">
-                <div className="container mx-auto px-4 sm:px-6">
-                    <div className="text-center max-w-3xl mx-auto mb-16">
-                        <span className="text-xs font-sans uppercase tracking-[0.2em] text-[#781C1D] font-semibold block mb-2">
-                            {t('rooms.inclusions.title', isAr ? 'مزايا وتجارب استثنائية مشمولة مع كل إقامة' : 'Heritage Privileges Included With Every Stay')}
-                        </span>
-                        <h2 className="font-serif text-3xl sm:text-4xl text-[#1C1C1C] font-bold mb-4">
-                            {t('rooms.inclusions.subtitle', isAr ? 'نحيي كرم الضيافة في الخانات التاريخية بأسلوب راقٍ يليق بأرقى المعايير العالمية' : 'Honoring the ancient Caravanserai hospitality tradition with modern refinement')}
-                        </h2>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-                        <div className="p-6 rounded-2xl bg-white shadow-md border border-[#781C1D]/10">
-                            <div className="w-12 h-12 rounded-xl bg-[#781C1D]/10 text-[#781C1D] flex items-center justify-center mb-4">
-                                <Coffee size={24} />
-                            </div>
-                            <h3 className="font-serif text-lg font-bold text-[#1C1C1C] mb-2">
-                                {t('rooms.inclusions.item1_title', isAr ? 'إفطار الفناء الدمشقي' : 'Courtyard Breakfast')}
-                            </h3>
-                            <p className="text-xs sm:text-sm text-[#5C4F47] leading-relaxed">
-                                {t('rooms.inclusions.item1_desc', isAr ? 'إفطار شامي طازج يُقدَّم يومياً تحت ظلال الأقواس التاريخية في الفناء المفتوح.' : 'Freshly prepared Damascene breakfast served daily in the sunlit open-air courtyard.')}
-                            </p>
-                        </div>
-
-                        <div className="p-6 rounded-2xl bg-white shadow-md border border-[#781C1D]/10">
-                            <div className="w-12 h-12 rounded-xl bg-[#781C1D]/10 text-[#781C1D] flex items-center justify-center mb-4">
-                                <Sparkles size={24} />
-                            </div>
-                            <h3 className="font-serif text-lg font-bold text-[#1C1C1C] mb-2">
-                                {t('rooms.inclusions.item2_title', isAr ? 'خدمة الكونسيرج والبتلر' : 'Concierge & Butler')}
-                            </h3>
-                            <p className="text-xs sm:text-sm text-[#5C4F47] leading-relaxed">
-                                {t('rooms.inclusions.item2_desc', isAr ? 'فريق مخصص لترتيب جولات خاصة في دمشق القديمة وحجوزات النقل والمطاعم.' : 'Dedicated personal assistance for private Old Damascus tours, transport, and dining.')}
-                            </p>
-                        </div>
-
-                        <div className="p-6 rounded-2xl bg-white shadow-md border border-[#781C1D]/10">
-                            <div className="w-12 h-12 rounded-xl bg-[#781C1D]/10 text-[#781C1D] flex items-center justify-center mb-4">
-                                <Compass size={24} />
-                            </div>
-                            <h3 className="font-serif text-lg font-bold text-[#1C1C1C] mb-2">
-                                {t('rooms.inclusions.item3_title', isAr ? 'طقس الشاي والحلويات التراثية' : 'Afternoon Tea Ritual')}
-                            </h3>
-                            <p className="text-xs sm:text-sm text-[#5C4F47] leading-relaxed">
-                                {t('rooms.inclusions.item3_desc', isAr ? 'شاي سوري أصيل ومشروبات عشبية عطرية مع تشكيلة من الحلويات الدمشقية الفاخرة.' : 'Traditional Syrian tea and aromatic infusions accompanied by artisanal Levantine pastries.')}
-                            </p>
-                        </div>
-
-                        <div className="p-6 rounded-2xl bg-white shadow-md border border-[#781C1D]/10">
-                            <div className="w-12 h-12 rounded-xl bg-[#781C1D]/10 text-[#781C1D] flex items-center justify-center mb-4">
-                                <Shield size={24} />
-                            </div>
-                            <h3 className="font-serif text-lg font-bold text-[#1C1C1C] mb-2">
-                                {t('rooms.inclusions.item4_title', isAr ? 'أولوية دخول المعالم التاريخية' : 'Private Heritage Access')}
-                            </h3>
-                            <p className="text-xs sm:text-sm text-[#5C4F47] leading-relaxed">
-                                {t('rooms.inclusions.item4_desc', isAr ? 'دخول حصري لأروقة الخان المرممة والمعارض الفنية الخاصة وصالات الاسترخاء الهادئة.' : 'Exclusive resident access to the restored arches, historical galleries, and peaceful lounges.')}
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
             {/* Direct Concierge Contact Strip */}
             <section className="bg-gradient-to-r from-[#241A18] via-[#1A1210] to-[#241A18] text-white py-16">
                 <div className="container mx-auto px-4 sm:px-6 text-center max-w-3xl">
@@ -720,11 +644,11 @@ const RoomsPage: React.FC<RoomsPageProps> = ({ dbRooms = [] }) => {
                         </a>
 
                         <a
-                            href="tel:+963930012015"
+                            href="mailto:info@khanwahoud.com"
                             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl border border-white/30 hover:border-white text-white font-sans text-xs sm:text-sm font-semibold tracking-wider uppercase transition-all hover:bg-white/10"
                         >
-                            <Phone size={16} />
-                            <span>{t('rooms.modal.call_action', isAr ? 'اتصال مباشر بالكونسيرج' : 'Call Hotel Concierge')}</span>
+                            <Mail size={16} />
+                            <span>{t('rooms.modal.email_action', isAr ? 'مراسلة عبر البريد الإلكتروني' : 'Email Reservations')}</span>
                         </a>
                     </div>
                 </div>
