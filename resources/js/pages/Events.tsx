@@ -21,7 +21,7 @@ const EventsPage: React.FC = () => {
         {
             id: 'saha',
             title: {
-                en: 'The Saha "Courtyard"',
+                en: 'the COURTYARD',
                 ar: 'ساحة الخان (الفناء المركزي)',
             },
             badge: {
@@ -49,7 +49,7 @@ const EventsPage: React.FC = () => {
         {
             id: 'gallery',
             title: {
-                en: 'The Gallery',
+                en: 'the GALLERY',
                 ar: 'صالة المعرض التراثية (The Gallery)',
             },
             badge: {
@@ -77,7 +77,7 @@ const EventsPage: React.FC = () => {
         {
             id: 'meeting-room',
             title: {
-                en: 'The Meeting Room',
+                en: 'the Roman lounge',
                 ar: 'قاعة الاجتماعات التنفيذية',
             },
             badge: {
@@ -160,7 +160,7 @@ const EventsPage: React.FC = () => {
             <section ref={heroRef} className="relative pt-32 pb-20 md:pt-64 md:pb-24">
                 <div className="absolute inset-0 z-0">
                     <img
-                        src="/images/IMG_3772.png"
+                        src="/images/events.jpeg"
                         alt="Private Events"
                         className="h-full w-full object-cover"
                     />
