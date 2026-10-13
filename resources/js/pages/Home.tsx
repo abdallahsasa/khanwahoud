@@ -1,16 +1,53 @@
 import { Link } from '@inertiajs/react';
-import { motion } from 'framer-motion';
-import React from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useInView } from 'react-intersection-observer';
+import { ChevronLeft, ChevronRight, X, Maximize2, Images } from 'lucide-react';
 import Button from '../components/Button';
 import DamascusMap from '../components/DamascusMap';
 import SectionTitle from '../components/SectionTitle';
 import YearAnimation from '../components/YearAnimation';
+import { journeyImages } from '../data/journeyImages';
 
 const HomePage: React.FC = () => {
     const { t, i18n } = useTranslation();
     const isAr = i18n.language?.startsWith('ar');
+
+    const [showAllPhotos, setShowAllPhotos] = useState(false);
+    const [activeImageIndex, setActiveImageIndex] = useState<number | null>(null);
+
+    const INITIAL_PHOTO_COUNT = 12;
+    const visibleImages = showAllPhotos ? journeyImages : journeyImages.slice(0, INITIAL_PHOTO_COUNT);
+
+    const handleNextImage = useCallback(() => {
+        setActiveImageIndex((prev) => (prev === null ? null : (prev + 1) % journeyImages.length));
+    }, []);
+
+    const handlePrevImage = useCallback(() => {
+        setActiveImageIndex((prev) => (prev === null ? null : (prev - 1 + journeyImages.length) % journeyImages.length));
+    }, []);
+
+    useEffect(() => {
+        if (activeImageIndex === null) return;
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') setActiveImageIndex(null);
+            if (e.key === 'ArrowRight') {
+                if (isAr) handlePrevImage();
+                else handleNextImage();
+            }
+            if (e.key === 'ArrowLeft') {
+                if (isAr) handleNextImage();
+                else handlePrevImage();
+            }
+        };
+        window.addEventListener('keydown', handleKeyDown);
+        document.body.style.overflow = 'hidden';
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+            document.body.style.overflow = '';
+        };
+    }, [activeImageIndex, isAr, handleNextImage, handlePrevImage]);
 
     const [heroRef, heroInView] = useInView({
         triggerOnce: true,
@@ -33,14 +70,6 @@ const HomePage: React.FC = () => {
             behavior: 'smooth',
         });
     };
-    const galleryImages = [
-        '/images/IMG_4643.JPEG',
-        '/images/IMG_3772.png',
-        '/images/1fa4b053-9d90-4471-ada4-730779b8b750.jpg',
-        '/images/IMG_4466.JPEG',
-        '/images/IMG_4474.JPEG',
-        '/images/IMG_4465.JPEG',
-    ];
 
     const [vipRef, vipInView] = useInView({
         triggerOnce: true,
@@ -332,33 +361,149 @@ const HomePage: React.FC = () => {
                 </div>
             </section>
 
-            {/* Gallery Section */}
+            {/* Gallery Section - Visual Journey */}
             <section ref={galleryRef} className="bg-[#FFFFF5] py-20">
                 <div className="container mx-auto px-4">
-                    <SectionTitle title={t('experience.gallery_title')} centered={true} className="mb-12 text-[#781C1D]" />
+                    <SectionTitle title={t('experience.gallery_title')} centered={true} className="mb-4 text-[#781C1D]" />
+                    <p className="mx-auto mb-12 max-w-2xl text-center text-sm md:text-base text-accent-700/80">
+                        {isAr
+                            ? 'لقطات توثّق تفاصيل خان وحود المعمارية وتراثه العريق'
+                            : 'Moments capturing the architectural heritage and timeless beauty of Khan Wahoud'}
+                    </p>
 
-                    <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-                        {galleryImages.map((image, index) => (
-                            <motion.div
-                                key={index}
-                                className="h-64 overflow-hidden rounded-lg shadow-lg md:h-80"
-                                initial={{ opacity: 0, y: 50 }}
-                                animate={galleryInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-                                transition={{
-                                    duration: 0.6,
-                                    delay: index * 0.1,
-                                }}
-                            >
-                                <img
-                                    src={image}
-                                    alt={`Khan Wahoud Gallery ${index + 1}`}
-                                    className="h-full w-full object-cover transition-transform duration-700 hover:scale-110"
-                                />
-                            </motion.div>
-                        ))}
+                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3">
+                        {visibleImages.map((image, index) => {
+                            const fullIndex = journeyImages.indexOf(image);
+                            return (
+                                <motion.div
+                                    key={image}
+                                    className="group relative h-64 sm:h-72 lg:h-80 cursor-pointer overflow-hidden rounded-xl bg-accent-100 shadow-md transition-all duration-300 hover:shadow-2xl"
+                                    initial={{ opacity: 0, y: 30 }}
+                                    animate={galleryInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                                    transition={{
+                                        duration: 0.5,
+                                        delay: Math.min(index * 0.04, 0.4),
+                                    }}
+                                    onClick={() => setActiveImageIndex(fullIndex)}
+                                >
+                                    <img
+                                        src={encodeURI(image)}
+                                        alt={`Khan Wahoud Visual Journey ${fullIndex + 1}`}
+                                        loading="lazy"
+                                        decoding="async"
+                                        className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex items-end justify-between p-4">
+                                        <span className="text-xs tracking-wider uppercase text-white/90 font-medium">
+                                            {isAr
+                                                ? `صورة ${fullIndex + 1} من ${journeyImages.length}`
+                                                : `Photo ${fullIndex + 1} of ${journeyImages.length}`}
+                                        </span>
+                                        <div className="flex h-9 w-9 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm text-white transition-transform duration-300 group-hover:scale-110">
+                                            <Maximize2 className="h-4 w-4" />
+                                        </div>
+                                    </div>
+                                </motion.div>
+                            );
+                        })}
+                    </div>
+
+                    {/* View All / Show Fewer Button */}
+                    <div className="mt-12 flex justify-center">
+                        <button
+                            type="button"
+                            onClick={() => setShowAllPhotos(!showAllPhotos)}
+                            className="inline-flex items-center gap-2.5 rounded-full border-2 border-[#781C1D] bg-[#FFFFF5] px-8 py-3.5 text-sm font-semibold tracking-wide text-[#781C1D] transition-all duration-300 hover:bg-[#781C1D] hover:text-white shadow-sm hover:shadow-lg cursor-pointer active:scale-95"
+                        >
+                            <Images className="h-4 w-4" />
+                            <span>
+                                {showAllPhotos
+                                    ? (isAr ? 'عرض صور أقل' : 'Show Fewer Photos')
+                                    : (isAr
+                                          ? `عرض جميع الصور (${journeyImages.length} صورة)`
+                                          : `View All Photos (${journeyImages.length} Photos)`)}
+                            </span>
+                        </button>
                     </div>
                 </div>
             </section>
+
+            {/* Lightbox Modal */}
+            <AnimatePresence>
+                {activeImageIndex !== null && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-md p-4 md:p-8"
+                        onClick={() => setActiveImageIndex(null)}
+                    >
+                        {/* Top Bar with counter & close */}
+                        <div
+                            className="absolute top-0 inset-x-0 flex items-center justify-between p-4 md:p-6 text-white z-10"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <div className="flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 backdrop-blur-md text-xs sm:text-sm font-medium tracking-wider">
+                                <span>
+                                    {isAr
+                                        ? `صورة ${activeImageIndex + 1} من ${journeyImages.length}`
+                                        : `Photo ${activeImageIndex + 1} of ${journeyImages.length}`}
+                                </span>
+                            </div>
+                            <button
+                                type="button"
+                                onClick={() => setActiveImageIndex(null)}
+                                className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors backdrop-blur-md cursor-pointer"
+                                aria-label="Close"
+                            >
+                                <X className="h-5 w-5" />
+                            </button>
+                        </div>
+
+                        {/* Navigation Buttons */}
+                        <button
+                            type="button"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                isAr ? handleNextImage() : handlePrevImage();
+                            }}
+                            className="absolute left-3 md:left-6 z-10 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/25 transition-all backdrop-blur-md cursor-pointer hover:scale-105"
+                            aria-label="Previous image"
+                        >
+                            <ChevronLeft className="h-6 w-6" />
+                        </button>
+
+                        <button
+                            type="button"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                isAr ? handlePrevImage() : handleNextImage();
+                            }}
+                            className="absolute right-3 md:right-6 z-10 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/25 transition-all backdrop-blur-md cursor-pointer hover:scale-105"
+                            aria-label="Next image"
+                        >
+                            <ChevronRight className="h-6 w-6" />
+                        </button>
+
+                        {/* Main Lightbox Image */}
+                        <motion.div
+                            key={activeImageIndex}
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.95 }}
+                            transition={{ duration: 0.2 }}
+                            className="relative max-h-[85vh] max-w-[90vw] overflow-hidden rounded-lg shadow-2xl flex items-center justify-center"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <img
+                                src={encodeURI(journeyImages[activeImageIndex])}
+                                alt={`Khan Wahoud ${activeImageIndex + 1}`}
+                                className="max-h-[85vh] max-w-[90vw] object-contain select-none"
+                            />
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
 
             {/* Inquiries & Contact Section */}
             <section className="bg-accent-950 py-20 text-white">

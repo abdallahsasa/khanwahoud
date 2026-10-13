@@ -23,19 +23,7 @@ const ExperiencePage: React.FC = () => {
         threshold: 0.1,
     });
 
-    const [galleryRef, galleryInView] = useInView({
-        triggerOnce: true,
-        threshold: 0.1,
-    });
 
-    const galleryImages = [
-        '/images/IMG_4643.JPEG',
-        '/images/IMG_3772.png',
-        '/images/1fa4b053-9d90-4471-ada4-730779b8b750.jpg',
-        '/images/IMG_4466.JPEG',
-        '/images/IMG_4474.JPEG',
-        '/images/IMG_4465.JPEG',
-    ];
 
     return (
         <div>
