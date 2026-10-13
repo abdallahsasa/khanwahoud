@@ -1,158 +1,163 @@
 import { motion } from 'framer-motion';
-import { MessageCircle, Phone } from 'lucide-react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useInView } from 'react-intersection-observer';
 import Button from '../components/Button';
-import SectionTitle from '../components/SectionTitle';
-
 const DiningPage: React.FC = () => {
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
+    const isAr = i18n.language?.startsWith('ar');
 
     const [heroRef, heroInView] = useInView({
         triggerOnce: true,
         threshold: 0.1,
     });
 
-    const diningExperiences = [
-        {
-            id: 'courtyard',
-            title: t('dining.experiences.courtyard.title'),
-            description: t('dining.experiences.courtyard.description'),
-            image: '/images/courtyard_dining_new.png',
-        },
-        {
-            id: 'private',
-            title: t('dining.experiences.private.title'),
-            description: t('dining.experiences.private.description'),
-            image: '/images/meeting_room.png',
-        },
-        {
-            id: 'tea',
-            title: t('dining.experiences.chef.title'),
-            description: t('dining.experiences.chef.description'),
-            image: '/images/tea_lounge.png',
-        },
-    ];
-
     return (
         <div className="min-h-screen">
-            {/* Hero Banner with Coming Soon Badge */}
-            <section ref={heroRef} className="relative pt-32 pb-20 md:pt-44 md:pb-24 overflow-hidden">
+            {/* Hero Banner - Full Page */}
+            <section
+                ref={heroRef}
+                className="relative min-h-[100dvh] w-full flex items-center justify-center overflow-hidden"
+            >
                 <div className="absolute inset-0 z-0">
                     <img
-                        src="/images/courtyard_dining_new.png"
-                        alt="Khan Wahoud Dining"
-                        className="h-full w-full object-cover"
+                        src="/images/dining.png"
+                        alt="Khan Wahoud Food & Drink"
+                        className="h-full w-full object-cover object-center"
                     />
-                    <div className="bg-accent-950/70 absolute inset-0 backdrop-blur-[2px]"></div>
+                    <div className="absolute inset-0 bg-black/40 sm:bg-black/35 pointer-events-none" />
                 </div>
 
-                <div className="relative z-10 container mx-auto px-4">
+                <div className="relative z-10 container mx-auto px-4 sm:px-6 text-center pt-24 pb-16">
                     <motion.div
-                        className="mx-auto max-w-3xl text-center text-white"
+                        className="mx-auto max-w-4xl"
                         initial={{ opacity: 0, y: 20 }}
                         animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                         transition={{ duration: 0.8 }}
                     >
-
-
-                        <h1 className="mb-6 font-serif text-4xl font-bold md:text-5xl lg:text-6xl text-secondary-100">
-                            {t('dining.title')}
+                        <h1 className="mb-4 sm:mb-6 font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)] leading-tight">
+                            {t('dining.title', isAr ? 'الطعام والشراب' : 'Food & Drink')}
                         </h1>
 
-
-                        <p className="text-secondary-200/90 text-base md:text-lg leading-relaxed max-w-2xl mx-auto mb-10">
-                            {t('dining.coming_soon_desc')}
+                        <p className="font-serif text-xs sm:text-sm md:text-base lg:text-[17px] tracking-[0.16em] sm:tracking-[0.2em] md:tracking-[0.24em] uppercase text-white/95 max-w-3xl mx-auto leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.7)] rtl:tracking-normal rtl:font-sans rtl:text-sm sm:rtl:text-base md:rtl:text-lg">
+                            {t(
+                                'dining.hero_subtitle',
+                                isAr
+                                    ? 'ستحتفل تجارب تناول الطعام لدينا بالتقاليد الغنية للمطبخ الدمشقي ومنطقة بلاد الشام.'
+                                    : 'OUR DINING EXPERIENCES WILL CELEBRATE THE RICH CULINARY TRADITIONS OF DAMASCUS AND THE LEVANT REGION.'
+                            )}
                         </p>
-
-
                     </motion.div>
                 </div>
             </section>
 
-            {/* Intro Section */}
-            <section className="bg-secondary-50 py-20">
-                <div className="container mx-auto px-4">
-                    <div className="mx-auto max-w-3xl text-center">
-                        <SectionTitle title={t('dining.experiences_title')} centered={true} className="mb-6" />
-                        <p className="text-accent-800 text-lg leading-relaxed">{t('dining.intro')}</p>
+            {/* 1. The Courtyard Section (Mockup: Image Left, Text & Button Right) */}
+            <section className="bg-[#FFFFF5] py-16 sm:py-24 md:py-28 overflow-hidden">
+                <div className="container mx-auto px-6 sm:px-10 lg:px-16">
+                    <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                        {/* Image Left */}
+                        <motion.div
+                            initial={{ opacity: 0, x: -30 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8 }}
+                            className="flex justify-center lg:justify-start"
+                        >
+                            <img
+                                src="/images/dining_courtyard.png"
+                                alt="the Courtyard Dining at Khan Wahoud"
+                                className="w-full max-w-[420px] aspect-[3/4] object-cover"
+                            />
+                        </motion.div>
+
+                        {/* Content Right */}
+                        <motion.div
+                            initial={{ opacity: 0, x: 30 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8 }}
+                            className="flex flex-col items-start text-left rtl:text-right rtl:items-start max-w-xl"
+                        >
+                            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-[52px] text-[#781C1D] mb-8 leading-tight tracking-tight">
+                                <span className="italic font-normal">{t('dining.courtyard_section.title_the', isAr ? 'فناء' : 'the')}</span>{' '}
+                                <span className="font-bold">{t('dining.courtyard_section.title_name', isAr ? 'الخان التاريخي' : 'Courtyard')}</span>
+                            </h2>
+
+                            <p className="font-sans text-xs sm:text-[13px] md:text-sm tracking-[0.14em] sm:tracking-[0.16em] uppercase leading-[2] sm:leading-[2.2] text-[#221B19] mb-5 rtl:tracking-normal rtl:font-sans rtl:text-sm sm:rtl:text-base font-normal">
+                                {t('dining.courtyard_section.p1', isAr ? 'في قلب الفناء التاريخي لخان وحود المشيد عام ١٧٣٦.' : "SET WITHIN THE KHAN'S HISTORIC COURTYARD.")}
+                            </p>
+
+                            <p className="font-sans text-xs sm:text-[13px] md:text-sm tracking-[0.14em] sm:tracking-[0.16em] uppercase leading-[2] sm:leading-[2.2] text-[#221B19] mb-10 rtl:tracking-normal rtl:font-sans rtl:text-sm sm:rtl:text-base font-normal">
+                                {t('dining.courtyard_section.p2', isAr ? 'من قهوة الصباح الباكر إلى أمسيات السمر الشامية، يجمع الفناء بين عبق التاريخ وأصالة الضيافة وتجربة طعام استثنائية تحت القبة التاريخية لأحد أبهى معالم دمشق القديمة.' : 'FROM MORNING COFFEE TO EVENING GATHERINGS, THE COURTYARD BRINGS TOGETHER HERITAGE, ATMOSPHERE, AND A CONTEMPORARY DINING EXPERIENCE WITHIN ONE OF DAMASCUS’S MOST DISTINCTIVE SPACES.')}
+                            </p>
+
+                            <div className="w-full flex justify-end rtl:justify-start pt-2">
+                                <a
+                                    href="https://wa.me/963930012015?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D8%AE%D8%A7%D9%86%20%D9%88%D8%AD%D9%88%D8%AF%D8%8C%20%D8%A3%D9%88%D8%AF%20%D8%AD%D8%AC%D8%B2%20%D8%B7%D8%A7%D9%88%D9%84%D8%A9%20%D9%81%D9%8A%20%D9%85%D8%B7%D8%B9%D9%85%20%D8%A7%D9%84%D9%81%D9%86%D8%A7%D8%A1"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center justify-center px-8 sm:px-10 py-3.5 rounded-full bg-[#063326] hover:bg-[#0b4837] text-white font-sans text-xs sm:text-[13px] font-semibold tracking-[0.18em] uppercase transition-all duration-300 shadow-sm hover:shadow-md hover:scale-[1.02] cursor-pointer"
+                                >
+                                    {t('dining.courtyard_section.cta', isAr ? 'احجز طاولتك الآن' : 'BOOK YOUR TABLE')}
+                                </a>
+                            </div>
+                        </motion.div>
                     </div>
                 </div>
             </section>
 
-            {/* Preview of Upcoming Culinary Spaces */}
-            <section className="bg-accent-950 py-24 border-t border-secondary-300/10">
-                <div className="container mx-auto px-4">
-                    <div className="space-y-20">
-                        {diningExperiences.map((experience, index) => {
-                            const [ref, inView] = useInView({
-                                triggerOnce: true,
-                                threshold: 0.1,
-                            });
+            {/* 2. The Rooftop Section (Mockup: Text Left, Image Right) */}
+            <section className="bg-[#FFFFF5] py-16 sm:py-24 md:py-28 overflow-hidden">
+                <div className="container mx-auto px-6 sm:px-10 lg:px-16">
+                    <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                        {/* Content Left */}
+                        <motion.div
+                            initial={{ opacity: 0, x: -30 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8 }}
+                            className="flex flex-col items-start text-left rtl:text-right rtl:items-start max-w-xl order-2 lg:order-1"
+                        >
+                            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-[46px] xl:text-[50px] text-[#781C1D] mb-8 leading-tight tracking-tight lg:whitespace-nowrap">
+                                <span className="italic font-normal">{t('dining.rooftop_section.title_the', isAr ? 'تراس' : 'the')}</span>{' '}
+                                <span className="font-bold">{t('dining.rooftop_section.title_name', isAr ? 'السطح البانورامي' : 'Rooftop')}</span>{' '}
+                                <span className="italic font-normal">{t('dining.rooftop_section.title_suffix', isAr ? '— قريباً' : '— Coming Soon')}</span>
+                            </h2>
 
-                            return (
-                                <div
-                                    key={experience.id}
-                                    ref={ref}
-                                    className={`flex flex-col ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-center gap-12 lg:gap-16`}
+                            <p className="font-sans text-xs sm:text-[13px] md:text-sm tracking-[0.14em] sm:tracking-[0.16em] uppercase leading-[2] sm:leading-[2.2] text-[#221B19] mb-5 rtl:tracking-normal rtl:font-sans rtl:text-sm sm:rtl:text-base font-normal whitespace-pre-line">
+                                {t('dining.rooftop_section.p1', isAr ? 'فوق أسقف ومآذن دمشق القديمة العريقة، تتشكل تجربة طعام فريدة من نوعها وسط نسيم السماء المفتوحة وإطلالات الغروب الساحرة على أفق المدينة الأقدم في التاريخ.' : 'ABOVE THE ROOFTOPS OF OLD DAMASCUS\nA NEW DINING EXPERIENCE IS TAKING SHAPE. DESIGNED AROUND OPEN SKIES, SUNSET VIEWS, AND THE SURROUNDING OLD CITYSCAPE.')}
+                            </p>
+
+                            <p className="font-sans text-xs sm:text-[13px] md:text-sm tracking-[0.14em] sm:tracking-[0.16em] uppercase leading-[2] sm:leading-[2.2] text-[#221B19] mb-10 rtl:tracking-normal rtl:font-sans rtl:text-sm sm:rtl:text-base font-normal">
+                                {t('dining.rooftop_section.p2', isAr ? 'سيقدم التراس البانورامي أسلوباً راقياً ومريحاً لتجربة خان وحود من الأعلى وإطلالة استثنائية لا تُنسى.' : 'THE ROOFTOP WILL OFFER A MORE ELEVATED AND RELAXED WAY TO EXPERIENCE KHAN WAHOUD FROM ABOVE.')}
+                            </p>
+
+                            <div className="w-full flex justify-start rtl:justify-end pt-2">
+                                <a
+                                    href="https://wa.me/963930012015?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D8%AE%D8%A7%D9%86%20%D9%88%D8%AD%D9%88%D8%AF%D8%8C%20%D8%A3%D9%88%D8%AF%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D8%AA%D8%AC%D8%B1%D8%A8%D8%A9%20%D8%A7%D9%84%D8%B3%D8%B7%D8%AD%20(Rooftop)"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center justify-center px-8 sm:px-10 py-3.5 rounded-full bg-[#5B1214] hover:bg-[#781C1D] text-white font-sans text-xs sm:text-[13px] font-semibold tracking-[0.18em] uppercase transition-all duration-300 shadow-sm hover:shadow-md hover:scale-[1.02] cursor-pointer"
                                 >
-                                    <motion.div
-                                        className="lg:w-1/2 w-full"
-                                        initial={{
-                                            opacity: 0,
-                                            x: index % 2 === 0 ? -40 : 40,
-                                        }}
-                                        animate={
-                                            inView
-                                                ? { opacity: 1, x: 0 }
-                                                : {
-                                                    opacity: 0,
-                                                    x: index % 2 === 0 ? -40 : 40,
-                                                }
-                                        }
-                                        transition={{ duration: 0.8 }}
-                                    >
-                                        <div className="relative overflow-hidden rounded-xl shadow-2xl group border border-secondary-300/15">
-                                            <img
-                                                src={experience.image}
-                                                alt={experience.title}
-                                                className="h-80 md:h-96 w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                                            />
-                                            <div className="absolute top-4 right-4 rtl:right-auto rtl:left-4 bg-accent-950/80 text-secondary-100 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase border border-secondary-300/30 shadow-lg">
-                                                {t('dining.coming_soon')}
-                                            </div>
-                                        </div>
-                                    </motion.div>
+                                    {t('dining.rooftop_section.cta', isAr ? 'اكتشف المزيد' : 'DISCOVER MORE')}
+                                </a>
+                            </div>
+                        </motion.div>
 
-                                    <motion.div
-                                        className="lg:w-1/2 w-full"
-                                        initial={{
-                                            opacity: 0,
-                                            x: index % 2 === 0 ? 40 : -40,
-                                        }}
-                                        animate={
-                                            inView
-                                                ? { opacity: 1, x: 0 }
-                                                : {
-                                                    opacity: 0,
-                                                    x: index % 2 === 0 ? 40 : -40,
-                                                }
-                                        }
-                                        transition={{
-                                            duration: 0.8,
-                                            delay: 0.2,
-                                        }}
-                                    >
-                                        <span className="text-primary-500 text-xs tracking-[0.25em] rtl:tracking-normal uppercase font-sans font-medium mb-3 block">
-                                            {t('dining.subtag')}
-                                        </span>
-                                        <h3 className="mb-4 font-serif text-3xl md:text-4xl font-bold text-secondary-100">{experience.title}</h3>
-                                        <p className="text-secondary-300/80 text-base md:text-lg leading-relaxed font-light">{experience.description}</p>
-                                    </motion.div>
-                                </div>
-                            );
-                        })}
+                        {/* Image Right */}
+                        <motion.div
+                            initial={{ opacity: 0, x: 30 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8 }}
+                            className="flex justify-center lg:justify-end order-1 lg:order-2"
+                        >
+                            <img
+                                src="/images/dining_rooftop.png"
+                                alt="the Rooftop Dining at Khan Wahoud"
+                                className="w-full max-w-[420px] aspect-[3/4] object-cover"
+                            />
+                        </motion.div>
                     </div>
                 </div>
             </section>
@@ -170,6 +175,7 @@ const DiningPage: React.FC = () => {
                         <p className="mx-auto mb-10 max-w-2xl text-lg text-secondary-300/90 leading-relaxed">
                             {t('dining.inquire_text')}
                         </p>
+
                         <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
                             <Button to="/contact" variant="primary" size="lg">
                                 {t('common.contact_us')}

@@ -157,7 +157,7 @@ const RoomBookingModal: React.FC<RoomBookingModalProps> = ({
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.95, y: 20 }}
                     transition={{ duration: 0.3, ease: 'easeOut' }}
-                    className="relative w-full max-w-4xl max-h-[92vh] overflow-y-auto rounded-2xl bg-[#FFFFF5] text-[#1C1C1C] shadow-2xl border border-[#781C1D]/20 z-10 my-auto"
+                    className="relative w-full max-w-5xl max-h-[92vh] overflow-y-auto rounded-2xl bg-[#FFFFF5] text-[#1C1C1C] shadow-2xl border border-[#781C1D]/20 z-10 my-auto"
                 >
                     {/* Floating Controls (Close Button & Gallery Shuffle) */}
                     <div className="absolute top-4 right-4 rtl:right-auto rtl:left-4 z-20 flex items-center gap-2">
@@ -313,34 +313,37 @@ const RoomBookingModal: React.FC<RoomBookingModalProps> = ({
                             </div>
                         </div>
 
-                        {/* Room Description */}
-                        <div>
-                            <h3 className="font-serif text-lg font-bold text-[#781C1D] mb-2 uppercase tracking-wide">
-                                {isAr ? 'عن هذا الجناح' : 'About This Suite'}
-                            </h3>
-                            <p className="text-[14px] sm:text-[15px] leading-relaxed text-[#3D332E]">
-                                {room.description}
-                            </p>
-                        </div>
+                        {/* Room Description & Amenities - Side by Side */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 items-start">
+                            {/* Room Description */}
+                            <div className="space-y-3">
+                                <h3 className="font-serif text-lg font-bold text-[#781C1D] uppercase tracking-wide">
+                                    {isAr ? 'عن هذا الجناح' : 'About This Suite'}
+                                </h3>
+                                <p className="text-[14px] sm:text-[15px] leading-relaxed text-[#3D332E]">
+                                    {room.description}
+                                </p>
+                            </div>
 
-                        {/* Highlights & Amenities */}
-                        <div>
-                            <h3 className="font-serif text-lg font-bold text-[#781C1D] mb-4 uppercase tracking-wide">
-                                {t('rooms.modal.amenities_tab')}
-                            </h3>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                                {Array.isArray(room.highlights) &&
-                                    room.highlights.map((highlight, idx) => (
-                                        <div
-                                            key={idx}
-                                            className="flex items-center gap-2.5 p-2.5 rounded-lg bg-[#FAF7EE] border border-[#781C1D]/10 text-xs sm:text-sm text-[#2A2422]"
-                                        >
-                                            <div className="w-5 h-5 rounded-full bg-[#781C1D] text-white flex items-center justify-center flex-shrink-0">
-                                                <Check size={12} strokeWidth={3} />
+                            {/* Highlights & Amenities */}
+                            <div className="space-y-3">
+                                <h3 className="font-serif text-lg font-bold text-[#781C1D] uppercase tracking-wide">
+                                    {t('rooms.modal.amenities_tab')}
+                                </h3>
+                                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-2.5">
+                                    {Array.isArray(room.highlights) &&
+                                        room.highlights.map((highlight, idx) => (
+                                            <div
+                                                key={idx}
+                                                className="flex items-center gap-2.5 p-2.5 rounded-lg bg-[#FAF7EE] border border-[#781C1D]/10 text-xs sm:text-sm text-[#2A2422]"
+                                            >
+                                                <div className="w-5 h-5 rounded-full bg-[#781C1D] text-white flex items-center justify-center flex-shrink-0">
+                                                    <Check size={12} strokeWidth={3} />
+                                                </div>
+                                                <span className="leading-snug">{highlight}</span>
                                             </div>
-                                            <span>{highlight}</span>
-                                        </div>
-                                    ))}
+                                        ))}
+                                </div>
                             </div>
                         </div>
 

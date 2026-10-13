@@ -360,8 +360,30 @@ const HomePage: React.FC = () => {
                 </div>
             </section>
 
-
-
+            {/* Inquiries & Contact Section */}
+            <section className="bg-accent-950 py-20 text-white">
+                <div className="container mx-auto px-4 text-center">
+                    <div className="mx-auto max-w-3xl">
+                        <span className="text-xs font-semibold tracking-widest text-primary-400 uppercase mb-3 block">
+                            {t('dining.location_tag')}
+                        </span>
+                        <h2 className="mb-6 font-serif text-3xl md:text-4xl font-bold text-secondary-200">
+                            {t('home.feature_titles.experience')}
+                        </h2>
+                        <p className="mx-auto mb-10 max-w-2xl text-lg text-secondary-300/90 leading-relaxed">
+                            {t('book_text')}
+                        </p>
+                        <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
+                            <Button to="/contact" variant="primary" size="lg">
+                                {t('common.contact_us')}
+                            </Button>
+                            <Button to="/rooms" variant="outline" size="lg" className="border-secondary-300 text-secondary-200 hover:bg-secondary-200/10">
+                                {t('common.explore')}
+                            </Button>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
     );
 };

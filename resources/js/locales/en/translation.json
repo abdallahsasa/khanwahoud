@@ -185,6 +185,7 @@
     "dining": {
         "title": "Food & Drink",
         "subtitle": "Culinary Heritage Reimagined",
+        "hero_subtitle": "OUR DINING EXPERIENCES WILL CELEBRATE THE RICH CULINARY TRADITIONS OF DAMASCUS AND THE LEVANT REGION.",
         "coming_soon": "Coming Soon",
         "coming_soon_desc": "A refined culinary journey celebrating Ottoman and Levantine gastronomic heritage is preparing to welcome guests in the historic courtyard of Khan Wahoud.",
         "experiences_title": "Upcoming Culinary Spaces",
@@ -206,7 +207,22 @@
         "inquire_text": "Reservations will open soon. For private inquiries, previews, or event dining, please contact our concierge.",
         "subtag": "Khan Wahoud · Dining",
         "location_tag": "Khan Wahoud · Old Damascus",
-        "whatsapp_inquiries": "WhatsApp Inquiries"
+        "whatsapp_inquiries": "WhatsApp Inquiries",
+        "courtyard_section": {
+            "title_the": "the",
+            "title_name": "Courtyard",
+            "p1": "SET WITHIN THE KHAN'S HISTORIC COURTYARD.",
+            "p2": "FROM MORNING COFFEE TO EVENING GATHERINGS, THE COURTYARD BRINGS TOGETHER HERITAGE, ATMOSPHERE, AND A CONTEMPORARY DINING EXPERIENCE WITHIN ONE OF DAMASCUS'S MOST DISTINCTIVE SPACES.",
+            "cta": "BOOK YOUR TABLE"
+        },
+        "rooftop_section": {
+            "title_the": "the",
+            "title_name": "Rooftop",
+            "title_suffix": "— Coming Soon",
+            "p1": "ABOVE THE ROOFTOPS OF OLD DAMASCUS\nA NEW DINING EXPERIENCE IS TAKING SHAPE. DESIGNED AROUND OPEN SKIES, SUNSET VIEWS, AND THE SURROUNDING OLD CITYSCAPE.",
+            "p2": "THE ROOFTOP WILL OFFER A MORE ELEVATED AND RELAXED WAY TO EXPERIENCE KHAN WAHOUD FROM ABOVE.",
+            "cta": "DISCOVER MORE"
+        }
     },
     "events": {
         "title": "private EVENTS",
