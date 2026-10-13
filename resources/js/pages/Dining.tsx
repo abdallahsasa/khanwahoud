@@ -91,7 +91,7 @@ const DiningPage: React.FC = () => {
                                 {t('dining.courtyard_section.p2', isAr ? 'من قهوة الصباح الباكر إلى أمسيات السمر الشامية، يجمع الفناء بين عبق التاريخ وأصالة الضيافة وتجربة طعام استثنائية تحت القبة التاريخية لأحد أبهى معالم دمشق القديمة.' : 'FROM MORNING COFFEE TO EVENING GATHERINGS, THE COURTYARD BRINGS TOGETHER HERITAGE, ATMOSPHERE, AND A CONTEMPORARY DINING EXPERIENCE WITHIN ONE OF DAMASCUS’S MOST DISTINCTIVE SPACES.')}
                             </p>
 
-                            <div className="w-full flex justify-end rtl:justify-start pt-2">
+                            <div className="w-full flex justify-center pt-2">
                                 <a
                                     href="https://wa.me/963930012015?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D8%AE%D8%A7%D9%86%20%D9%88%D8%AD%D9%88%D8%AF%D8%8C%20%D8%A3%D9%88%D8%AF%20%D8%AD%D8%AC%D8%B2%20%D8%B7%D8%A7%D9%88%D9%84%D8%A9%20%D9%81%D9%8A%20%D9%85%D8%B7%D8%B9%D9%85%20%D8%A7%D9%84%D9%81%D9%86%D8%A7%D8%A1"
                                     target="_blank"
@@ -132,7 +132,7 @@ const DiningPage: React.FC = () => {
                                 {t('dining.rooftop_section.p2', isAr ? 'سيقدم التراس البانورامي أسلوباً راقياً ومريحاً لتجربة خان وحود من الأعلى وإطلالة استثنائية لا تُنسى.' : 'THE ROOFTOP WILL OFFER A MORE ELEVATED AND RELAXED WAY TO EXPERIENCE KHAN WAHOUD FROM ABOVE.')}
                             </p>
 
-                            <div className="w-full flex justify-start rtl:justify-end pt-2">
+                            <div className="w-full flex justify-center pt-2">
                                 <a
                                     href="https://wa.me/963930012015?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D8%AE%D8%A7%D9%86%20%D9%88%D8%AD%D9%88%D8%AF%D8%8C%20%D8%A3%D9%88%D8%AF%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D8%AA%D8%AC%D8%B1%D8%A8%D8%A9%20%D8%A7%D9%84%D8%B3%D8%B7%D8%AD%20(Rooftop)"
                                     target="_blank"
