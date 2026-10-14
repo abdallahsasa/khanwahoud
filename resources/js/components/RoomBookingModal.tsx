@@ -111,9 +111,9 @@ const RoomBookingModal: React.FC<RoomBookingModalProps> = ({
             ? `${checkInDate} to ${checkOutDate}` 
             : 'dates to be confirmed';
         
-        const messageEn = `Hello Khan Wahoud Concierge,\n\nI would like to inquire about reserving the ${room.name}.\n\n• Room: ${room.name} (${room.tag})\n• Dates: ${datesText}\n• Guests: ${guestCount}\n• Rate: ${room.starting_price} / night\n\nPlease confirm availability and details. Thank you!`;
+        const messageEn = `Hello Khan Wahoud Concierge,\n\nI would like to inquire about reserving the ${room.name}.\n\n• Room: ${room.name} (${room.tag})\n• Dates: ${datesText}\n• Guests: ${guestCount}\n• Rate: On Request\n\nPlease confirm availability and details. Thank you!`;
         
-        const messageAr = `مرحباً كونسيرج خان وحود،\n\nأود الاستفسار عن حجز ${room.name}.\n\n• الجناح: ${room.name}\n• التواريخ: ${datesText}\n• عدد النزلاء: ${guestCount}\n• السعر المبدئي: ${room.starting_price} / ليلة\n\nيرجى تأكيد التوفر والتفاصيل. شكراً جزيلاً!`;
+        const messageAr = `مرحباً كونسيرج خان وحود،\n\nأود الاستفسار عن حجز ${room.name}.\n\n• الجناح: ${room.name}\n• التواريخ: ${datesText}\n• عدد النزلاء: ${guestCount}\n• السعر: عند الطلب\n\nيرجى تأكيد التوفر والتفاصيل. شكراً جزيلاً!`;
 
         const text = isAr ? messageAr : messageEn;
         return `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
@@ -353,14 +353,11 @@ const RoomBookingModal: React.FC<RoomBookingModalProps> = ({
                                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 pb-6 border-b border-white/10">
                                     <div>
                                         <span className="text-xs uppercase tracking-[0.18em] text-[#E0D3C5] font-sans">
-                                            {t('rooms.specs.from_rate')}
+                                            {isAr ? 'الأسعار' : 'Rates'}
                                         </span>
                                         <div className="flex items-baseline gap-2 mt-1">
-                                            <span className="font-serif text-3xl sm:text-4xl font-bold text-[#FFFFF5]">
-                                                {room.starting_price}
-                                            </span>
-                                            <span className="text-xs text-[#E0D3C5]/80 font-sans uppercase tracking-wider">
-                                                {t('rooms.specs.night')}
+                                            <span className="font-serif text-2xl sm:text-3xl font-bold text-[#FFFFF5]">
+                                                {isAr ? 'عند الطلب' : 'On Request'}
                                             </span>
                                         </div>
                                     </div>

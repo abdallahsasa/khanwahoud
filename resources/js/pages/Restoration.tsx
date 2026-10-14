@@ -16,7 +16,8 @@ type Event = {
 };
 
 const RestorationPage: React.FC = () => {
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
+    const isAr = i18n.language?.startsWith('ar');
 
     const [heroRef, heroInView] = useInView({
         triggerOnce: true,
@@ -62,31 +63,40 @@ const RestorationPage: React.FC = () => {
     return (
         <div className="min-h-screen">
             {/* Hero Section */}
-            <section ref={heroRef} className="relative pt-32 pb-20 md:pt-64 md:pb-24">
+            <section ref={heroRef} className="relative flex flex-col justify-center items-center overflow-hidden min-h-[420px] md:min-h-[480px] lg:min-h-[520px] pt-28 sm:pt-32 md:pt-40 pb-16 md:pb-24">
                 <div className="absolute inset-0 z-0">
-                    <img src="/images/mainbg.png" alt="Restoration" className="h-full w-full object-cover" loading="eager" />
-                    <div className="bg-accent-950 absolute inset-0 opacity-50"></div>
+                    <img
+                        src="/images/restoration.jpeg"
+                        alt="A Modern Rebirth"
+                        className="h-full w-full object-cover object-[center_35%]"
+                        loading="eager"
+                    />
+                    <div className="absolute inset-0 bg-[#4c4c4c]/50"></div>
                 </div>
 
                 <div className="relative z-10 container mx-auto px-4">
                     <motion.div
-                        className="mx-auto max-w-3xl text-center text-white"
+                        className="mx-auto max-w-4xl text-center text-white"
                         initial={{ opacity: 0, y: 20 }}
                         animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                         transition={{ duration: 0.8 }}
                     >
-                        <h1 className="mb-4 font-serif text-4xl font-bold md:text-5xl lg:text-6xl">{t('restoration.title')}</h1>
-                        <p className="font-serif text-xl italic opacity-90 md:text-2xl">{t('restoration.subtitle')}</p>
+                        <h1 className="mb-3 md:mb-4 font-serif italic text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal text-white tracking-[0.05em] uppercase drop-shadow-md">
+                            {isAr ? t('restoration.title') : 'A MODERN REBIRTH'}
+                        </h1>
+                        <p className="font-sans text-xs sm:text-sm md:text-base tracking-[0.22em] uppercase text-white/95 font-medium drop-shadow">
+                            {t('restoration.subtitle')}
+                        </p>
                     </motion.div>
                 </div>
             </section>
 
             {/* Introduction */}
-            <section className="bg-white py-16">
-                <div className="container mx-auto px-4">
-                    <div className="mx-auto max-w-3xl text-center">
-                        <p className="text-accent-800 text-lg leading-relaxed">{t('restoration.intro')}</p>
-                    </div>
+            <section className="bg-white py-14 sm:py-16 md:py-20 border-b border-[#2C4040]/10">
+                <div className="container mx-auto px-6 max-w-4xl text-center">
+                    <p className="font-serif text-sm sm:text-base md:text-lg lg:text-[19px] uppercase tracking-[0.08em] leading-relaxed md:leading-[2] text-[#2C4040]">
+                        {t('restoration.intro')}
+                    </p>
                 </div>
             </section>
 
@@ -157,6 +167,38 @@ const RestorationPage: React.FC = () => {
                         <div className="bg-accent-800 aspect-video rounded-lg">
                             <VideoPlayer src="/images/output.m3u8" />
                         </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* The Team Section */}
+            <section className="bg-[#FFFFF5] py-20 border-t border-[#781C1D]/10">
+                <div className="container mx-auto px-4 sm:px-6">
+                    <div className="text-center mb-6">
+                        <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-[#781C1D]">
+                            <span className="italic font-normal lowercase">{t('restoration.team_title_prefix', isAr ? 'فريق' : 'the')}</span>{' '}
+                            <span className="font-bold tracking-wide uppercase">{t('restoration.team_title_main', isAr ? 'العمل' : 'TEAM')}</span>
+                        </h2>
+                    </div>
+
+                    <p className="mx-auto mb-10 max-w-4xl text-center font-serif text-xs sm:text-sm md:text-base uppercase tracking-[0.06em] leading-relaxed md:leading-[1.9] text-[#2C4040]">
+                        {t(
+                            'restoration.team_description',
+                            isAr
+                                ? "ولادة خان وحود الجديدة هي ثمرة سنوات من التفاني والترميم والرؤية المشتركة. نتقدم بخالص الامتنان والتقدير لكل من ساهم في هذه الرحلة الاستثنائية — وخاصة الحرفيين والعمال والمهندسين والمعماريين والمصممين الذين أعادت جهودهم وإخلاصهم الحياة إلى الخان."
+                                : "KHAN WAHOUD'S REBIRTH IS THE RESULT OF YEARS OF DEDICATION, RESTORATION & SHARED VISION. WE EXTEND OUR GRATITUDE TO ALL WHO CONTRIBUTED TO THIS JOURNEY — ESPECIALLY THE CRAFTSMEN, WORKERS, ENGINEERS, ARCHITECTS, AND DESIGNERS WHOSE CARE AND COMMITMENT HELPED BRING THE KHAN BACK TO LIFE."
+                        )}
+                    </p>
+
+                    <div className="mx-auto max-w-4xl">
+                        <BeforeAfterSlider
+                            beforeImage="/images/teambefore.jpeg"
+                            afterImage="/images/teamafter.jpeg"
+                            beforeLabel={isAr ? 'قبل' : 'BEFORE'}
+                            afterLabel={isAr ? 'بعد' : 'AFTER'}
+                            height="520px"
+                            className="shadow-2xl rounded-2xl overflow-hidden border border-[#781C1D]/15"
+                        />
                     </div>
                 </div>
             </section>

@@ -104,7 +104,7 @@ const RoomsPage: React.FC<RoomsPageProps> = ({ dbRooms = [] }) => {
             bed: t('rooms.categories.heritage.bed', isAr ? 'سرير كينغ' : 'King Bed'),
             capacity: t('rooms.categories.heritage.capacity', isAr ? '٤ نزلاء' : '4 Guests'),
             view: t('rooms.categories.heritage.view', isAr ? 'إطلالة فناء' : 'Courtyard View'),
-            starting_price: t('rooms.categories.heritage.starting_price', '$450'),
+            starting_price: t('rooms.categories.heritage.starting_price', isAr ? 'عند الطلب' : 'On Request'),
             images: [
                 '/images/rooms.png',
                 '/images/IMG_4466.JPEG',
@@ -129,7 +129,7 @@ const RoomsPage: React.FC<RoomsPageProps> = ({ dbRooms = [] }) => {
             bed: t('rooms.categories.courtyard.bed', isAr ? 'سرير كوين' : 'Queen Bed'),
             capacity: t('rooms.categories.courtyard.capacity', isAr ? '٣ نزلاء' : '3 Guests'),
             view: t('rooms.categories.courtyard.view', isAr ? 'إطلالة نافورة' : 'Fountain View'),
-            starting_price: t('rooms.categories.courtyard.starting_price', '$280'),
+            starting_price: t('rooms.categories.courtyard.starting_price', isAr ? 'عند الطلب' : 'On Request'),
             images: [
                 '/images/center.jpg',
                 '/images/welcome_section.png',
@@ -154,7 +154,7 @@ const RoomsPage: React.FC<RoomsPageProps> = ({ dbRooms = [] }) => {
             bed: t('rooms.categories.panoramic.bed', isAr ? 'سرير كينغ' : 'King Bed'),
             capacity: t('rooms.categories.panoramic.capacity', isAr ? '٣ نزلاء' : '3 Guests'),
             view: t('rooms.categories.panoramic.view', isAr ? 'إطلالة الأفق' : 'Skyline View'),
-            starting_price: t('rooms.categories.panoramic.starting_price', '$380'),
+            starting_price: t('rooms.categories.panoramic.starting_price', isAr ? 'عند الطلب' : 'On Request'),
             images: [
                 '/images/IMG_4643.JPEG',
                 '/images/side hall high.jpg',
@@ -220,7 +220,7 @@ const RoomsPage: React.FC<RoomsPageProps> = ({ dbRooms = [] }) => {
                     bed: isAr ? (cat.toLowerCase().includes('court') ? 'سرير كوين' : 'سرير كينغ') : (cat.toLowerCase().includes('court') ? 'Queen Bed' : 'King Bed'),
                     capacity: r.max_occupancy ? `${r.max_occupancy} ${isAr ? 'نزلاء' : 'Guests'}` : `3 ${isAr ? 'نزلاء' : 'Guests'}`,
                     view: isAr ? (cat.toLowerCase().includes('pano') ? 'إطلالة الأفق' : 'إطلالة فناء') : (cat.toLowerCase().includes('pano') ? 'Skyline View' : 'Courtyard View'),
-                    starting_price: `$${Math.round(priceNum)}`,
+                    starting_price: isAr ? 'عند الطلب' : 'On Request',
                     images: rawImgs,
                     highlights: parsedAmenities,
                 };
@@ -521,18 +521,15 @@ const RoomsPage: React.FC<RoomsPageProps> = ({ dbRooms = [] }) => {
                                         </div>
                                     )}
 
-                                    {/* Price Overlay on Image */}
+                                    {/* Rates Overlay on Image */}
                                     <div className="absolute bottom-3 left-4 right-4 text-white flex justify-between items-end z-10 pointer-events-none">
                                         <div>
                                             <span className="text-[10px] font-sans uppercase tracking-[0.16em] text-[#E0D3C5] block">
-                                                {t('rooms.specs.from_rate', isAr ? 'ابتداءً من' : 'From')}
+                                                {isAr ? 'الأسعار' : 'Rates'}
                                             </span>
-                                            <div className="flex items-baseline gap-1">
-                                                <span className="font-serif text-2xl sm:text-3xl font-bold">
-                                                    {room.starting_price}
-                                                </span>
-                                                <span className="text-xs text-[#E0D3C5] font-sans uppercase tracking-wider">
-                                                    / {t('rooms.specs.night', isAr ? 'لليلة' : 'night')}
+                                            <div className="flex items-baseline gap-1 mt-0.5">
+                                                <span className="font-serif text-xl sm:text-2xl font-bold tracking-wide text-white">
+                                                    {isAr ? 'عند الطلب' : 'On Request'}
                                                 </span>
                                             </div>
                                         </div>

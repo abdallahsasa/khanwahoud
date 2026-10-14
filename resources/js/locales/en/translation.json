@@ -94,7 +94,7 @@
                 "bed": "King Bed",
                 "capacity": "4 Guests",
                 "view": "Courtyard View",
-                "starting_price": "$450",
+                "starting_price": "On Request",
                 "highlights": [
                     "Original 1736 Restored Stone Arches",
                     "Authentic Ottoman-Style Marble Bath",
@@ -113,7 +113,7 @@
                 "bed": "Queen Bed",
                 "capacity": "3 Guests",
                 "view": "Fountain View",
-                "starting_price": "$280",
+                "starting_price": "On Request",
                 "highlights": [
                     "Panoramic Windows to Central Courtyard",
                     "Artisanal Damascene Woodwork Details",
@@ -132,7 +132,7 @@
                 "bed": "King Bed",
                 "capacity": "3 Guests",
                 "view": "Skyline View",
-                "starting_price": "$380",
+                "starting_price": "On Request",
                 "highlights": [
                     "Panoramic Views of the Old City Skyline",
                     "Private Balcony / Extended Window Lounge",
@@ -326,7 +326,7 @@
         }
     },
     "restoration": {
-        "title": "Refurbishment & Preservation",
+        "title": "A Modern Rebirth",
         "subtitle": "Honoring Heritage Through Restoration",
         "intro": "Our restoration project represents one of the most significant private heritage preservation initiatives in Syria, combining traditional craftsmanship with modern conservation techniques.",
         "timeline_title": "Restoration Timeline",
@@ -343,6 +343,9 @@
         "after": "After",
         "main_courtyard": "Main Courtyard",
         "stone_archways": "Stone Archways",
+        "team_title_prefix": "the",
+        "team_title_main": "TEAM",
+        "team_description": "Khan Wahoud's rebirth is the result of years of dedication, restoration & shared vision. We extend our gratitude to all who contributed to this journey — especially the craftsmen, workers, engineers, architects, and designers whose care and commitment helped bring the Khan back to life.",
         "experience_khan": "Experience the Restored Khan",
         "experience_desc": "Book your stay at Khan Wahoud and immerse yourself in centuries of restored heritage.",
         "book_room": "Book a Room"
