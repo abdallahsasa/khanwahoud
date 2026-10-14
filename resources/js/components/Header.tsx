@@ -1,6 +1,8 @@
 import { Link, usePage } from '@inertiajs/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Globe, Menu, X } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
 
 const Header: React.FC = () => {
@@ -9,8 +11,23 @@ const Header: React.FC = () => {
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     const isAr = i18n.language?.startsWith('ar');
+
+    // Close on Escape key
+    useEffect(() => {
+        if (!isMenuOpen) return;
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') setIsMenuOpen(false);
+        };
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [isMenuOpen]);
 
     const setLanguage = (newLang: 'en' | 'ar') => {
         i18n.changeLanguage(newLang);
@@ -196,106 +213,134 @@ const Header: React.FC = () => {
                             </button>
                         </div>
                         <button
-                            className="text-secondary-300 focus:outline-none p-1"
-                            onClick={() => setIsMenuOpen(!isMenuOpen)}
-                            aria-label="Toggle menu"
+                            type="button"
+                            className="w-11 h-11 flex items-center justify-center rounded-xl text-[#EAE2CC] hover:text-white bg-white/5 hover:bg-white/10 active:bg-white/20 transition-all cursor-pointer focus:outline-none"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                setIsMenuOpen(!isMenuOpen);
+                            }}
+                            aria-label={isMenuOpen ? 'Close menu' : 'Toggle menu'}
+                            aria-expanded={isMenuOpen}
                         >
-                            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                            {isMenuOpen ? <X size={26} /> : <Menu size={26} />}
                         </button>
                     </div>
                 </div>
             </div>
 
-            {/* Mobile Navigation Drawer */}
-            <div
-                className={`bg-[#140E0C] fixed inset-0 z-[100000] overflow-y-auto transform transition-all duration-300 lg:hidden ${
-                    isMenuOpen ? 'opacity-100 translate-x-0 pointer-events-auto' : 'opacity-0 -translate-x-full rtl:translate-x-full pointer-events-none'
-                }`}
-            >
-                <div className="min-h-full flex flex-col justify-between px-6 py-7 max-w-md mx-auto">
-                    <div>
-                        {/* Drawer Top Header */}
-                        <div className="flex items-center justify-between pb-5 border-b border-[#EAE2CC]/15">
-                            <Link href="/" onClick={() => setIsMenuOpen(false)} className="flex items-center gap-3">
-                                <img src="/images/logowahoud.png" alt="Khan Wahoud" className="h-12 w-auto object-contain drop-shadow" />
-                                <span className="font-serif text-lg tracking-[0.14em] uppercase text-[#FFFFF5] font-semibold">
-                                    {t('khan_wahoud')}
-                                </span>
-                            </Link>
-                            <button
-                                className="w-10 h-10 rounded-full bg-white/10 hover:bg-[#781C1D] text-[#EAE2CC] hover:text-white flex items-center justify-center transition-all duration-200 cursor-pointer"
+            {/* Mobile Navigation Drawer via Portal directly to body */}
+            {mounted && createPortal(
+                <AnimatePresence>
+                    {isMenuOpen && (
+                        <div className="fixed inset-0 z-[999999] lg:hidden" dir={isAr ? 'rtl' : 'ltr'}>
+                            {/* Backdrop */}
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{ duration: 0.25 }}
+                                className="fixed inset-0 bg-black/75 backdrop-blur-sm cursor-pointer"
                                 onClick={() => setIsMenuOpen(false)}
-                                aria-label="Close menu"
-                            >
-                                <X size={22} />
-                            </button>
-                        </div>
+                            />
 
-                        {/* Navigation Links */}
-                        <nav className="mt-8 flex flex-col space-y-2">
-                            {mobileNavItems.map((item) => (
-                                <Link
-                                    key={item.path}
-                                    href={item.path}
-                                    onClick={() => setIsMenuOpen(false)}
-                                    className={`py-3.5 px-3 rounded-xl text-base tracking-[0.14em] uppercase font-sans transition-all duration-200 flex items-center justify-between border-b border-white/5 ${
-                                        isActive(item.path)
-                                            ? 'text-white bg-[#781C1D]/60 font-semibold border-l-4 rtl:border-l-0 rtl:border-r-4 border-[#C93A1E]'
-                                            : 'text-[#EAE2CC]/90 hover:text-white hover:bg-white/5'
-                                    }`}
-                                >
-                                    <span>{item.name}</span>
-                                    <span className="text-xs opacity-40">→</span>
-                                </Link>
-                            ))}
-                        </nav>
+                            {/* Slide-out Drawer */}
+                            <motion.aside
+                                initial={{ x: isAr ? '-100%' : '100%' }}
+                                animate={{ x: 0 }}
+                                exit={{ x: isAr ? '-100%' : '100%' }}
+                                transition={{ type: 'spring', damping: 28, stiffness: 280 }}
+                                className={`fixed inset-y-0 ${isAr ? 'left-0' : 'right-0'} w-full sm:max-w-md bg-[#140E0C] text-[#FFFFF5] shadow-2xl flex flex-col justify-between overflow-y-auto overscroll-contain px-6 py-6 z-10`}
+                            >
+                                <div>
+                                    {/* Drawer Top Header */}
+                                    <div className="flex items-center justify-between pb-5 border-b border-[#EAE2CC]/15">
+                                        <Link href="/" onClick={() => setIsMenuOpen(false)} className="flex items-center gap-3">
+                                            <img src="/images/logowahoud.png" alt="Khan Wahoud" className="h-12 w-auto object-contain drop-shadow" />
+                                            <span className="font-serif text-lg tracking-[0.14em] uppercase text-[#FFFFF5] font-semibold">
+                                                {t('khan_wahoud')}
+                                            </span>
+                                        </Link>
+                                        <button
+                                            type="button"
+                                            className="w-10 h-10 rounded-full bg-white/10 hover:bg-[#781C1D] text-[#EAE2CC] hover:text-white flex items-center justify-center transition-all duration-200 cursor-pointer"
+                                            onClick={() => setIsMenuOpen(false)}
+                                            aria-label="Close menu"
+                                        >
+                                            <X size={22} />
+                                        </button>
+                                    </div>
 
-                        {/* Quick CTA inside Mobile Menu */}
-                        <div className="mt-8 pt-6 border-t border-[#EAE2CC]/15 grid grid-cols-2 gap-3">
-                            <Link
-                                href="/rooms"
-                                onClick={() => setIsMenuOpen(false)}
-                                className="text-center py-3 px-3 rounded-xl bg-[#781C1D] hover:bg-[#9E2B21] text-white text-xs uppercase tracking-wider font-semibold shadow-md transition-all"
-                            >
-                                {t('common.book_your_stay')}
-                            </Link>
-                            <Link
-                                href="/dining"
-                                onClick={() => setIsMenuOpen(false)}
-                                className="text-center py-3 px-3 rounded-xl bg-[#EDE3D8] hover:bg-white text-[#4A1516] text-xs uppercase tracking-wider font-semibold shadow-md transition-all"
-                            >
-                                {t('common.book_a_table')}
-                            </Link>
-                        </div>
-                    </div>
+                                    {/* Navigation Links */}
+                                    <nav className="mt-8 flex flex-col space-y-2">
+                                        {mobileNavItems.map((item) => (
+                                            <Link
+                                                key={item.path}
+                                                href={item.path}
+                                                onClick={() => setIsMenuOpen(false)}
+                                                className={`py-3.5 px-3 rounded-xl text-base tracking-[0.14em] uppercase font-sans transition-all duration-200 flex items-center justify-between border-b border-white/5 ${
+                                                    isActive(item.path)
+                                                        ? 'text-white bg-[#781C1D]/60 font-semibold border-l-4 rtl:border-l-0 rtl:border-r-4 border-[#C93A1E]'
+                                                        : 'text-[#EAE2CC]/90 hover:text-white hover:bg-white/5'
+                                                }`}
+                                            >
+                                                <span>{item.name}</span>
+                                                <span className="text-xs opacity-40 rtl:rotate-180">→</span>
+                                            </Link>
+                                        ))}
+                                    </nav>
 
-                    {/* Language Switcher in Mobile Drawer Bottom */}
-                    <div className="pt-8 pb-4 mt-8 border-t border-[#EAE2CC]/15 flex items-center justify-between">
-                        <div className="flex items-center gap-2 text-[#EAE2CC]/80 text-xs tracking-wider uppercase font-sans">
-                            <Globe size={16} />
-                            <span>{t('nav.language')}</span>
+                                    {/* Quick CTA inside Mobile Menu */}
+                                    <div className="mt-8 pt-6 border-t border-[#EAE2CC]/15 grid grid-cols-2 gap-3">
+                                        <Link
+                                            href="/rooms"
+                                            onClick={() => setIsMenuOpen(false)}
+                                            className="text-center py-3 px-3 rounded-xl bg-[#781C1D] hover:bg-[#9E2B21] text-white text-xs uppercase tracking-wider font-semibold shadow-md transition-all cursor-pointer"
+                                        >
+                                            {t('common.book_your_stay')}
+                                        </Link>
+                                        <Link
+                                            href="/dining"
+                                            onClick={() => setIsMenuOpen(false)}
+                                            className="text-center py-3 px-3 rounded-xl bg-[#EDE3D8] hover:bg-white text-[#4A1516] text-xs uppercase tracking-wider font-semibold shadow-md transition-all cursor-pointer"
+                                        >
+                                            {t('common.book_a_table')}
+                                        </Link>
+                                    </div>
+                                </div>
+
+                                {/* Language Switcher in Mobile Drawer Bottom */}
+                                <div className="pt-8 pb-4 mt-8 border-t border-[#EAE2CC]/15 flex items-center justify-between">
+                                    <div className="flex items-center gap-2 text-[#EAE2CC]/80 text-xs tracking-wider uppercase font-sans">
+                                        <Globe size={16} />
+                                        <span>{t('nav.language')}</span>
+                                    </div>
+                                    <div className="flex items-center rounded-full border border-[#EAE2CC]/25 bg-black/40 p-1">
+                                        <button
+                                            type="button"
+                                            onClick={() => setLanguage('en')}
+                                            className={`rounded-full px-3.5 py-1 text-xs font-sans transition-all cursor-pointer ${
+                                                !isAr ? 'bg-[#781C1D] text-white font-medium shadow-sm' : 'text-[#EAE2CC]/80 hover:text-white'
+                                            }`}
+                                        >
+                                            English
+                                        </button>
+                                        <button
+                                            type="button"
+                                            onClick={() => setLanguage('ar')}
+                                            className={`rounded-full px-3.5 py-1 text-xs font-serif transition-all cursor-pointer ${
+                                                isAr ? 'bg-[#781C1D] text-white font-medium shadow-sm' : 'text-[#EAE2CC]/80 hover:text-white'
+                                            }`}
+                                        >
+                                            العربية
+                                        </button>
+                                    </div>
+                                </div>
+                            </motion.aside>
                         </div>
-                        <div className="flex items-center rounded-full border border-[#EAE2CC]/25 bg-black/40 p-1">
-                            <button
-                                onClick={() => setLanguage('en')}
-                                className={`rounded-full px-3.5 py-1 text-xs font-sans transition-all ${
-                                    !isAr ? 'bg-[#781C1D] text-white font-medium shadow-sm' : 'text-[#EAE2CC]/80 hover:text-white'
-                                }`}
-                            >
-                                English
-                            </button>
-                            <button
-                                onClick={() => setLanguage('ar')}
-                                className={`rounded-full px-3.5 py-1 text-xs font-serif transition-all ${
-                                    isAr ? 'bg-[#781C1D] text-white font-medium shadow-sm' : 'text-[#EAE2CC]/80 hover:text-white'
-                                }`}
-                            >
-                                العربية
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                    )}
+                </AnimatePresence>,
+                document.body
+            )}
         </header>
     );
 };
