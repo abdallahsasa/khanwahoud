@@ -28,7 +28,7 @@ class RoomController extends Controller
             'category' => 'required|string|max:255',
             'images' => 'nullable',
             'amenities' => 'nullable',
-            'size' => 'nullable|numeric|min:0',
+            'size' => 'nullable|string|max:50',
             'max_occupancy' => 'nullable|integer|min:1',
         ]);
 
@@ -101,7 +101,7 @@ class RoomController extends Controller
             'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
             'amenities' => 'required|array|min:1',
             'amenities.*' => 'string',
-            'size' => 'required|numeric|min:0',
+            'size' => 'nullable|string|max:50',
             'max_occupancy' => 'required|integer|min:1',
         ]);
         $room = Room::findOrFail($room);

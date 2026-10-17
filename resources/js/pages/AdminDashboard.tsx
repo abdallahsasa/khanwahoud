@@ -111,7 +111,7 @@ const AdminDashboard: React.FC = () => {
     const [newRoomName, setNewRoomName] = useState('');
     const [newRoomCategory, setNewRoomCategory] = useState('Heritage');
     const [newRoomPrice, setNewRoomPrice] = useState('');
-    const [newRoomSize, setNewRoomSize] = useState('50');
+    const [newRoomSize, setNewRoomSize] = useState('20-23');
     const [newRoomMaxOccupancy, setNewRoomMaxOccupancy] = useState('3');
     const [newRoomDescription, setNewRoomDescription] = useState('');
     const [newRoomAmenities, setNewRoomAmenities] = useState('Courtyard View, Ottoman Marble Bath, Grand King Bed, Free Wi-Fi');
@@ -171,6 +171,7 @@ const AdminDashboard: React.FC = () => {
             setNewRoomDescription('');
             setNewRoomImageFiles([]);
             setNewRoomImagePreviews([]);
+            setNewRoomSize('20-23');
             // Refresh list
             fetchRooms();
         } catch (error: any) {
@@ -620,14 +621,13 @@ const AdminDashboard: React.FC = () => {
 
                                 <div>
                                     <label className="block text-xs font-semibold uppercase tracking-wider text-accent-700 mb-1.5">
-                                        Size (m²)
+                                        Size (e.g. 20-23 m²)
                                     </label>
                                     <input
-                                        type="number"
-                                        min="1"
+                                        type="text"
                                         value={newRoomSize}
                                         onChange={(e) => setNewRoomSize(e.target.value)}
-                                        placeholder="e.g. 55"
+                                        placeholder="e.g. 20-23"
                                         className="w-full px-3.5 py-2.5 rounded-xl border border-accent-300 focus:border-[#781C1D] focus:ring-2 focus:ring-[#781C1D]/15 text-sm outline-none transition-all"
                                     />
                                 </div>

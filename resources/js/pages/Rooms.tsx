@@ -57,7 +57,7 @@ export const formatEstimatedRoomSize = (
         if (indicMatch) {
             return `${indicMatch[1]}-${indicMatch[2]} ${unit}`;
         }
-        const asciiMatch = str.match(/(\d+)\s*[-–—]\s*(\d+)/);
+        const asciiMatch = str.match(/(\d+)\s*(?:[-–—]|to|إلى)\s*(\d+)/i);
         if (asciiMatch) {
             const a = parseInt(asciiMatch[1], 10);
             const b = parseInt(asciiMatch[2], 10);
