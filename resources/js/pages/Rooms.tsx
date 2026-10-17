@@ -42,6 +42,75 @@ interface RoomsPageProps {
     }>;
 }
 
+export const formatEstimatedRoomSize = (
+    rawSize: number | string | undefined | null,
+    category?: string,
+    isAr: boolean = false
+): string => {
+    const unit = isAr ? 'م²' : 'm²';
+    const cat = (category || '').toLowerCase();
+
+    // If already provided as a range string (e.g. "18-23", "18-23 m²", "١٨-٢٣ م²", "23-18")
+    if (typeof rawSize === 'string') {
+        const str = rawSize.trim();
+        const indicMatch = str.match(/([٠-٩]+)\s*[-–—]\s*([٠-٩]+)/);
+        if (indicMatch) {
+            return `${indicMatch[1]}-${indicMatch[2]} ${unit}`;
+        }
+        const asciiMatch = str.match(/(\d+)\s*[-–—]\s*(\d+)/);
+        if (asciiMatch) {
+            const a = parseInt(asciiMatch[1], 10);
+            const b = parseInt(asciiMatch[2], 10);
+            const min = Math.min(a, b);
+            const max = Math.max(a, b);
+            return `${min}-${max} ${unit}`;
+        }
+    }
+
+    const num = typeof rawSize === 'number' ? rawSize : parseFloat(String(rawSize) || '');
+
+    // Courtyard rooms: explicit 18-23 m2 estimate
+    if (cat.includes('court') || cat.includes('فناء')) {
+        if (isNaN(num) || num <= 45) {
+            return `18-23 ${unit}`;
+        }
+        return `65-75 ${unit}`;
+    }
+
+    // Panoramic suites:
+    if (cat.includes('pano') || cat.includes('بانورام')) {
+        if (isNaN(num) || num <= 42) {
+            return `35-42 ${unit}`;
+        }
+        return `45-55 ${unit}`;
+    }
+
+    // Heritage suites:
+    if (cat.includes('herit') || cat.includes('تراث')) {
+        if (!isNaN(num) && num <= 50) {
+            return `42-48 ${unit}`;
+        }
+        return `60-70 ${unit}`;
+    }
+
+    // Fallbacks if num is missing or 0
+    if (isNaN(num) || num <= 0) {
+        return `18-23 ${unit}`;
+    }
+
+    // Number-based estimated ranges:
+    if (num <= 25) return `18-23 ${unit}`;
+    if (num <= 36) return `30-36 ${unit}`;
+    if (num <= 42) return `38-44 ${unit}`;
+    if (num <= 48) return `42-48 ${unit}`;
+    if (num <= 58) return `50-60 ${unit}`;
+    if (num <= 68) return `60-70 ${unit}`;
+    if (num <= 78) return `68-78 ${unit}`;
+    const low = Math.round(num * 0.9);
+    const high = Math.round(num * 1.1);
+    return `${low}-${high} ${unit}`;
+};
+
 const RoomsPage: React.FC<RoomsPageProps> = ({ dbRooms = [] }) => {
     const { t, i18n } = useTranslation();
     const isAr = i18n.language === 'ar';
@@ -99,7 +168,7 @@ const RoomsPage: React.FC<RoomsPageProps> = ({ dbRooms = [] }) => {
             name: t('rooms.categories.heritage.name', isAr ? 'جناح التراث الملكي' : 'Heritage Grand Suite'),
             tag: t('rooms.categories.heritage.tag', isAr ? 'الجناح الرئاسي المميز' : 'Signature Master Suite'),
             description: t('rooms.categories.heritage.description', isAr ? 'إقامتنا الأكثر فخامة وعراقة، يتميز بأقواس حجرية أصلية من القرن الثامن عشر، وأسقف شاهقة الارتفاع، وأثاث دمشقي مصنوع يدوياً ومطعم بالصدف الطبيعي، مع حمام رخامي خاص على الطراز العثماني.' : 'Our most prestigious accommodation featuring restored 18th-century stone arches, soaring ceilings, handcrafted Damascene mother-of-pearl furnishings, and an authentic Ottoman-style private bath.'),
-            size: t('rooms.categories.heritage.size', isAr ? '٦٥ م²' : '65 m²'),
+            size: t('rooms.categories.heritage.size', isAr ? '60-70 م²' : '60-70 m²'),
             bed: t('rooms.categories.heritage.bed', isAr ? 'سرير كينغ' : 'King Bed'),
             capacity: t('rooms.categories.heritage.capacity', isAr ? '٤ نزلاء' : '4 Guests'),
             view: t('rooms.categories.heritage.view', isAr ? 'إطلالة فناء' : 'Courtyard View'),
@@ -124,7 +193,7 @@ const RoomsPage: React.FC<RoomsPageProps> = ({ dbRooms = [] }) => {
             name: t('rooms.categories.courtyard.name', isAr ? 'غرفة الفناء الدمشقي الفاخرة' : 'Courtyard Deluxe Room'),
             tag: t('rooms.categories.courtyard.tag', isAr ? 'إطلالة على النافورة والحديقة' : 'Fountain & Garden View'),
             description: t('rooms.categories.courtyard.description', isAr ? 'غرفة هادئة وساحرة تطل مباشرة على الفناء الداخلي التاريخي ونافورة الرخام المركزية، يغمرها ضوء الصباح الطبيعي وخرير الماء الهادئ مع تفاصيل خشبية تقليدية متقنة.' : 'Serene rooms overlooking the historic central courtyard and marble fountain, filled with natural morning light, gentle water sounds, and traditional Syrian woodwork.'),
-            size: t('rooms.categories.courtyard.size', isAr ? '٤٢ م²' : '42 m²'),
+            size: t('rooms.categories.courtyard.size', isAr ? '18-23 م²' : '18-23 m²'),
             bed: t('rooms.categories.courtyard.bed', isAr ? 'سرير كوين' : 'Queen Bed'),
             capacity: t('rooms.categories.courtyard.capacity', isAr ? '٣ نزلاء' : '3 Guests'),
             view: t('rooms.categories.courtyard.view', isAr ? 'إطلالة نافورة' : 'Fountain View'),
@@ -149,7 +218,7 @@ const RoomsPage: React.FC<RoomsPageProps> = ({ dbRooms = [] }) => {
             name: t('rooms.categories.panoramic.name', isAr ? 'جناح دمشق البانورامي' : 'Panoramic Damascus Suite'),
             tag: t('rooms.categories.panoramic.tag', isAr ? 'إطلالة على أفق المدينة القديمة' : 'Old City Skyline View'),
             description: t('rooms.categories.panoramic.description', isAr ? 'أجنحة علوية ذات إطلالات خلابة تشرف على الشارع المستقيم التاريخي وسوق مدحت باشا ومآذن وقباب مدينة دمشق القديمة العريقة.' : 'Elevated suites with private views gazing over the ancient Straight Street, Souk Midhat Pasha, and the minaret skyline of historic Damascus.'),
-            size: t('rooms.categories.panoramic.size', isAr ? '٥٥ م²' : '55 m²'),
+            size: t('rooms.categories.panoramic.size', isAr ? '45-55 م²' : '45-55 m²'),
             bed: t('rooms.categories.panoramic.bed', isAr ? 'سرير كينغ' : 'King Bed'),
             capacity: t('rooms.categories.panoramic.capacity', isAr ? '٣ نزلاء' : '3 Guests'),
             view: t('rooms.categories.panoramic.view', isAr ? 'إطلالة الأفق' : 'Skyline View'),
@@ -231,7 +300,7 @@ const RoomsPage: React.FC<RoomsPageProps> = ({ dbRooms = [] }) => {
                     name: roomName,
                     tag: isAr ? (r.category_ar || `${cat} المميز`) : `${cat} Sanctuary`,
                     description: roomDesc,
-                    size: r.size ? `${r.size} ${isAr ? 'م²' : 'm²'}` : (isAr ? '٥٠ م²' : '50 m²'),
+                    size: formatEstimatedRoomSize(r.size, r.category, isAr),
                     bed: isAr ? (cat.toLowerCase().includes('court') ? 'سرير كوين' : 'سرير كينغ') : (cat.toLowerCase().includes('court') ? 'Queen Bed' : 'King Bed'),
                     capacity: r.max_occupancy ? `${r.max_occupancy} ${isAr ? 'نزلاء' : 'Guests'}` : `3 ${isAr ? 'نزلاء' : 'Guests'}`,
                     view: isAr ? (cat.toLowerCase().includes('pano') ? 'إطلالة الأفق' : 'إطلالة فناء') : (cat.toLowerCase().includes('pano') ? 'Skyline View' : 'Courtyard View'),

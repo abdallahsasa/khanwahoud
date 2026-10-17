@@ -19,6 +19,7 @@ import { useTranslation } from 'react-i18next';
 import toast from 'react-hot-toast';
 import Button from '../components/Button';
 import api from '../utils/axios';
+import { formatEstimatedRoomSize } from './Rooms';
 
 interface Booking {
     id: string;
@@ -431,7 +432,7 @@ const AdminDashboard: React.FC = () => {
                                                         )}
 
                                                         <div className="flex items-center gap-3 text-xs text-accent-600 mb-2 bg-accent-50 p-2.5 rounded-lg">
-                                                            <span><strong>Size:</strong> {room.size ? `${room.size} m²` : '—'}</span>
+                                                            <span><strong>Size:</strong> {room.size ? formatEstimatedRoomSize(room.size, room.category, false) : '—'}</span>
                                                             <span>•</span>
                                                             <span><strong>Guests:</strong> {room.max_occupancy || 2}</span>
                                                         </div>

@@ -54,7 +54,7 @@ class DatabaseSeeder extends Seeder
                 'price' => 280,
                 'description' => 'Serene room overlooking the traditional inner courtyard with fountain',
                 'category' => 'courtyard',
-                'size' => 40,
+                'size' => 20,
                 'max_occupancy' => 3,
                 'amenities' => json_encode(['Queen bed', 'Private courtyard', 'WiFi', 'Modern bathroom']),
                 'images' => json_encode(['https://placehold.co/800x600?text=Courtyard+Room+1', 'https://placehold.co/800x600?text=Courtyard+Room+2']),

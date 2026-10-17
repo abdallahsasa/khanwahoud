@@ -264,7 +264,7 @@ const RoomBookingModal: React.FC<RoomBookingModalProps> = ({
                                         {t('rooms.specs.area')}
                                     </div>
                                     <div className="text-sm font-semibold text-[#1C1C1C]">
-                                        {room.size}
+                                        <bdi dir="ltr" className="inline-block">{room.size}</bdi>
                                     </div>
                                 </div>
                             </div>
