@@ -6,9 +6,6 @@ import toast from 'react-hot-toast';
 import {
     Calendar as CalendarIcon,
     Users,
-    BedDouble,
-    Maximize2,
-    Eye,
     Check,
     MessageCircle,
     Phone,
@@ -563,31 +560,8 @@ const RoomsPage: React.FC<RoomsPageProps> = ({ dbRooms = [] }) => {
                                             {room.description}
                                         </p>
 
-                                        {/* Architectural Specs 2x2 Grid */}
-                                        <div className="grid grid-cols-2 gap-2 mb-4 p-3 rounded-xl bg-[#FAF7EE] border border-[#781C1D]/10 text-xs text-[#2A2422]">
-                                            <div className="flex items-center gap-1.5 min-w-0">
-                                                <Maximize2 size={13} className="text-[#781C1D] flex-shrink-0" />
-                                                <span className="font-body text-[11px] font-semibold text-[#2A2422] truncate">{room.size}</span>
-                                            </div>
-
-                                            <div className="flex items-center gap-1.5 min-w-0">
-                                                <BedDouble size={13} className="text-[#781C1D] flex-shrink-0" />
-                                                <span className="font-body text-[11px] font-semibold text-[#2A2422] truncate">{room.bed}</span>
-                                            </div>
-
-                                            <div className="flex items-center gap-1.5 min-w-0">
-                                                <Users size={13} className="text-[#781C1D] flex-shrink-0" />
-                                                <span className="font-body text-[11px] font-semibold text-[#2A2422] truncate">{room.capacity}</span>
-                                            </div>
-
-                                            <div className="flex items-center gap-1.5 min-w-0">
-                                                <Eye size={13} className="text-[#781C1D] flex-shrink-0" />
-                                                <span className="font-body text-[11px] font-semibold text-[#2A2422] truncate">{room.view}</span>
-                                            </div>
-                                        </div>
-
-                                        {/* Curated Highlights List */}
-                                        <div className="space-y-1.5 mb-5">
+                                        {/* Curated Amenities List */}
+                                        <div className="space-y-2 mb-6">
                                             {Array.isArray(room.highlights) &&
                                                 room.highlights.slice(0, 3).map((item, hIdx) => (
                                                     <div
