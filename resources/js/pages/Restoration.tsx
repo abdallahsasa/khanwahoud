@@ -99,6 +99,37 @@ const RestorationPage: React.FC = () => {
                     </p>
                 </div>
             </section>
+            {/* The Team Section */}
+            <section className="bg-[#FFFFF5] py-20 border-t border-[#781C1D]/10">
+                <div className="container mx-auto px-4 sm:px-6">
+                    <div className="text-center mb-6">
+                        <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-[#781C1D]">
+                            <span className="italic font-normal lowercase">{t('restoration.team_title_prefix', isAr ? 'فريق' : 'the')}</span>{' '}
+                            <span className="font-bold tracking-wide uppercase">{t('restoration.team_title_main', isAr ? 'العمل' : 'TEAM')}</span>
+                        </h2>
+                    </div>
+
+                    <p className="mx-auto mb-10 max-w-4xl text-center font-serif text-xs sm:text-sm md:text-base uppercase tracking-[0.06em] leading-relaxed md:leading-[1.9] text-[#2C4040]">
+                        {t(
+                            'restoration.team_description',
+                            isAr
+                                ? "ولادة خان وحود الجديدة هي ثمرة سنوات من التفاني والترميم والرؤية المشتركة. نتقدم بخالص الامتنان والتقدير لكل من ساهم في هذه الرحلة الاستثنائية — وخاصة الحرفيين والعمال والمهندسين والمعماريين والمصممين الذين أعادت جهودهم وإخلاصهم الحياة إلى الخان."
+                                : "KHAN WAHOUD'S REBIRTH IS THE RESULT OF YEARS OF DEDICATION, RESTORATION & SHARED VISION. WE EXTEND OUR GRATITUDE TO ALL WHO CONTRIBUTED TO THIS JOURNEY — ESPECIALLY THE CRAFTSMEN, WORKERS, ENGINEERS, ARCHITECTS, AND DESIGNERS WHOSE CARE AND COMMITMENT HELPED BRING THE KHAN BACK TO LIFE."
+                        )}
+                    </p>
+
+                    <div className="mx-auto max-w-4xl">
+                        <BeforeAfterSlider
+                            beforeImage="/images/teambefore.jpeg"
+                            afterImage="/images/teamafter.jpeg"
+                            beforeLabel={isAr ? 'قبل' : 'BEFORE'}
+                            afterLabel={isAr ? 'بعد' : 'AFTER'}
+                            height="520px"
+                            className="shadow-2xl rounded-2xl overflow-hidden border border-[#781C1D]/15"
+                        />
+                    </div>
+                </div>
+            </section>
 
             {/* Timeline */}
             <section className="bg-accent-50 py-16">
@@ -171,37 +202,6 @@ const RestorationPage: React.FC = () => {
                 </div>
             </section>
 
-            {/* The Team Section */}
-            <section className="bg-[#FFFFF5] py-20 border-t border-[#781C1D]/10">
-                <div className="container mx-auto px-4 sm:px-6">
-                    <div className="text-center mb-6">
-                        <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-[#781C1D]">
-                            <span className="italic font-normal lowercase">{t('restoration.team_title_prefix', isAr ? 'فريق' : 'the')}</span>{' '}
-                            <span className="font-bold tracking-wide uppercase">{t('restoration.team_title_main', isAr ? 'العمل' : 'TEAM')}</span>
-                        </h2>
-                    </div>
-
-                    <p className="mx-auto mb-10 max-w-4xl text-center font-serif text-xs sm:text-sm md:text-base uppercase tracking-[0.06em] leading-relaxed md:leading-[1.9] text-[#2C4040]">
-                        {t(
-                            'restoration.team_description',
-                            isAr
-                                ? "ولادة خان وحود الجديدة هي ثمرة سنوات من التفاني والترميم والرؤية المشتركة. نتقدم بخالص الامتنان والتقدير لكل من ساهم في هذه الرحلة الاستثنائية — وخاصة الحرفيين والعمال والمهندسين والمعماريين والمصممين الذين أعادت جهودهم وإخلاصهم الحياة إلى الخان."
-                                : "KHAN WAHOUD'S REBIRTH IS THE RESULT OF YEARS OF DEDICATION, RESTORATION & SHARED VISION. WE EXTEND OUR GRATITUDE TO ALL WHO CONTRIBUTED TO THIS JOURNEY — ESPECIALLY THE CRAFTSMEN, WORKERS, ENGINEERS, ARCHITECTS, AND DESIGNERS WHOSE CARE AND COMMITMENT HELPED BRING THE KHAN BACK TO LIFE."
-                        )}
-                    </p>
-
-                    <div className="mx-auto max-w-4xl">
-                        <BeforeAfterSlider
-                            beforeImage="/images/teambefore.jpeg"
-                            afterImage="/images/teamafter.jpeg"
-                            beforeLabel={isAr ? 'قبل' : 'BEFORE'}
-                            afterLabel={isAr ? 'بعد' : 'AFTER'}
-                            height="520px"
-                            className="shadow-2xl rounded-2xl overflow-hidden border border-[#781C1D]/15"
-                        />
-                    </div>
-                </div>
-            </section>
 
             {/* CTA Section */}
             <section className="bg-white py-16">

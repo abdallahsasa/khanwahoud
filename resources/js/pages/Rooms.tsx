@@ -565,7 +565,7 @@ const RoomsPage: React.FC<RoomsPageProps> = ({ dbRooms = [] }) => {
                                         {/* Curated Amenities List */}
                                         <div className="space-y-2 mb-6">
                                             {Array.isArray(room.highlights) &&
-                                                room.highlights.slice(0, 3).map((item, hIdx) => (
+                                                room.highlights.slice(0, 12).map((item, hIdx) => (
                                                     <div
                                                         key={hIdx}
                                                         className="flex items-center gap-2 text-xs text-[#3D332E]"
