@@ -21,6 +21,7 @@ import {
     Shuffle,
 } from 'lucide-react';
 import RoomBookingModal, { RoomDetails } from '../components/RoomBookingModal';
+import QuickReserveModal from '../components/QuickReserveModal';
 
 interface RoomsPageProps {
     dbRooms?: Array<{
@@ -70,6 +71,7 @@ const RoomsPage: React.FC<RoomsPageProps> = ({ dbRooms = [] }) => {
     const [guestCount, setGuestCount] = useState<number>(2);
     const [selectedCategoryFilter, setSelectedCategoryFilter] = useState<string>('all');
     const [activeModalRoom, setActiveModalRoom] = useState<RoomDetails | null>(null);
+    const [activeReserveRoom, setActiveReserveRoom] = useState<RoomDetails | null>(null);
 
     // Gallery state per room: maps roomId -> array of images (for shuffle order)
     const [roomImagesMap, setRoomImagesMap] = useState<Record<string, string[]>>({});
@@ -580,7 +582,8 @@ const RoomsPage: React.FC<RoomsPageProps> = ({ dbRooms = [] }) => {
                                     {/* Action Buttons */}
                                     <div className="pt-4 border-t border-[#781C1D]/15 flex flex-col gap-2">
                                         <button
-                                            onClick={() => setActiveModalRoom(room)}
+                                            type="button"
+                                            onClick={() => setActiveReserveRoom(room)}
                                             className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-[#781C1D] hover:bg-[#932526] text-white font-sans text-xs font-semibold tracking-[0.14em] uppercase transition-all duration-300 shadow-md hover:shadow-lg cursor-pointer"
                                         >
                                             <span>{t('rooms.specs.reserve_now', isAr ? 'حجز الجناح' : 'RESERVE SUITE')}</span>
@@ -588,6 +591,7 @@ const RoomsPage: React.FC<RoomsPageProps> = ({ dbRooms = [] }) => {
                                         </button>
 
                                         <button
+                                            type="button"
                                             onClick={() => setActiveModalRoom(room)}
                                             className="w-full inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl border border-[#781C1D]/30 hover:border-[#781C1D] text-[#781C1D] hover:bg-[#781C1D]/5 font-sans text-xs font-semibold tracking-[0.12em] uppercase transition-all duration-300 cursor-pointer"
                                         >
@@ -640,6 +644,15 @@ const RoomsPage: React.FC<RoomsPageProps> = ({ dbRooms = [] }) => {
                     </div>
                 </div>
             </section>
+
+            {/* Quick Instant Reservation Modal (WhatsApp / Email / Direct Call) */}
+            <QuickReserveModal
+                room={activeReserveRoom}
+                checkInDate={checkInDate}
+                checkOutDate={checkOutDate}
+                guestCount={guestCount}
+                onClose={() => setActiveReserveRoom(null)}
+            />
 
             {/* Room Booking & Details Modal */}
             <RoomBookingModal
