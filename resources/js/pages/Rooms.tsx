@@ -106,10 +106,10 @@ const RoomsPage: React.FC<RoomsPageProps> = ({ dbRooms = [] }) => {
             view: t('rooms.categories.heritage.view', isAr ? 'إطلالة فناء' : 'Courtyard View'),
             starting_price: t('rooms.categories.heritage.starting_price', isAr ? 'عند الطلب' : 'On Request'),
             images: [
-                '/images/rooms.png',
-                '/images/IMG_4466.JPEG',
-                '/images/IMG_4460.JPEG',
                 '/images/side hall.jpg',
+                '/images/IMG_4460.JPEG',
+                '/images/IMG_4466.JPEG',
+                '/images/rooms.png',
             ],
             highlights: safeHighlights('rooms.categories.heritage.highlights', [
                 isAr ? 'أقواس حجرية تاريخية مرممة تعود لعام ١٧٣٦' : 'Original 1736 Restored Stone Arches',
@@ -131,10 +131,10 @@ const RoomsPage: React.FC<RoomsPageProps> = ({ dbRooms = [] }) => {
             view: t('rooms.categories.courtyard.view', isAr ? 'إطلالة نافورة' : 'Fountain View'),
             starting_price: t('rooms.categories.courtyard.starting_price', isAr ? 'عند الطلب' : 'On Request'),
             images: [
-                '/images/center.jpg',
-                '/images/welcome_section.png',
-                '/images/IMG_4654.JPEG',
                 '/images/IMG_4465.JPEG',
+                '/images/IMG_4654.JPEG',
+                '/images/welcome_section.png',
+                '/images/center.jpg',
             ],
             highlights: safeHighlights('rooms.categories.courtyard.highlights', [
                 isAr ? 'نوافذ واسعة تطل مباشرة على الفناء المركزي' : 'Panoramic Windows to Central Courtyard',
@@ -156,10 +156,10 @@ const RoomsPage: React.FC<RoomsPageProps> = ({ dbRooms = [] }) => {
             view: t('rooms.categories.panoramic.view', isAr ? 'إطلالة الأفق' : 'Skyline View'),
             starting_price: t('rooms.categories.panoramic.starting_price', isAr ? 'عند الطلب' : 'On Request'),
             images: [
-                '/images/IMG_4643.JPEG',
-                '/images/side hall high.jpg',
-                '/images/IMG_4474.JPEG',
                 '/images/mainbg.png',
+                '/images/IMG_4474.JPEG',
+                '/images/side hall high.jpg',
+                '/images/IMG_4643.JPEG',
             ],
             highlights: safeHighlights('rooms.categories.panoramic.highlights', [
                 isAr ? 'إطلالة بانورامية ساحرة على مآذن وأفق دمشق القديمة' : 'Panoramic Views of the Old City Skyline',
@@ -177,9 +177,25 @@ const RoomsPage: React.FC<RoomsPageProps> = ({ dbRooms = [] }) => {
         const sourceRooms = (roomsData && roomsData.length > 0) ? roomsData : dbRooms;
         if (sourceRooms && sourceRooms.length > 0) {
             return sourceRooms.map((r) => {
-                const rawImgs = r.formatted_images && r.formatted_images.length > 0
-                    ? r.formatted_images
-                    : (Array.isArray(r.images) && r.images.length > 0 ? r.images : ['/images/rooms.png']);
+                let rawImgs: string[] = [];
+                if (Array.isArray(r.formatted_images) && r.formatted_images.length > 0) {
+                    rawImgs = r.formatted_images;
+                } else if (Array.isArray(r.images) && r.images.length > 0) {
+                    rawImgs = r.images;
+                } else if (typeof r.images === 'string' && r.images.trim() !== '') {
+                    try {
+                        const parsed = JSON.parse(r.images);
+                        rawImgs = Array.isArray(parsed) ? parsed : [r.images];
+                    } catch {
+                        rawImgs = r.images.split(',').map((s: string) => s.trim()).filter(Boolean);
+                    }
+                }
+                if (rawImgs.length === 0) {
+                    rawImgs = ['/images/rooms.png'];
+                }
+
+                // Show images from last to first (e.g. from 16 to 0)
+                const roomImgs = [...rawImgs].reverse();
 
                 const roomName = (isAr && r.name_ar && r.name_ar.trim() !== '') ? r.name_ar : r.name;
                 const roomDesc = (isAr && r.description_ar && r.description_ar.trim() !== '') ? r.description_ar : (r.description || '');
@@ -221,7 +237,7 @@ const RoomsPage: React.FC<RoomsPageProps> = ({ dbRooms = [] }) => {
                     capacity: r.max_occupancy ? `${r.max_occupancy} ${isAr ? 'نزلاء' : 'Guests'}` : `3 ${isAr ? 'نزلاء' : 'Guests'}`,
                     view: isAr ? (cat.toLowerCase().includes('pano') ? 'إطلالة الأفق' : 'إطلالة فناء') : (cat.toLowerCase().includes('pano') ? 'Skyline View' : 'Courtyard View'),
                     starting_price: isAr ? 'عند الطلب' : 'On Request',
-                    images: rawImgs,
+                    images: roomImgs,
                     highlights: parsedAmenities,
                 };
             });
