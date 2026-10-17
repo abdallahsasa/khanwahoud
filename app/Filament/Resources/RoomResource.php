@@ -92,7 +92,8 @@ class RoomResource extends Resource
                                         }
                                     })
                                     ->dehydrateStateUsing(function ($state) {
-                                        if (empty($state)) return [];
+                                        if (empty($state))
+                                            return [];
                                         return is_array($state) ? array_values($state) : [];
                                     })
                                     ->columnSpanFull(),
@@ -149,7 +150,8 @@ class RoomResource extends Resource
                                         }
                                     })
                                     ->dehydrateStateUsing(function ($state) {
-                                        if (empty($state)) return [];
+                                        if (empty($state))
+                                            return [];
                                         return is_array($state) ? array_values($state) : [];
                                     })
                                     ->columnSpanFull(),
@@ -167,7 +169,7 @@ class RoomResource extends Resource
                             ->label(__('Price')),
                         Forms\Components\TextInput::make('size')
                             ->required()
-                            ->numeric()
+                            ->maxLength(255)
                             ->suffix('m²')
                             ->label(__('Size')),
                         Forms\Components\TextInput::make('max_occupancy')
@@ -194,7 +196,8 @@ class RoomResource extends Resource
                             ->panelLayout('grid')
                             ->helperText(__('Upload up to 40 high-resolution photos for this suite/room. Drag and drop to reorder images.'))
                             ->dehydrateStateUsing(function ($state) {
-                                if (empty($state)) return [];
+                                if (empty($state))
+                                    return [];
                                 return is_array($state) ? array_values($state) : [];
                             }),
                     ]),
@@ -207,7 +210,7 @@ class RoomResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->label(__('Name'))
-                    ->description(fn ($record) => $record->name_ar)
+                    ->description(fn($record) => $record->name_ar)
                     ->searchable(['name', 'name_ar']),
                 Tables\Columns\TextColumn::make('price')
                     ->label(__('Price'))
@@ -215,7 +218,7 @@ class RoomResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('category')
                     ->label(__('Category'))
-                    ->description(fn ($record) => $record->category_ar)
+                    ->description(fn($record) => $record->category_ar)
                     ->searchable(['category', 'category_ar']),
                 Tables\Columns\ImageColumn::make('images')
                     ->label(__('Images'))
@@ -251,45 +254,45 @@ class RoomResource extends Resource
                     ->sortable(),
 
                 Tables\Columns\TextColumn::make('status')
-                ->label(__('Status'))
-                ->getStateUsing(function ($record) {
-                    $today = now()->startOfDay();
-                    $latestBooking = $record->bookings()
-                        ->where('check_in', '<=', $today)
-                        ->where('check_out', '>=', $today)
-                        ->latest()
-                        ->first();
+                    ->label(__('Status'))
+                    ->getStateUsing(function ($record) {
+                        $today = now()->startOfDay();
+                        $latestBooking = $record->bookings()
+                            ->where('check_in', '<=', $today)
+                            ->where('check_out', '>=', $today)
+                            ->latest()
+                            ->first();
 
-                    return $latestBooking ? __('Booked') : __('Available');
-                })
-                ->badge()
-                ->color(function ($state) {
-                    return $state === __('Booked') ? 'danger' : 'success';
-                }),
-            Tables\Columns\TextColumn::make('created_at')
-                ->label(__('Created At'))
-                ->dateTime()
-                ->sortable()
-                ->toggleable(isToggledHiddenByDefault: true),
-            Tables\Columns\TextColumn::make('updated_at')
-                ->label(__('Updated At'))
-                ->dateTime()
-                ->sortable()
-                ->toggleable(isToggledHiddenByDefault: true),
-        ])
-        ->filters([
-            //
-        ])
-        ->actions([
-            Tables\Actions\EditAction::make(),
-            Tables\Actions\DeleteAction::make(),
-        ])
-        ->bulkActions([
-            Tables\Actions\BulkActionGroup::make([
-                Tables\Actions\DeleteBulkAction::make(),
-            ]),
-        ]);
-}
+                        return $latestBooking ? __('Booked') : __('Available');
+                    })
+                    ->badge()
+                    ->color(function ($state) {
+                        return $state === __('Booked') ? 'danger' : 'success';
+                    }),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label(__('Created At'))
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->label(__('Updated At'))
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+            ])
+            ->filters([
+                //
+            ])
+            ->actions([
+                Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
+            ])
+            ->bulkActions([
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
+                ]),
+            ]);
+    }
     public static function getRelations(): array
     {
         return [
