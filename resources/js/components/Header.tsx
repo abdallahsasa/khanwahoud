@@ -66,22 +66,20 @@ const Header: React.FC = () => {
         };
     }, [isMenuOpen]);
 
-    // Left navigation group (before logo): The Khan - Rebirth
+    // Left navigation group (before logo): Rebirth - Stay
     const leftNavItems = [
-        { name: t('nav.the_khan'), path: '/experience' },
         { name: t('nav.rebirth'), path: '/restoration' },
+        { name: t('nav.stay'), path: '/rooms' },
     ];
 
-    // Right navigation group (after logo): Stay - Events - Dine
+    // Right navigation group (after logo): Events - Dine
     const rightNavItems = [
-        { name: t('nav.stay'), path: '/rooms' },
         { name: t('nav.events'), path: '/events' },
         { name: t('nav.dine'), path: '/dining' },
     ];
 
     // All links for mobile menu
     const mobileNavItems = [
-        { name: t('nav.the_khan'), path: '/experience' },
         { name: t('nav.rebirth'), path: '/restoration' },
         { name: t('nav.stay'), path: '/rooms' },
         { name: t('nav.events'), path: '/events' },
@@ -114,7 +112,7 @@ const Header: React.FC = () => {
                     {/* Desktop Navigation: Perfectly Symmetrical Centered Unit */}
                     <nav className="hidden w-full items-center justify-center lg:flex">
                         <div className="flex items-center justify-center gap-x-6 xl:gap-x-10">
-                            {/* Left Wing (Exact same width as Right Wing) */}
+                            {/* Left Wing (Exact same width as Right Wing): Rebirth - Stay */}
                             <div className="w-[280px] xl:w-[340px] flex items-center justify-around rtl:justify-around">
                                 {leftNavItems.map((item) => (
                                     <Link
@@ -144,8 +142,8 @@ const Header: React.FC = () => {
                                 />
                             </Link>
 
-                            {/* Right Wing (Exact same width as Left Wing) */}
-                            <div className="w-[280px] xl:w-[340px] flex items-center justify-between rtl:justify-between px-2">
+                            {/* Right Wing (Exact same width as Left Wing): Events - Dine */}
+                            <div className="w-[280px] xl:w-[340px] flex items-center justify-around rtl:justify-around">
                                 {rightNavItems.map((item) => (
                                     <Link
                                         key={item.path}
