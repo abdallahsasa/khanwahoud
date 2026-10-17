@@ -107,12 +107,12 @@ const RoomBookingModal: React.FC<RoomBookingModalProps> = ({
     // Generate WhatsApp direct reservation URL with pre-filled message
     const buildWhatsAppUrl = () => {
         const phone = '963930012015';
-        const datesText = checkInDate && checkOutDate 
-            ? `${checkInDate} to ${checkOutDate}` 
+        const datesText = checkInDate && checkOutDate
+            ? `${checkInDate} to ${checkOutDate}`
             : 'dates to be confirmed';
-        
+
         const messageEn = `Hello Khan Wahoud Concierge,\n\nI would like to inquire about reserving the ${room.name}.\n\n• Room: ${room.name} (${room.tag})\n• Dates: ${datesText}\n• Guests: ${guestCount}\n• Rate: On Request\n\nPlease confirm availability and details. Thank you!`;
-        
+
         const messageAr = `مرحباً كونسيرج خان وحود،\n\nأود الاستفسار عن حجز ${room.name}.\n\n• الجناح: ${room.name}\n• التواريخ: ${datesText}\n• عدد النزلاء: ${guestCount}\n• السعر: عند الطلب\n\nيرجى تأكيد التوفر والتفاصيل. شكراً جزيلاً!`;
 
         const text = isAr ? messageAr : messageEn;
@@ -240,11 +240,10 @@ const RoomBookingModal: React.FC<RoomBookingModalProps> = ({
                                 <button
                                     key={idx}
                                     onClick={() => setActiveImageIndex(idx)}
-                                    className={`relative flex-shrink-0 w-16 h-12 rounded-lg overflow-hidden border-2 transition-all cursor-pointer ${
-                                        activeImageIndex === idx
+                                    className={`relative flex-shrink-0 w-16 h-12 rounded-lg overflow-hidden border-2 transition-all cursor-pointer ${activeImageIndex === idx
                                             ? 'border-[#781C1D] scale-105 shadow-md'
                                             : 'border-transparent opacity-60 hover:opacity-100'
-                                    }`}
+                                        }`}
                                 >
                                     <img src={img} alt="" className="w-full h-full object-cover" />
                                 </button>
@@ -298,19 +297,7 @@ const RoomBookingModal: React.FC<RoomBookingModalProps> = ({
                                 </div>
                             </div>
 
-                            <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 rounded-lg bg-[#781C1D]/10 text-[#781C1D] flex items-center justify-center flex-shrink-0">
-                                    <Eye size={18} />
-                                </div>
-                                <div>
-                                    <div className="text-[11px] font-sans uppercase tracking-wider text-[#6B5E55]">
-                                        {t('rooms.specs.view')}
-                                    </div>
-                                    <div className="text-sm font-semibold text-[#1C1C1C] truncate">
-                                        {room.view}
-                                    </div>
-                                </div>
-                            </div>
+
                         </div>
 
                         {/* Room Description & Amenities - Side by Side */}
