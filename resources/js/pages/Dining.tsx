@@ -64,7 +64,7 @@ const DiningPage: React.FC = () => {
                             className="flex justify-center lg:justify-start"
                         >
                             <img
-                                src="/images/dining_courtyard.png"
+                                src="/images/dining/courtyard.png"
                                 alt="the Courtyard Dining at Khan Wahoud"
                                 className="w-full max-w-[420px] aspect-[3/4] object-cover"
                             />
@@ -153,7 +153,7 @@ const DiningPage: React.FC = () => {
                             className="flex justify-center lg:justify-end order-1 lg:order-2"
                         >
                             <img
-                                src="/images/dining_rooftop.png"
+                                src="/images/dining/rooftop.png"
                                 alt="the Rooftop Dining at Khan Wahoud"
                                 className="w-full max-w-[420px] aspect-[3/4] object-cover"
                             />

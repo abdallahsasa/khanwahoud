@@ -40,7 +40,7 @@ const EventsPage: React.FC = () => {
                 en: 'Our magnificent central courtyard provides a breathtaking open-air setting surrounded by 1736 stone arches, black-and-white ablaq masonry, and our central fountain. A peerless backdrop for celebratory banquets and unforgettable gatherings.',
                 ar: 'يوفر فناؤنا المركزي المهيب بيئة مفتوحة ساحرة محاطة بأقواس حجرية تعود لعام ١٧٣٦، ومداميك الأبلق الدمشقي وبحرة المياه التراثية. إطار لا مثيل له لحفلات الزفاف الملكية والاحتفالات الاستثنائية تحت سماء دمشق القديمة.',
             },
-            image: '/images/events/courtyard2.jpg',
+            image: '/images/events/courtyard2.png',
             waMessage: {
                 en: 'Hello Khan Wahoud Concierge, I would like to inquire about booking an event at The Saha Courtyard.',
                 ar: 'مرحباً خان وحود، أود الاستفسار عن حجز مناسبة خاصة في ساحة الخان (الفناء المركزي).',
@@ -96,7 +96,7 @@ const EventsPage: React.FC = () => {
                 en: 'A fully appointed professional suite that pairs authentic 18th-century architectural grandeur with modern audiovisual capabilities, climate control, and dedicated executive catering. Ideal for board meetings, seminars, and strategic summits.',
                 ar: 'قاعة تنفيذية مجهزة بالكامل تدمج بين أصالة العمارة العثمانية لعام ١٧٣٦ وأحدث التجهيزات السمعية والبصرية، مع تكييف كامل وخدمات ضيافة تنفيذية مخصصة. مثالية لاجتماعات الأعمال وورش العمل والندوات الدبلوماسية.',
             },
-            image: '/images/events/roman.JPEG',
+            image: '/images/events/roman.png',
             waMessage: {
                 en: 'Hello Khan Wahoud Concierge, I would like to inquire about booking The Meeting Room for a corporate event/meeting.',
                 ar: 'مرحباً خان وحود، أود الاستفسار عن حجز قاعة الاجتماعات لإقامة اجتماع عمل / فعالية تنفيذية.',
