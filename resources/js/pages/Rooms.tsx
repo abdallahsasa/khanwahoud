@@ -19,6 +19,17 @@ import {
     ArrowUpRight,
     Camera,
     Shuffle,
+    Maximize2,
+    BedDouble,
+    Wifi,
+    Wind,
+    Bath,
+    Wine,
+    Briefcase,
+    Baby,
+    Eye,
+    Tv,
+    Utensils,
 } from 'lucide-react';
 import RoomBookingModal, { RoomDetails } from '../components/RoomBookingModal';
 import QuickReserveModal from '../components/QuickReserveModal';
@@ -109,6 +120,70 @@ export const formatEstimatedRoomSize = (
     const low = Math.round(num * 0.9);
     const high = Math.round(num * 1.1);
     return `${low}-${high} ${unit}`;
+};
+
+export const getAmenityIcon = (item: string) => {
+    if (!item || typeof item !== 'string') return <Check size={11} strokeWidth={2.5} />;
+    const lower = item.toLowerCase();
+
+    // Size / Area
+    if (lower.includes('m2') || lower.includes('م²') || lower.includes('متر') || lower.includes('sqm') || lower.includes('مساحة') || lower.includes('sq ft')) {
+        return <Maximize2 size={11} />;
+    }
+    // Bed
+    if (lower.includes('bed') || lower.includes('king') || lower.includes('queen') || lower.includes('سرير') || lower.includes('تخت')) {
+        return <BedDouble size={11} />;
+    }
+    // Sleeps / Guests
+    if (lower.includes('sleep') || lower.includes('guest') || lower.includes('person') || lower.includes('occupan') || lower.includes('نزلاء') || lower.includes('شخص') || lower.includes('أشخاص') || lower.includes('ضيوف')) {
+        return <Users size={11} />;
+    }
+    // Wifi / Internet
+    if (lower.includes('wifi') || lower.includes('wi-fi') || lower.includes('internet') || lower.includes('واي فاي') || lower.includes('إنترنت') || lower.includes('انترنت')) {
+        return <Wifi size={11} />;
+    }
+    // AC / Climate
+    if (lower.includes('air') || lower.includes('ac') || lower.includes('conditioning') || lower.includes('climate') || lower.includes('تكييف') || lower.includes('تبريد') || lower.includes('تدفئة')) {
+        return <Wind size={11} />;
+    }
+    // Shower / Bath
+    if (lower.includes('shower') || lower.includes('bath') || lower.includes('tub') || lower.includes('حمام') || lower.includes('دش') || lower.includes('مروش') || lower.includes('جاكوزي')) {
+        return <Bath size={11} />;
+    }
+    // Coffee / Tea
+    if (lower.includes('coffee') || lower.includes('tea') || lower.includes('قهوة') || lower.includes('شاي') || lower.includes('زهورات') || lower.includes('غلاية') || lower.includes('كافيه')) {
+        return <Coffee size={11} />;
+    }
+    // Mini bar / Drinks / Fridge
+    if (lower.includes('bar') || lower.includes('fridge') || lower.includes('drink') || lower.includes('ميني بار') || lower.includes('بار') || lower.includes('ثلاجة') || lower.includes('مشروبات')) {
+        return <Wine size={11} />;
+    }
+    // Desk / Work
+    if (lower.includes('desk') || lower.includes('work') || lower.includes('مكتب') || lower.includes('عمل')) {
+        return <Briefcase size={11} />;
+    }
+    // Crib / Infant / Child
+    if (lower.includes('crib') || lower.includes('infant') || lower.includes('baby') || lower.includes('child') || lower.includes('طفل') || lower.includes('أطفال') || lower.includes('مهد')) {
+        return <Baby size={11} />;
+    }
+    // View / Balcony / Courtyard
+    if (lower.includes('view') || lower.includes('balcony') || lower.includes('terrace') || lower.includes('إطلالة') || lower.includes('شرفة') || lower.includes('فناء') || lower.includes('حديقة') || lower.includes('أفق') || lower.includes('نافورة')) {
+        return <Eye size={11} />;
+    }
+    // TV
+    if (lower.includes('tv') || lower.includes('television') || lower.includes('screen') || lower.includes('تلفزيون') || lower.includes('شاشة')) {
+        return <Tv size={11} />;
+    }
+    // Breakfast / Dining
+    if (lower.includes('breakfast') || lower.includes('dining') || lower.includes('food') || lower.includes('meal') || lower.includes('إفطار') || lower.includes('طعام') || lower.includes('وجبة')) {
+        return <Utensils size={11} />;
+    }
+    // Heritage / Arches / Stone / Architecture
+    if (lower.includes('arch') || lower.includes('stone') || lower.includes('heritage') || lower.includes('أقواس') || lower.includes('تراث') || lower.includes('عثماني') || lower.includes('رخام')) {
+        return <Sparkles size={11} />;
+    }
+
+    return <Check size={11} strokeWidth={2.5} />;
 };
 
 const RoomsPage: React.FC<RoomsPageProps> = ({ dbRooms = [] }) => {
@@ -631,18 +706,21 @@ const RoomsPage: React.FC<RoomsPageProps> = ({ dbRooms = [] }) => {
                                             {room.description}
                                         </p>
 
-                                        {/* Curated Amenities List */}
-                                        <div className="space-y-2 mb-6">
+                                        {/* Curated Amenities 2-Column Grid with Smart Icons */}
+                                        <div className="grid grid-cols-2 gap-x-3 gap-y-2.5 mb-6">
                                             {Array.isArray(room.highlights) &&
-                                                room.highlights.slice(0, 12).map((item, hIdx) => (
+                                                room.highlights.slice(0, 10).map((item, hIdx) => (
                                                     <div
                                                         key={hIdx}
-                                                        className="flex items-center gap-2 text-xs text-[#3D332E]"
+                                                        className="flex items-center gap-2 min-w-0 group/item"
+                                                        title={item}
                                                     >
-                                                        <div className="w-3.5 h-3.5 rounded-full bg-[#781C1D]/15 text-[#781C1D] flex items-center justify-center flex-shrink-0">
-                                                            <Check size={9} strokeWidth={3} />
+                                                        <div className="w-5 h-5 rounded-md bg-[#781C1D]/10 text-[#781C1D] flex items-center justify-center flex-shrink-0 transition-colors group-hover/item:bg-[#781C1D] group-hover/item:text-white">
+                                                            {getAmenityIcon(item)}
                                                         </div>
-                                                        <span className="font-body text-xs text-[#3D332E] truncate normal-case">{item}</span>
+                                                        <span className="font-body text-[11px] sm:text-xs text-[#3D332E] truncate normal-case font-medium">
+                                                            {item}
+                                                        </span>
                                                     </div>
                                                 ))}
                                         </div>

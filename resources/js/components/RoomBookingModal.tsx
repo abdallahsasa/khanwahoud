@@ -19,6 +19,7 @@ import {
 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import toast from 'react-hot-toast';
+import { getAmenityIcon } from '../pages/Rooms';
 
 export interface RoomDetails {
     id: string;
@@ -324,8 +325,8 @@ const RoomBookingModal: React.FC<RoomBookingModalProps> = ({
                                                 key={idx}
                                                 className="flex items-center gap-2.5 p-2.5 rounded-lg bg-[#FAF7EE] border border-[#781C1D]/10 text-xs sm:text-sm text-[#2A2422]"
                                             >
-                                                <div className="w-5 h-5 rounded-full bg-[#781C1D] text-white flex items-center justify-center flex-shrink-0">
-                                                    <Check size={12} strokeWidth={3} />
+                                                <div className="w-6 h-6 rounded-md bg-[#781C1D]/10 text-[#781C1D] flex items-center justify-center flex-shrink-0">
+                                                    {getAmenityIcon(highlight)}
                                                 </div>
                                                 <span className="leading-snug">{highlight}</span>
                                             </div>
