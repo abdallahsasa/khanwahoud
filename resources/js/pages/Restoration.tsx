@@ -1,4 +1,5 @@
 import VideoPlayer from '@/components/VideoPlayer';
+import { Head } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -60,8 +61,23 @@ const RestorationPage: React.FC = () => {
         },
     ];
 
+    const metaTitle = isAr
+        ? 'رحلة الإحياء والترميم المعماري | خان وحود دمشق'
+        : 'The Rebirth & Architectural Restoration | Khan Wahoud';
+    const metaDescription = isAr
+        ? 'تعرف على رحلة إحياء وترميم خان سليمان باشا العظم عبر سنوات من العمل الحرفي الدقيق لحفظ التراث المعماري السوري والعثماني العريق.'
+        : 'Explore the meticulous 7-year restoration journey of Khan Sulayman Pasha al-Azem (Khan Wahoud), preserving 18th-century Ottoman craftsmanship in Old Damascus.';
+
     return (
         <div className="min-h-screen">
+            <Head>
+                <title>{metaTitle}</title>
+                <meta name="description" content={metaDescription} />
+                <meta property="og:title" content={metaTitle} />
+                <meta property="og:description" content={metaDescription} />
+                <meta name="twitter:title" content={metaTitle} />
+                <meta name="twitter:description" content={metaDescription} />
+            </Head>
             {/* Hero Section */}
             <section ref={heroRef} className="relative flex flex-col justify-center items-center overflow-hidden min-h-[420px] md:min-h-[480px] lg:min-h-[520px] pt-28 sm:pt-32 md:pt-40 pb-16 md:pb-24">
                 <div className="absolute inset-0 z-0">

@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
+import { Head } from '@inertiajs/react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { useInView } from 'react-intersection-observer';
@@ -444,8 +445,23 @@ const RoomsPage: React.FC<RoomsPageProps> = ({ dbRooms = [] }) => {
         return `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
     };
 
+    const metaTitle = isAr
+        ? 'الأجنحة والغرف التراثية الفاخرة | فندق خان وحود دمشق'
+        : 'Boutique Suites & Heritage Rooms | Khan Wahoud Old Damascus';
+    const metaDescription = isAr
+        ? 'أجنحة وغرف نوم تاريخية فخمة في قلب دمشق القديمة. عمارة أبلقية حجرية، أسقف خشبية عجمية، وسائل راحة عصرية، وخدمة فندقية بوتيكية استثنائية.'
+        : 'Discover bespoke luxury suites and Ottoman heritage rooms at Khan Wahoud. High ceilings, Damascene stone architecture, modern comfort, and timeless elegance in Old Damascus.';
+
     return (
         <div className="bg-[#FFFFF5] min-h-screen text-[#1C1C1C]">
+            <Head>
+                <title>{metaTitle}</title>
+                <meta name="description" content={metaDescription} />
+                <meta property="og:title" content={metaTitle} />
+                <meta property="og:description" content={metaDescription} />
+                <meta name="twitter:title" content={metaTitle} />
+                <meta name="twitter:description" content={metaDescription} />
+            </Head>
             {/* Hero Section */}
             <section ref={heroRef} className="relative pt-24 pb-24 md:pt-48 md:pb-28 overflow-hidden">
                 {/* Background Image with Dark Vignette */}

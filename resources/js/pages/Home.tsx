@@ -1,4 +1,4 @@
-import { Link } from '@inertiajs/react';
+import { Link, Head } from '@inertiajs/react';
 import { motion, AnimatePresence } from 'framer-motion';
 import React, { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -13,6 +13,13 @@ import { journeyImages } from '../data/journeyImages';
 const HomePage: React.FC = () => {
     const { t, i18n } = useTranslation();
     const isAr = i18n.language?.startsWith('ar');
+
+    const metaTitle = isAr
+        ? 'خان وحود | فندق بوتيكي وتجربة تاريخية فاخرة في دمشق القديمة'
+        : 'Khan Wahoud | Luxury Boutique Hotel & Heritage in Old Damascus';
+    const metaDescription = isAr
+        ? 'أهلاً بكم في خان وحود (خان سليمان باشا العظم)، فندق بوتيكي فاخر وتجربة ضيافة أصيلة في قلب دمشق القديمة، الشارع المستقيم.'
+        : 'Welcome to Khan Wahoud (Khan Suleyman Pasha al-Azem), a luxury boutique hotel in the heart of Old Damascus, Straight Street.';
 
     const [showAllPhotos, setShowAllPhotos] = useState(false);
     const [activeImageIndex, setActiveImageIndex] = useState<number | null>(null);
@@ -82,6 +89,14 @@ const HomePage: React.FC = () => {
     });
     return (
         <div className="min-h-screen">
+            <Head>
+                <title>{metaTitle}</title>
+                <meta name="description" content={metaDescription} />
+                <meta property="og:title" content={metaTitle} />
+                <meta property="og:description" content={metaDescription} />
+                <meta name="twitter:title" content={metaTitle} />
+                <meta name="twitter:description" content={metaDescription} />
+            </Head>
             {/* Hero Section */}
             <section className="relative min-h-[100dvh] flex flex-col justify-between overflow-hidden pb-4 sm:pb-0">
                 <div className="absolute inset-0 z-0">

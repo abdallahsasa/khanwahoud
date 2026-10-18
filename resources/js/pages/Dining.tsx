@@ -1,11 +1,20 @@
+import { Head } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useInView } from 'react-intersection-observer';
 import Button from '../components/Button';
+
 const DiningPage: React.FC = () => {
     const { t, i18n } = useTranslation();
     const isAr = i18n.language?.startsWith('ar');
+
+    const metaTitle = isAr
+        ? 'المطعم وتجربة الطعام التراثي الفاخر | خان وحود دمشق'
+        : 'Dining & Damascene Cuisine | Khan Wahoud Old Damascus';
+    const metaDescription = isAr
+        ? 'استمتع بتجربة طعام دمشقية أصيلة في باحة خان وحود التاريخية وتراسه الساحر. فطور شامي، مقبلات شرقية، أطباق تراثية، ومشروبات فاخرة في الشارع المستقيم.'
+        : 'Experience authentic Damascene culinary heritage at Khan Wahoud. Courtyard dining, rooftop terrace, oriental mezze, artisanal breakfast, and specialty coffee in Old Damascus.';
 
     const [heroRef, heroInView] = useInView({
         triggerOnce: true,
@@ -14,6 +23,14 @@ const DiningPage: React.FC = () => {
 
     return (
         <div className="min-h-screen">
+            <Head>
+                <title>{metaTitle}</title>
+                <meta name="description" content={metaDescription} />
+                <meta property="og:title" content={metaTitle} />
+                <meta property="og:description" content={metaDescription} />
+                <meta name="twitter:title" content={metaTitle} />
+                <meta name="twitter:description" content={metaDescription} />
+            </Head>
             {/* Hero Banner - Full Page */}
             <section
                 ref={heroRef}

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}">
 
 <head>
     <meta charset="utf-8">
@@ -234,35 +234,134 @@
     @php
         $isAr = app()->getLocale() === 'ar';
         $siteName = $isAr ? 'خان وحود | Khan Wahoud' : 'Khan Wahoud';
-        $metaTitle = $isAr
-            ? 'خان وحود | فندق بوتيكي وتجربة تاريخية فاخرة في دمشق القديمة'
-            : 'Khan Wahoud | Luxury Boutique Hotel & Heritage in Old Damascus';
-        $metaDescription = $isAr
-            ? 'أهلاً بكم في خان وحود (خان سليمان باشا العظم)، فندق بوتيكي فاخر وتجربة ضيافة أصيلة في قلب دمشق القديمة، الشارع المستقيم. إقامة عثمانية راقية، طعام وتراث، وفعاليات خاصة.'
-            : 'Welcome to Khan Wahoud (Khan Suleyman Pasha al-Azem), a luxury boutique hotel in the heart of Old Damascus, Straight Street. Authentic Ottoman heritage, luxury dining, and private events.';
+        $path = trim(request()->path(), '/');
 
-        // Absolute URL for OG image & canonical URL
-        $ogImage = url('/images/og-image.jpg');
+        // Dynamic page-specific SEO metadata
+        if ($path === '' || $path === 'home') {
+            $metaTitle = $isAr
+                ? 'خان وحود | فندق بوتيكي وتجربة تاريخية فاخرة في دمشق القديمة'
+                : 'Khan Wahoud | Luxury Boutique Hotel & Heritage in Old Damascus';
+            $metaDescription = $isAr
+                ? 'أهلاً بكم في خان وحود (خان سليمان باشا العظم)، فندق بوتيكي فاخر وتجربة ضيافة أصيلة في قلب دمشق القديمة، الشارع المستقيم. إقامة عثمانية راقية، طعام وتراث، وفعاليات خاصة.'
+                : 'Welcome to Khan Wahoud (Khan Suleyman Pasha al-Azem), a luxury boutique hotel in the heart of Old Damascus, Straight Street. Authentic Ottoman heritage, luxury dining, and private events.';
+        } elseif (str_starts_with($path, 'dining')) {
+            $metaTitle = $isAr
+                ? 'المطعم وتجربة الطعام التراثي الفاخر | خان وحود دمشق'
+                : 'Dining & Damascene Cuisine | Khan Wahoud Old Damascus';
+            $metaDescription = $isAr
+                ? 'استمتع بتجربة طعام دمشقية أصيلة في باحة خان وحود التاريخية وتراسه الساحر. فطور شامي، مقبلات شرقية، أطباق تراثية، ومشروبات فاخرة في الشارع المستقيم.'
+                : 'Experience authentic Damascene culinary heritage at Khan Wahoud. Courtyard dining, rooftop terrace, oriental mezze, artisanal breakfast, and specialty coffee in Old Damascus.';
+        } elseif (str_starts_with($path, 'rooms')) {
+            $metaTitle = $isAr
+                ? 'الأجنحة والغرف التراثية الفاخرة | فندق خان وحود دمشق'
+                : 'Boutique Suites & Heritage Rooms | Khan Wahoud Old Damascus';
+            $metaDescription = $isAr
+                ? 'أجنحة وغرف نوم تاريخية فخمة في قلب دمشق القديمة. عمارة أبلقية حجرية، أسقف خشبية عجمية، وسائل راحة عصرية، وخدمة فندقية بوتيكية استثنائية.'
+                : 'Discover bespoke luxury suites and Ottoman heritage rooms at Khan Wahoud. High ceilings, Damascene stone architecture, modern comfort, and timeless elegance in Old Damascus.';
+        } elseif (str_starts_with($path, 'events')) {
+            $metaTitle = $isAr
+                ? 'المناسبات والفعاليات الخاصة الراقية | خان وحود'
+                : 'Private Events & Celebrations | Khan Wahoud Old Damascus';
+            $metaDescription = $isAr
+                ? 'أقم مناسباتك الخاصة وفعالياتك الراقية في باحة خان وحود التاريخية وقاعاته العثمانية المرممة بدقة في قلب دمشق القديمة.'
+                : 'Host unforgettable private events, receptions, and gatherings in our historic 18th-century Ottoman courtyard and restored halls at Khan Wahoud, Old Damascus.';
+        } elseif (str_starts_with($path, 'restoration')) {
+            $metaTitle = $isAr
+                ? 'رحلة الإحياء والترميم المعماري | خان وحود دمشق'
+                : 'The Rebirth & Architectural Restoration | Khan Wahoud';
+            $metaDescription = $isAr
+                ? 'تعرف على رحلة إحياء وترميم خان سليمان باشا العظم عبر سنوات من العمل الحرفي الدقيق لحفظ التراث المعماري السوري والعثماني العريق.'
+                : 'Explore the meticulous 7-year restoration journey of Khan Sulayman Pasha al-Azem (Khan Wahoud), preserving 18th-century Ottoman craftsmanship in Old Damascus.';
+        } elseif (str_starts_with($path, 'contact')) {
+            $metaTitle = $isAr
+                ? 'التواصل والموقع في الشارع المستقيم | خان وحود'
+                : 'Contact & Location | Khan Wahoud Old Damascus';
+            $metaDescription = $isAr
+                ? 'تواصل مع إدارة خان وحود في دمشق القديمة، الشارع المستقيم (باب شرقي). للحجوزات والاستفسارات والموقع المباشر.'
+                : 'Contact Khan Wahoud in Old Damascus. Located on historic Straight Street near Bab Sharqi. Reservations, directions, phone, and WhatsApp concierge.';
+        } else {
+            $metaTitle = $isAr
+                ? 'خان وحود | فندق بوتيكي وتجربة تاريخية فاخرة في دمشق القديمة'
+                : 'Khan Wahoud | Luxury Boutique Hotel & Heritage in Old Damascus';
+            $metaDescription = $isAr
+                ? 'أهلاً بكم في خان وحود (خان سليمان باشا العظم)، فندق بوتيكي فاخر وتجربة ضيافة أصيلة في قلب دمشق القديمة، الشارع المستقيم.'
+                : 'Welcome to Khan Wahoud (Khan Suleyman Pasha al-Azem), a luxury boutique hotel in the heart of Old Damascus, Straight Street.';
+        }
+
+        // Canonical URL & OG images with cache-busting v=2
         $canonicalUrl = url()->current();
+        $ogImage = url('/images/og-image.jpg?v=2');
+        $ogSquare = url('/images/og-square.jpg?v=2');
+        $logoUrl = url('/images/logowahoud.png');
 
-        // Enforce HTTPS if in production or behind SSL proxy
+        // Always enforce HTTPS if in production or behind SSL proxy
         if (
             str_starts_with(config('app.url'), 'https://') ||
             request()->isSecure() ||
             request()->header('X-Forwarded-Proto') === 'https' ||
             request()->header('X-Forwarded-Ssl') === 'on' ||
-            app()->environment('production')
+            app()->environment('production') ||
+            request()->server('HTTPS') === 'on'
         ) {
-            $ogImage = preg_replace('/^http:/i', 'https:', $ogImage);
             $canonicalUrl = preg_replace('/^http:/i', 'https:', $canonicalUrl);
+            $ogImage = preg_replace('/^http:/i', 'https:', $ogImage);
+            $ogSquare = preg_replace('/^http:/i', 'https:', $ogSquare);
+            $logoUrl = preg_replace('/^http:/i', 'https:', $logoUrl);
         }
+
+        // Schema.org Structured Data
+        $schemaData = [
+            '@context' => 'https://schema.org',
+            '@type' => ['Hotel', 'LodgingBusiness', 'HistoricalLandmark'],
+            '@id' => 'https://khanwahoud.com/#hotel',
+            'name' => $isAr ? 'خان وحود' : 'Khan Wahoud',
+            'alternateName' => ['Khan Suleyman Pasha al-Azem', 'خان سليمان باشا العظم', 'Khan Wahoud Boutique Hotel'],
+            'url' => 'https://khanwahoud.com',
+            'logo' => $logoUrl,
+            'image' => [$ogImage, $ogSquare],
+            'description' => $metaDescription,
+            'telephone' => '+963930012015',
+            'priceRange' => '$$$',
+            'address' => [
+                '@type' => 'PostalAddress',
+                'streetAddress' => 'Straight Street, Bab Sharqi',
+                'addressLocality' => 'Old Damascus',
+                'addressRegion' => 'Damascus',
+                'addressCountry' => 'SY',
+            ],
+            'geo' => [
+                '@type' => 'GeoCoordinates',
+                'latitude' => 33.5097,
+                'longitude' => 36.3148,
+            ],
+            'hasMap' => 'https://maps.google.com/?q=33.5097,36.3148',
+            'amenityFeature' => [
+                ['@type' => 'LocationFeatureSpecification', 'name' => 'Courtyard Dining', 'value' => true],
+                ['@type' => 'LocationFeatureSpecification', 'name' => 'Rooftop Terrace', 'value' => true],
+                ['@type' => 'LocationFeatureSpecification', 'name' => 'Boutique Suites', 'value' => true],
+                ['@type' => 'LocationFeatureSpecification', 'name' => 'Heritage Architecture', 'value' => true],
+            ],
+            'sameAs' => [
+                'https://wa.me/963930012015',
+            ],
+        ];
     @endphp
 
     <!-- Primary Meta Tags -->
     <title inertia>{{ $metaTitle }}</title>
     <meta name="title" content="{{ $metaTitle }}">
     <meta name="description" content="{{ $metaDescription }}">
+    <meta name="author" content="Khan Wahoud">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow">
+    <meta name="keywords" content="{{ $isAr ? 'خان وحود, فندق خان وحود, فندق بوتيكي دمشق, خان سليمان باشا العظم, الشارع المستقيم دمشق, مطعم خان وحود, فنادق دمشق القديمة, سياحة دمشق' : 'Khan Wahoud, Khan Wahoud Hotel, Boutique Hotel Damascus, Khan Suleyman Pasha, Old Damascus Straight Street, Luxury Hotel Syria, Damascus Heritage Hotel, Damascus Dining' }}">
+    <meta name="theme-color" content="#181411">
     <link rel="canonical" href="{{ $canonicalUrl }}">
+
+    <!-- Multi-Language SEO / hreflang -->
+    <link rel="alternate" hreflang="ar" href="{{ $canonicalUrl }}">
+    <link rel="alternate" hreflang="en" href="{{ $canonicalUrl }}">
+    <link rel="alternate" hreflang="x-default" href="{{ $canonicalUrl }}">
 
     <!-- Open Graph / Facebook / WhatsApp / LinkedIn / Telegram -->
     <meta property="og:type" content="website">
@@ -270,14 +369,24 @@
     <meta property="og:site_name" content="{{ $siteName }}">
     <meta property="og:title" content="{{ $metaTitle }}">
     <meta property="og:description" content="{{ $metaDescription }}">
+    <!-- Primary 1200x630 card with logo for WhatsApp / Social -->
     <meta property="og:image" content="{{ $ogImage }}">
     <meta property="og:image:secure_url" content="{{ $ogImage }}">
     <meta property="og:image:type" content="image/jpeg">
     <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="675">
-    <meta property="og:image:alt" content="{{ $metaTitle }}">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="{{ $siteName }}">
+    <!-- Square 600x600 card for WhatsApp square preview thumbnails -->
+    <meta property="og:image" content="{{ $ogSquare }}">
+    <meta property="og:image:secure_url" content="{{ $ogSquare }}">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="600">
+    <meta property="og:image:height" content="600">
     <meta property="og:locale" content="{{ $isAr ? 'ar_SY' : 'en_US' }}">
     <meta property="og:locale:alternate" content="{{ $isAr ? 'en_US' : 'ar_SY' }}">
+
+    <!-- Image source link for WhatsApp and mobile crawlers -->
+    <link rel="image_src" href="{{ $ogImage }}">
 
     <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image">
@@ -287,9 +396,16 @@
     <meta name="twitter:image" content="{{ $ogImage }}">
     <meta name="twitter:image:alt" content="{{ $metaTitle }}">
 
+    <!-- Icons & Manifest -->
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" href="/favicon.png" type="image/png">
     <link rel="apple-touch-icon" href="/favicon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <!-- Schema.org JSON-LD Structured Data for Search Engines -->
+    <script type="application/ld+json">
+        {!! json_encode($schemaData, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}
+    </script>
 
     @routes
     @viteReactRefresh

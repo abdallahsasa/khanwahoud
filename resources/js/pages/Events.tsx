@@ -1,3 +1,4 @@
+import { Head } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import { Phone, Sparkles, Users } from 'lucide-react';
 import React from 'react';
@@ -154,8 +155,23 @@ const EventsPage: React.FC = () => {
         }
     };
 
+    const metaTitle = isAr
+        ? 'المناسبات والفعاليات الخاصة الراقية | خان وحود'
+        : 'Private Events & Celebrations | Khan Wahoud Old Damascus';
+    const metaDescription = isAr
+        ? 'أقم مناسباتك الخاصة وفعالياتك الراقية في باحة خان وحود التاريخية وقاعاته العثمانية المرممة بدقة في قلب دمشق القديمة.'
+        : 'Host unforgettable private events, receptions, and gatherings in our historic 18th-century Ottoman courtyard and restored halls at Khan Wahoud, Old Damascus.';
+
     return (
         <div>
+            <Head>
+                <title>{metaTitle}</title>
+                <meta name="description" content={metaDescription} />
+                <meta property="og:title" content={metaTitle} />
+                <meta property="og:description" content={metaDescription} />
+                <meta name="twitter:title" content={metaTitle} />
+                <meta name="twitter:description" content={metaDescription} />
+            </Head>
             {/* Hero Banner */}
             <section ref={heroRef} className="relative pt-32 pb-20 md:pt-64 md:pb-24">
                 <div className="absolute inset-0 z-0">

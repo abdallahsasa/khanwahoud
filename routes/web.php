@@ -15,6 +15,12 @@ Route::redirect('/membership', '/')->name('membership'); // Phase-1 2026-08-06: 
 Route::get('/restoration', [PageController::class, 'restoration'])->name('restoration');
 Route::get('/contact', [PageController::class, 'contact'])->name('contact');
 
+Route::get('/sitemap.xml', function () {
+    return response(file_get_contents(public_path('sitemap.xml')), 200, [
+        'Content-Type' => 'application/xml; charset=utf-8',
+    ]);
+});
+
 require __DIR__ . '/admin.php';
 require __DIR__ . '/api.php';
 

@@ -1,3 +1,4 @@
+import { Head } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import {
     AlertCircle,
@@ -108,8 +109,23 @@ const ContactPage: React.FC = () => {
         }
     };
 
+    const metaTitle = isAr
+        ? 'التواصل والموقع في الشارع المستقيم | خان وحود'
+        : 'Contact & Location | Khan Wahoud Old Damascus';
+    const metaDescription = isAr
+        ? 'تواصل مع إدارة خان وحود في دمشق القديمة، الشارع المستقيم (باب شرقي). للحجوزات والاستفسارات والموقع المباشر.'
+        : 'Contact Khan Wahoud in Old Damascus. Located on historic Straight Street near Bab Sharqi. Reservations, directions, phone, and WhatsApp concierge.';
+
     return (
         <div className="bg-white">
+            <Head>
+                <title>{metaTitle}</title>
+                <meta name="description" content={metaDescription} />
+                <meta property="og:title" content={metaTitle} />
+                <meta property="og:description" content={metaDescription} />
+                <meta name="twitter:title" content={metaTitle} />
+                <meta name="twitter:description" content={metaDescription} />
+            </Head>
             {/* Hero Banner */}
             <section ref={heroRef} className="relative pt-36 pb-24 md:pt-56 md:pb-32 overflow-hidden">
                 <div className="absolute inset-0 z-0">
