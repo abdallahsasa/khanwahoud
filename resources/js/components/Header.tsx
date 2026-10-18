@@ -35,6 +35,8 @@ const Header: React.FC = () => {
         document.documentElement.lang = newLang;
         try {
             localStorage.setItem('i18nextLng', newLang);
+            document.cookie = `locale=${newLang}; path=/; max-age=31536000; SameSite=Lax`;
+            document.cookie = `i18nextLng=${newLang}; path=/; max-age=31536000; SameSite=Lax`;
         } catch (e) {}
     };
 

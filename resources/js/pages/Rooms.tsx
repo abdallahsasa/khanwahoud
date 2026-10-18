@@ -189,7 +189,7 @@ export const getAmenityIcon = (item: string) => {
 
 const RoomsPage: React.FC<RoomsPageProps> = ({ dbRooms = [] }) => {
     const { t, i18n } = useTranslation();
-    const isAr = i18n.language === 'ar';
+    const isAr = Boolean(i18n.language?.startsWith('ar'));
 
     // State for backend rooms with live API fallback
     const [roomsData, setRoomsData] = useState<any[]>(Array.isArray(dbRooms) && dbRooms.length > 0 ? dbRooms : []);

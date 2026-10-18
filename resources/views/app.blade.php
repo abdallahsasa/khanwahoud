@@ -232,6 +232,17 @@
     </style>
 
     @php
+        $qLocale = request()->query('lang', request()->query('locale'));
+        if ($qLocale && in_array(strtolower($qLocale), ['ar', 'en'])) {
+            app()->setLocale(strtolower($qLocale));
+        } elseif (request()->hasCookie('locale') && in_array(strtolower(request()->cookie('locale')), ['ar', 'en'])) {
+            app()->setLocale(strtolower(request()->cookie('locale')));
+        } elseif (request()->hasCookie('i18nextLng')) {
+            $cPrefix = strtolower(substr(request()->cookie('i18nextLng'), 0, 2));
+            if (in_array($cPrefix, ['ar', 'en'])) {
+                app()->setLocale($cPrefix);
+            }
+        }
         $isAr = app()->getLocale() === 'ar';
         $siteName = $isAr ? 'خان وحود | Khan Wahoud' : 'Khan Wahoud';
         $path = trim(request()->path(), '/');
