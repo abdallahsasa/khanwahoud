@@ -41,11 +41,19 @@ class RestorationResource extends Resource
                 Forms\Components\TextInput::make('phase')
                     ->required()
                     ->maxLength(255)
-                    ->label(__('Phase')),
+                    ->label(__('Phase (English)')),
+                Forms\Components\TextInput::make('phase_ar')
+                    ->maxLength(255)
+                    ->label(__('Phase (Arabic)')),
                 Forms\Components\Textarea::make('description')
                     ->required()
+                    ->rows(4)
                     ->columnSpanFull()
-                    ->label(__('Description')),
+                    ->label(__('Description (English)')),
+                Forms\Components\Textarea::make('description_ar')
+                    ->rows(4)
+                    ->columnSpanFull()
+                    ->label(__('Description (Arabic)')),
                 Forms\Components\FileUpload::make('media_url')
                     ->required()
                     ->multiple(false)
@@ -54,7 +62,7 @@ class RestorationResource extends Resource
                     ->acceptedFileTypes(['image/*', 'video/*'])
                     ->maxFiles(1)
                     ->required()
-                    ->label(__('Image'))
+                    ->label(__('Image/Video'))
                     ->enableReordering()
                     ->enableOpen()
                     ->enableDownload(),
@@ -68,10 +76,13 @@ class RestorationResource extends Resource
                 Tables\Columns\TextColumn::make('phase')
                     ->label(__('Phase'))
                     ->searchable(),
+                Tables\Columns\TextColumn::make('phase_ar')
+                    ->label(__('Phase (Arabic)'))
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('description')
                     ->label(__('Description'))
                     ->searchable()
-                    ->limit(50),
+                    ->limit(40),
                 Tables\Columns\ViewColumn::make('media_url')
                     ->label(__('Media'))
                     ->view('filament.components.media-preview'),

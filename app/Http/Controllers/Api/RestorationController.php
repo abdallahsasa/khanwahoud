@@ -20,12 +20,16 @@ class RestorationController extends Controller
     {
         $validated = $request->validate([
             'phase' => 'required|string|max:255',
+            'phase_ar' => 'nullable|string|max:255',
             'description' => 'required|string',
+            'description_ar' => 'nullable|string',
             'media_url' => 'required|string',
         ]);
         $restoration = RestorationLog::create([
             'phase' => $validated['phase'],
+            'phase_ar' => $validated['phase_ar'] ?? null,
             'description' => $validated['description'],
+            'description_ar' => $validated['description_ar'] ?? null,
             'media_url' => $validated['media_url'],
         ]);
         return response()->json([
@@ -38,13 +42,16 @@ class RestorationController extends Controller
     {
         $validated = $request->validate([
             'phase' => 'required|string|max:255',
+            'phase_ar' => 'nullable|string|max:255',
             'description' => 'required|string',
+            'description_ar' => 'nullable|string',
             'media_url' => 'required|string',
         ]);
-        $restoration = RestorationLog::findOrFail($restoration);
         $restoration->update([
             'phase' => $validated['phase'],
+            'phase_ar' => $validated['phase_ar'] ?? null,
             'description' => $validated['description'],
+            'description_ar' => $validated['description_ar'] ?? null,
             'media_url' => $validated['media_url'],
         ]);
         return response()->json([

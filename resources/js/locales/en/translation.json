@@ -336,11 +336,11 @@
         "sustainability_text": "While preserving historical authenticity, we've integrated sustainable systems for water conservation, energy efficiency, and waste management.",
         "video_title": "Restoration Documentary",
         "video_subtitle": "Watch a glimpse on our restoration technique",
-        "pillars_title": "Restoration Pillars",
+        "pillars_title": "Restoration Pillars & Phases",
         "before_after_title": "Before & After Pillars",
-        "before_after_subtitle": "Witness the transformation",
-        "before": "Before",
-        "after": "After",
+        "before_after_subtitle": "Witness the architectural transformation",
+        "before": "Before Restoration",
+        "after": "After Restoration",
         "main_courtyard": "Main Courtyard",
         "stone_archways": "Stone Archways",
         "team_title_prefix": "the",
@@ -348,7 +348,9 @@
         "team_description": "Khan Wahoud's rebirth is the result of years of dedication, restoration & shared vision. We extend our gratitude to all who contributed to this journey — especially the craftsmen, workers, engineers, architects, and designers whose care and commitment helped bring the Khan back to life.",
         "experience_khan": "Experience the Restored Khan",
         "experience_desc": "Book your stay at Khan Wahoud and immerse yourself in centuries of restored heritage.",
-        "book_room": "Book a Room"
+        "book_room": "Explore Suites & Rooms",
+        "loading": "Loading restoration timeline...",
+        "error_loading": "Failed to load timeline events. Please try again later."
     },
     "contact": {
         "badge": "Concierge & Inquiries",
