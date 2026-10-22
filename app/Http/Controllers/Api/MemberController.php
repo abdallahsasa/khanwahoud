@@ -23,4 +23,40 @@ class MemberController extends Controller
 
         return response()->json($member, 201);
     }
+
+    public function index()
+    {
+        $members = Member::orderBy('joined_at', 'desc')->paginate(10);
+
+        return response()->json([
+            'message' => 'success',
+            'data' => $members,
+        ]);
+    }
+
+    public function update(Request $request, Member $member)
+    {
+        $validated = $request->validate([
+            'name' => 'sometimes|required|string|min:2',
+            'email' => 'sometimes|required|email|unique:members,email,'.$member->id,
+            'phone' => 'sometimes|required|string',
+            'status' => 'sometimes|required|string',
+        ]);
+
+        $member->update($validated);
+
+        return response()->json([
+            'message' => 'Member updated successfully',
+            'member' => $member->fresh(),
+        ]);
+    }
+
+    public function destroy(Member $member)
+    {
+        $member->delete();
+
+        return response()->json([
+            'message' => 'Member deleted successfully',
+        ]);
+    }
 }

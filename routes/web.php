@@ -21,9 +21,7 @@ Route::get('/sitemap.xml', function () {
     ]);
 });
 
-require __DIR__ . '/admin.php';
-require __DIR__ . '/api.php';
+require __DIR__.'/admin.php';
 
 // 404 route
 Route::fallback([PageController::class, 'notFound']);
-
