@@ -5,8 +5,8 @@
 
     RewriteEngine On
 
-    # Block access to hidden files and directories
-    RewriteRule ^\.(.*)$ - [F,L]
+    # Block access to hidden files and directories (allow .well-known for SSL certificates)
+    RewriteRule ^\.(?!well-known)(.*)$ - [F,L]
 
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
